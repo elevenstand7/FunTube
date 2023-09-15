@@ -1,18 +1,17 @@
 import { csrfFetch } from "./csrf";
 
     // ACTION TYPES
-    const RECEIVE_USER = 'users/RECEIVE_USER';
-    const REMOVE_USER = 'users/REMOVE_USER';
+    const SET_CURRENT_USER = 'session/setCurrentUser';
+    const REMOVE_CURRENT_USER = 'session/removeCurrentUser';
 
     // ACTION CREATORS
-    export const receiveUser = user => ({
-        type: RECEIVE_USER,
-        payload: user
+    export const setCurrentUser = user => ({
+        type: SET_CURRENT_USER,
+        user
     });
 
-    export const removeUser = userId => ({
-        type: REMOVE_USER,
-        userId // userId: userId
+    export const removeCurrentUser = () => ({
+        type: REMOVE_CURRENT_USER
     });
 
     // THUNK ACTION CREATORS
@@ -24,7 +23,7 @@ import { csrfFetch } from "./csrf";
         let data = await res.json();
         sessionStorage.setItem('currentUser', JSON.stringify(data.user));
         debugger
-        dispatch(receiveUser(data.user))
+        dispatch(setCurrentUser(data.user))
     };
 
     export const logoutUser = userId => async dispatch => {
@@ -32,7 +31,7 @@ import { csrfFetch } from "./csrf";
             method: 'DELETE'
         });
         sessionStorage.setItem('currentUser', null)
-        dispatch(removeUser(userId));
+        dispatch(removeCurrentUser(userId));
     }
 
     export const createUser = user => async dispatch => {
@@ -42,24 +41,23 @@ import { csrfFetch } from "./csrf";
         });
         let data = await res.json();
         sessionStorage.setItem('currentUser', JSON.stringify(data.user));
-        dispatch(receiveUser(data.user));
+        dispatch(setCurrentUser(data.user));
     }
 
     // REDUCER
-    const usersReducer = ( state = {}, action ) => {
+    const sessionReducer = ( state = {}, action ) => {
         const nextState = { ...state };
 
         switch(action.type) {
-            case RECEIVE_USER:
+            case SET_CURRENT_USER:
                 debugger
-                nextState[action.payload.id] = action.payload;
-                return nextState;
-            case REMOVE_USER:
-                delete nextState[action.userId];
-                return nextState;
+                return {...nextState, user: action.user}
+
+            case REMOVE_CURRENT_USER:
+                return { ...nextState, user: null };
             default:
                 return state;
         }
     };
 
-    export default usersReducer
+    export default sessionReducer
