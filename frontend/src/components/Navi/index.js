@@ -1,10 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import './Navigation.css';
+import './Navi.css';
 
 
-export default function Navigation() {
+export default function Navi() {
     const currentUser = useSelector(state => state.session.user);
 
     let sessionLinks;

@@ -1,18 +1,23 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Navigation from "./components/Navigation";
-import VideoIndexPage from "./components/VideoIndexPage";
+import Navi from "./components/Navi";
+import Home from "./components/Home";
+import SignupForm from "./components/SignupForm";
 
 function App() {
   return (
     <>
-      <h1>Hello from App</h1>
-      <VideoIndexPage>
+      <h1>Welcom to Funtube</h1>
         <Switch>
-            <Route path="/" >
-            </Route>
+          <Route exact path="/" >
+            <Home />
+          </Route>
+
+          <Route path="/signup" >
+            <SignupForm />
+          </Route>
         </Switch>
-      </VideoIndexPage>
+
     </>
   );
 }

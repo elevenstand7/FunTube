@@ -1,4 +1,4 @@
-import usersReducer from './session'
+import sessionReducer from './session'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 // import users from './'
@@ -6,7 +6,8 @@ import thunk from 'redux-thunk';
 const rootReducer = combineReducers({
     // videos: videosReducer,
     // comments: commentsReducer,
-    users: usersReducer
+    // users: usersReducer,
+    session: sessionReducer
 });
 
 let enhancer;
