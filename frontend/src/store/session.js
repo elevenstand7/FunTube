@@ -39,12 +39,12 @@ import { csrfFetch } from "./csrf";
     };
 
 
-    export const logoutUser = userId => async dispatch => {
+    export const logoutUser = () => async dispatch => {
         let res = await csrfFetch('/api/session', {
             method: 'DELETE'
         });
         storeCurrentUser(null);
-        dispatch(removeCurrentUser(userId));
+        dispatch(removeCurrentUser());
         return res;
     }
 
