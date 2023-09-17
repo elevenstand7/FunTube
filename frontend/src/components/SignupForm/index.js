@@ -28,7 +28,6 @@ const SignupForm = ()=>{
             try {
               // .clone() essentially allows you to read the response body twice
               data = await res.clone().json();
-            //   return Redirect("/");
             } catch {
               data = await res.text(); // Will hit this case if, e.g., server is down
             }
@@ -36,7 +35,6 @@ const SignupForm = ()=>{
             else if (data) setErrors([data]);
             else setErrors([res.statusText]);
           };
-        //   return Redirect("/");
     }
     if (sessionUser || isSignUp) {
         console.log(sessionUser)
@@ -44,22 +42,22 @@ const SignupForm = ()=>{
       }
 
     return (
-        <>
+        <div className="signup-container">
             <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="signup-form">
                 <ul>{errors.map(error => <li>{error}</li>)}</ul>
-                <label>Username
+                <label className="content">Username
                     <input type="text" onChange={e=>setUsername(e.target.value)} value={username} required></input>
                 </label>
-                <label>Email
+                <label className="content">Email
                     <input type="text" onChange={e=>setEmail(e.target.value)} value={email} required></input>
                 </label>
-                <label>Password
+                <label className="content">Password
                     <input type="password" onChange={e=>setPassword(e.target.value)} value={password} required></input>
                 </label>
-                <button type="submit">Sign Up</button>
+                <button type="submit" className="content btn">Sign Up</button>
             </form>
-        </>
+        </div>
     )
 
 }

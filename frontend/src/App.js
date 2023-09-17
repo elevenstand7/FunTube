@@ -8,6 +8,7 @@ import LoginForm from "./components/LoginForm";
 function App() {
   return (
     <>
+    <title>Funtube</title>
       <h1>Welcom to Funtube</h1>
         <Switch>
           <Route exact path="/" >
