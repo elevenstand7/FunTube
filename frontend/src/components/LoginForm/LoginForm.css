@@ -11,8 +11,9 @@ h1 {
 
 
     .login-container{
-        width: 200%;
-        height: 450%;
+        width: 30%;
+        height: 50%;
+        margin-top: 50px;
         font-family: "Comic Sans MS", cursive, sans-serif;
         display: flex;
         flex-direction: column;

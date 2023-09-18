@@ -21,14 +21,14 @@ function NaviBar() {
       <>
         <button onClick={changeRoute} type="button" className="user-btn btn btn-outline-primary ">
           <i className="fa-solid fa-user"></i>
-          LogIn
+          <div className='btn-content'>LogIn</div>
         </button>
       </>
     );
   }
 
   return (
-    <div>
+    <div className='navi-btn'>
         {sessionLinks}
     </div>
   );
