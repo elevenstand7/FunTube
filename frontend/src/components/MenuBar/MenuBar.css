@@ -1,0 +1,22 @@
+.menu-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.page-logo{
+    width: 129px;
+
+}
+
+.menu-btn{
+    display: flex;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+}
+
+.menu-logo{
+    display: inline-block;
+}

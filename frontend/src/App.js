@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, NavLink } from "react-router-dom";
 import Home from "./components/Home";
 import SignupForm from "./components/SignupForm";
 import LoginForm from "./components/LoginForm";
@@ -8,8 +8,8 @@ import LoginForm from "./components/LoginForm";
 function App() {
   return (
     <>
-    <title>Funtube</title>
-      <h1>Welcom to Funtube</h1>
+    {/* <title>Funtube</title>
+      <h1>Welcom to Funtube</h1> */}
         <Switch>
           <Route exact path="/" >
             <Home />

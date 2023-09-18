@@ -70,7 +70,7 @@ const SignupForm = ()=>{
                 <label className="content">Password
                     <input type="password" onChange={e=>setPassword(e.target.value)} value={password} required></input>
                 </label>
-                <button type="submit" className="content btn">Sign Up</button>
+                <button type="submit" className="content signup-btn">Sign Up</button>
             </form>
         </div>
     )

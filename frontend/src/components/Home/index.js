@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./Home.css";
-
+import MenuBar from "../MenuBar";
+import SearchBar from "../SearchBar";
 import NaviBar from "../NaviBar";
+import UserProfile from "../UserProfile";
 
 const Home = ()=>{
     const history = useHistory();
@@ -13,15 +15,10 @@ const Home = ()=>{
     // const routeChange1 = ()=>{history.push(`/signup`)}
     // const routeChange = ()=>{history.push(`/login`)}
     return (
-        <div>
-            <h2>Home page</h2>
-            {/* <img className="page-logo"src={logo}></img> */}
+        <div className="header">
+            <MenuBar />
+            <SearchBar />
             <NaviBar />
-            {/* <a href="/signup">Sign Up</a> */}
-            {/* <button onClick={routeChange1}>Sign Up</button> */}
-            {/* <Link to={`/signup`} className="btn btn-primary">Sign Up</Link> */}
-            {/* <button onClick={routeChange}>LogIn</button> */}
-
         </div>
     )
 
