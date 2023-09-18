@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import UserProfile from './UserProfile';
+import UserProfile from '../UserProfile';
+import logo from './logo.png'
 import './NaviBar.css';
 
 function NaviBar() {
@@ -31,6 +32,9 @@ function NaviBar() {
     <ul>
       <li>
         <NavLink exact to="/">Home</NavLink>
+        <i className="fa-solid fa-bars"></i>
+        <img className="page-logo"src={logo}></img>
+        <input type='text'></input>
         <br />
         {sessionLinks}
       </li>

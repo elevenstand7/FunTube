@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { signUpUser, loginUser, logoutUser  }  from "../../store/session";
+import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import "./LoginForm.css";
@@ -11,15 +11,21 @@ function LoginForm() {
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
-  const [isLogin, setisLogin] = useState(false);
 
-  const handleSubmit = async e => {
+
+  if (sessionUser) return <Redirect to="/" />;
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    try{
-      dispatch(loginUser({ credential, password }));
-      setisLogin(true);
-    }catch(res){
+    // debugger
+
+    return dispatch(sessionActions.loginUser({ credential, password }))
+      // .then(response => {
+      //   console.log(response)
+      // })
+      .catch(async (res) => {
+        console.log(res);
         let data;
         try {
           // .clone() essentially allows you to read the response body twice
@@ -30,43 +36,26 @@ function LoginForm() {
         if (data?.errors) setErrors(data.errors);
         else if (data) setErrors([data]);
         else setErrors([res.statusText]);
-      };
+      });
   };
 
-  if (sessionUser || isLogin) {
-    console.log(sessionUser)
-    return <Redirect to="/" />; // Redirect to home page if signed in or signed up
-  }
-
   return (
-    <>
+    <div className="login-container">
       <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="login-form">
         <ul>
           {errors.map(error => <li key={error}>{error}</li>)}
         </ul>
-        <label>
-          Username or Email
-          <input
-            type="text"
-            value={credential}
-            onChange={(e) => setCredential(e.target.value)}
-            required
-          />
+        <label className="content">Username or Email
+          <input type="text" value={credential} onChange={(e) => setCredential(e.target.value)} required />
         </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+        <label className="content">Password
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         </label>
-        <button type="submit">Log In</button>
+        <button type="submit" className="content btn">Log In</button>
       </form>
       {/* <Link to={`/signup`}>Create an Account!</Link> */}
-    </>
+    </div>
   );
 }
 

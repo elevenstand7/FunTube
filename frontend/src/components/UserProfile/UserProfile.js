@@ -32,7 +32,7 @@ function UserProfile({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
+      <button onClick={openMenu} className="home-btn">
         <i className="fa-solid fa-user-circle" />
       </button>
       {showMenu && (

@@ -1,4 +1,4 @@
-import { csrfFetch } from "./csrf";
+import csrfFetch from "./csrf";
 
     // ACTION TYPES
     const SET_CURRENT_USER = 'session/setCurrentUser';
@@ -7,7 +7,7 @@ import { csrfFetch } from "./csrf";
     // ACTION CREATORS
     export const setCurrentUser = user => ({
         type: SET_CURRENT_USER,
-        user
+        payload: user
     });
 
     export const removeCurrentUser = () => ({
@@ -24,47 +24,47 @@ import { csrfFetch } from "./csrf";
         else sessionStorage.removeItem("currentUser");
       }
 
-
     // THUNK ACTION CREATORS
-    export const loginUser = user => async dispatch => {
-        let res = await csrfFetch('/api/session', {
-            method: 'POST',
-            body: JSON.stringify(user)
+    export const loginUser = ({ credential, password }) => async dispatch => {
+        const response = await csrfFetch("/api/session", {
+          method: "POST",
+          body: JSON.stringify({ credential, password })
         });
-        let data = await res.json();
+        const data = await response.json();
         storeCurrentUser(data.user);
-        debugger
         dispatch(setCurrentUser(data.user));
-        return res;
-    };
+        console.log(response)
+        return response;
+      };
 
 
-    export const logoutUser = () => async dispatch => {
-        let res = await csrfFetch('/api/session', {
-            method: 'DELETE'
+      export const logoutUser = () => async (dispatch) => {
+        const response = await csrfFetch("/api/session", {
+          method: "DELETE"
         });
         storeCurrentUser(null);
         dispatch(removeCurrentUser());
-        return res;
-    }
+        return response;
+      };
 
-    export const signUpUser = user => async dispatch => {
+
+    export const signUpUser = (user) => async (dispatch) => {
         const { username, email, password } = user;
-        let res = await csrfFetch('/api/users', {
-            method: 'POST',
-            body: JSON.stringify({
-                username,
-                email,
-                password
-              })
+        const response = await csrfFetch("/api/users", {
+          method: "POST",
+          body: JSON.stringify({
+            username,
+            email,
+            password
+          })
         });
-        let data = await res.json();
+        const data = await response.json();
         storeCurrentUser(data.user);
         dispatch(setCurrentUser(data.user));
-        return res;
-    }
+        return response;
+      };
 
-    export const restoreSession = () => async dispatch => {
+      export const restoreSession = () => async dispatch => {
         const response = await csrfFetch("/api/session");
         storeCSRFToken(response);
         const data = await response.json();
@@ -73,7 +73,7 @@ import { csrfFetch } from "./csrf";
         return response;
       };
 
-      console.log(sessionStorage)
+    // console.log(sessionStorage)
     const initialState = {
         user: JSON.parse(sessionStorage.getItem("currentUser"))
       };
@@ -86,7 +86,7 @@ import { csrfFetch } from "./csrf";
         switch(action.type) {
             case SET_CURRENT_USER:
                 // debugger
-                return {...nextState, user: action.user}
+                return {...nextState, user: action.payload}
 
             case REMOVE_CURRENT_USER:
                 return { ...nextState, user: null };

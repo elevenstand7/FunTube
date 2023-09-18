@@ -15,6 +15,7 @@ const Home = ()=>{
     return (
         <div>
             <h2>Home page</h2>
+            {/* <img className="page-logo"src={logo}></img> */}
             <NaviBar />
             {/* <a href="/signup">Sign Up</a> */}
             {/* <button onClick={routeChange1}>Sign Up</button> */}

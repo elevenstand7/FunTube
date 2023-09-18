@@ -7,7 +7,7 @@ import { Route } from "react-router-dom";
 import './index.css';
 import App from './App';
 import configureStore from './store';
-import { csrfFetch } from './store/csrf';
+import csrfFetch from './store/csrf';
 import { signUpUser, loginUser, logoutUser, restoreSession  } from './store/session';
 
 const store = configureStore();
