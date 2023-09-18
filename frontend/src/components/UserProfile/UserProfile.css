@@ -1,0 +1,13 @@
+.user-profile-bar{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.avatar-btn{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}

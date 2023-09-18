@@ -1,8 +1,9 @@
 
-
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { signUpUser, loginUser, logoutUser  } from '../../store/session';
+import "./UserProfile.css"
+
 
 function UserProfile({ user }) {
   const dispatch = useDispatch();
@@ -31,20 +32,21 @@ function UserProfile({ user }) {
   };
 
   return (
-    <>
-      <button onClick={openMenu} className="home-btn">
+    <div className="user-profile-bar">
+      <button onClick={openMenu} className="avatar-btn">
         <i className="fa-solid fa-user-circle" />
       </button>
       {showMenu && (
-        <ul className="profile-dropdown">
+        <div className="profile-dropdown">
           <li>{user.username}</li>
           <li>{user.email}</li>
           <li>
             <button onClick={logout}>Log Out</button>
           </li>
-        </ul>
+
+        </div>
       )}
-    </>
+    </div>
   );
 }
 

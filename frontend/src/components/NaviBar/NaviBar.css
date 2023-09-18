@@ -2,7 +2,13 @@
     width: 20px;
     height: 45px;
 }
-
+.navi-btn{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 
 .user-btn{
    display: flex;
