@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import * as sessionActions from "../../store/session";
+import { signUpUser, loginUser, logoutUser  }  from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect,useHistory  } from "react-router-dom";
 import "./LoginForm.css";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function LoginForm() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector(state => state.session.user);
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
@@ -19,8 +20,7 @@ function LoginForm() {
     e.preventDefault();
     setErrors([]);
     // debugger
-
-    return dispatch(sessionActions.loginUser({ credential, password }))
+    return dispatch(loginUser({ credential, password }))
       // .then(response => {
       //   console.log(response)
       // })
@@ -38,6 +38,12 @@ function LoginForm() {
         else setErrors([res.statusText]);
       });
   };
+  const loginDemo = e =>{
+    e.preventDefault();
+    dispatch(loginUser({ credential: '123', password: "password" }))
+    // debugger
+    history.push(`/`);
+  }
 
   return (
     <div className="login-container">
@@ -52,9 +58,12 @@ function LoginForm() {
         <label className="content">Password
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         </label>
-        <button type="submit" className="content login-btn">Log In</button>
+        <div className="login-btn-container">
+          <button type="submit" className="content login-btn">Log In</button>
+          <button className="demo-user-link login-btn" onClick={loginDemo}>Demo User</button>
+        </div>
       </form>
-      <Link className="demo-user-link">Demo User</Link>
+      {/* <Link className="demo-user-link" onClick={loginDemo}>Demo User</Link> */}
       <Link to={`/signup`} className="sign-up-link">Create an Account!</Link>
     </div>
   );
