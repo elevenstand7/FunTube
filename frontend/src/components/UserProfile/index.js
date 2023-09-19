@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { signUpUser, loginUser, logoutUser  } from '../../store/session';
 import "./UserProfile.css"
+import Dropdown from 'react-bootstrap/Dropdown';
+
 
 
 function UserProfile({ user }) {
@@ -32,20 +34,41 @@ function UserProfile({ user }) {
   };
 
   return (
-    <div className="user-profile-bar">
-      <button onClick={openMenu} className="avatar-btn">
-        <i className="fa-solid fa-user-circle" />
-      </button>
-      {showMenu && (
-        <div className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <button onClick={logout}>Log Out</button>
-          </li>
+    // <div className="user-profile-bar">
+    //   <div className="avatar-btn">
+    //     <button onClick={openMenu}>
+    //       <i className="fa-solid fa-user-circle" />
+    //     </button>
+    //   </div>
+    //   {showMenu && (
+    //     <div className="profile-dropdown">
+    //       <li>{user.username}</li>
+    //       <li>{user.email}</li>
+    //       <li>
+    //         <button onClick={logout}>Log Out</button>
+    //       </li>
 
-        </div>
-      )}
+    //     </div>
+    //   )}
+    // </div>
+    <div className="user-profile-bar">
+      <Dropdown>
+        <Dropdown.Toggle id="avatar-btn" variant="success">
+          <i className="fa-solid fa-user-circle" />
+        </Dropdown.Toggle>
+        {/* {showMenu && ( */}
+        <Dropdown.Menu>
+          <Dropdown.Item >{user.username}</Dropdown.Item>
+          <Dropdown.Item >{user.email}</Dropdown.Item>
+          <Dropdown.Item >
+            <a className="logout-btn" onClick={logout}>
+              <i class="fa-solid fa-arrow-right-from-bracket logout-img"></i>
+              <span>Log Out</span>
+            </a>
+            {/* <button onClick={logout} className="logout-btn">Log Out</button> */}
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
     </div>
   );
 }

@@ -11,13 +11,17 @@ import Header from "./header";
 const Home = ()=>{
     const history = useHistory();
     const currentUser = useSelector(state=>state.session.user)
-    const videos = useSelector(state => state.videos)
+    // const videos = useSelector(state => state.videos)
+    const videos = [];
     // const userHasSignUp =
     // const routeChange1 = ()=>{history.push(`/signup`)}
     // const routeChange = ()=>{history.push(`/login`)}
     return (
-        <div className="header">
-            {/* <Header /> */}
+        <div >
+            {videos.map(video=>{
+                <div>video</div>
+            })}
+
         </div>
     )
 

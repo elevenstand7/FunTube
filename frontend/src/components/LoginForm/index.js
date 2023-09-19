@@ -41,7 +41,7 @@ function LoginForm() {
 
   return (
     <div className="login-container">
-      <h1>Log In</h1>
+      <h2>Log In</h2>
       <form onSubmit={handleSubmit} className="login-form">
         <ul>
           {errors.map(error => <li key={error}>{error}</li>)}
@@ -54,7 +54,8 @@ function LoginForm() {
         </label>
         <button type="submit" className="content login-btn">Log In</button>
       </form>
-      <Link to={`/signup`}>Create an Account!</Link>
+      <Link className="demo-user-link">Demo User</Link>
+      <Link to={`/signup`} className="sign-up-link">Create an Account!</Link>
     </div>
   );
 }

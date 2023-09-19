@@ -1,14 +1,15 @@
-h1 {
-    color: purple;
-    font-family: "Comic Sans MS", cursive, sans-serif;
+h2 {
+        margin-top: 10px;
+        color: #F25287;
+        font-family: "Comic Sans MS", cursive, sans-serif;
     }
     body{
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        color: #F25287;;
     }
-
 
     .login-container{
         width: 30%;
@@ -23,7 +24,7 @@ h1 {
         border-radius: 100px;
         background: #FEF2F4;
         /* margin: 50px 50px 50px 50px; */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 1.0);
+        box-shadow: 0 0 10px rgb(200, 200, 200);
     }
 
 
@@ -41,7 +42,7 @@ h1 {
 
     input{
         border: 5px solid white;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 1.0);
+        box-shadow: 0 0 10px rgb(200, 200, 200);
         border-radius: 10px;
         margin-left: 10px;
     }
@@ -58,4 +59,9 @@ h1 {
         width: 100px;
         height: 50px;
         /* margin-top: 5px; */
+    }
+
+    .sign-up-link{
+        color: #F25287;
+        margin-bottom: 10px;
     }

@@ -11,8 +11,9 @@ Rails.application.routes.draw do
     resource :videos, only: [:create, :show, :index, :destroy, :update]
     resource :comments, only: [:create, :destroy, :update]
     resource :likes, only:[:create, :destroy]
-
   end
+
+  get '*path', to: "static_pages#fronted_index"
 
   # post 'api/test', to: 'application#test'
 end
