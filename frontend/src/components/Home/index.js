@@ -17,9 +17,9 @@ const Home = ()=>{
     // const routeChange1 = ()=>{history.push(`/signup`)}
     // const routeChange = ()=>{history.push(`/login`)}
     return (
-        <div >
+        <div className="video-list">
             {videos.map(video=>{
-                <div>video</div>
+                <div>{video}Video</div>
             })}
 
         </div>
