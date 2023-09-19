@@ -1,0 +1,26 @@
+{
+  "name": "funtube",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elevenstand7/FunTube.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": "v16.20.1"
+  },
+  "bugs": {
+    "url": "https://github.com/elevenstand7/FunTube/issues"
+  },
+  "homepage": "https://github.com/elevenstand7/FunTube#readme"
+}

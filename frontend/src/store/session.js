@@ -33,7 +33,7 @@ import csrfFetch from "./csrf";
         const data = await response.json();
         storeCurrentUser(data.user);
         dispatch(setCurrentUser(data.user));
-        console.log(response)
+        // console.log(response)
         return response;
       };
 

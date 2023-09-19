@@ -25,7 +25,7 @@ function LoginForm() {
       //   console.log(response)
       // })
       .catch(async (res) => {
-        console.log(res);
+        // console.log(res);
         let data;
         try {
           // .clone() essentially allows you to read the response body twice

@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: Funtube_production
-  username: Funtube
-  password: <%= ENV["FUNTUBE_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
