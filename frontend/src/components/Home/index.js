@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./Home.css";
@@ -7,25 +7,32 @@ import SearchBar from "../SearchBar";
 import NaviBar from "../NaviBar";
 import UserProfile from "../UserProfile";
 import Header from "./header";
-import { getVideos, getVideo } from "../../store/videos";
+import VideoShow from "../VideoShow";
+import { fetchVideo, fetchVideos, getVideos } from "../../store/videos";
+
+
 
 const Home = ()=>{
     const history = useHistory();
     const currentUser = useSelector(state=>state.session.user)
-    // const videos = useSelector(state => state.videos)
-    const videos = useSelector(getVideos);
-    // const userHasSignUp =
+    const dispatch = useDispatch();
+    // const videos = useSelector(getVideos);
+    const videos = useSelector(state=>Object.values(state.videos));
+    console.log(videos)
+    // const video = videos[0];
     // const routeChange1 = ()=>{history.push(`/signup`)}
     // const routeChange = ()=>{history.push(`/login`)}
+
+    useEffect(()=>{
+        // debugger
+        dispatch(fetchVideos(videos));
+    }, [dispatch])
     return (
-        <div className="video-list">
-            {videos.map(video=>{
-                <div>
-                    <label>
-                    {video}
-                    </label>
-                </div>
-            })}
+        <div className="video-list-container">
+                {/* <VideoShow /> */}
+                {/* {videos.map(video=>{ */}
+                   <VideoShow key={videos[0].id} video={videos[0]}/>
+                 {/* })} */}
 
         </div>
     )

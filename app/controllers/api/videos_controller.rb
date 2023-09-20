@@ -1,4 +1,5 @@
 class Api::VideosController < ApplicationController
+  wrap_parameters include: Video.attribute_names + [:new_video]
 
   def create
     @video = Video.new(video_params)
@@ -29,7 +30,7 @@ class Api::VideosController < ApplicationController
 
     if @video && @video.user_id == current_user.id
       @video.destroy
-      render json: {'Delete video!'}
+      render json: { message: 'Delete video!'}, status: :unauthorized
     else
       render json: { errors: ['Failed to delete video.'] }, status: :unauthorized
     end
