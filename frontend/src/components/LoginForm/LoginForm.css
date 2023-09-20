@@ -1,6 +1,7 @@
 h2 {
         margin-top: 10px;
-        color: #F25287;
+        /* color: #F25287; */
+        color: #272829;
         font-family: "Comic Sans MS", cursive, sans-serif;
     }
     body{
@@ -8,21 +9,23 @@ h2 {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        color: #F25287;;
+        /* color: #F25287; */
+        color: #272829;
+
     }
 
     .login-container{
         width: 30%;
-        height: 50%;
-        margin-top: 50px;
+        height: 60%;
+        margin-top: 100px;
         font-family: "Comic Sans MS", cursive, sans-serif;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        border: 5px solid white;
-        border-radius: 100px;
-        background: #FEE3EC;
+        border: 3px solid rgb(236, 225, 225);
+        border-radius: 30px;
+        background: white;
         /* margin: 50px 50px 50px 50px; */
         box-shadow: 0 0 10px rgb(200, 200, 200);
     }
@@ -59,8 +62,10 @@ h2 {
         /* box-shadow: 0 0 10px rgba(0, 0, 0, 1.0); */
         /* position: relative;
         top: 50%; */
-        background-color: #D14D72;
-        color: #FCC8D1;
+        /* background-color: #D14D72; */
+        background-color: rgb(227, 217, 217);
+        /* color: #F25287; */
+        color: #272829;
         border: none;
         border-radius: 10px;
         width: 100px;
@@ -69,6 +74,6 @@ h2 {
     }
 
     .sign-up-link{
-        color: #F25287;
+        color: #272829;
         margin-bottom: 10px;
     }
