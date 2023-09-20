@@ -40,7 +40,7 @@ function LoginForm() {
   };
   const loginDemo = e =>{
     e.preventDefault();
-    dispatch(loginUser({ credential: '123', password: "password" }))
+    dispatch(loginUser({ credential: 'demo', password: "password" }))
     // debugger
     history.push(`/`);
   }

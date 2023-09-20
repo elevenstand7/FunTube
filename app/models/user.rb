@@ -26,6 +26,8 @@ class User < ApplicationRecord
 
   before_validation :ensure_session_token
 
+  has_many :videos, dependent: :destroy, inverse_of: :user
+
   def self.find_by_credentials(credential, password)
     field = credential =~ URI::MailTo::EMAIL_REGEXP ? :email : :username
     user = User.find_by(field => credential)
@@ -50,5 +52,7 @@ class User < ApplicationRecord
           return token unless User.exists?(session_token: token)
       end
   end
+
+
 
 end

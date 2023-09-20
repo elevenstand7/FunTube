@@ -1,3 +1,3 @@
 json.video do
-  json.extract! @video, :id, :title, :description, :user_id
+  json.partial! '/api/videos/video', video: @video
 end

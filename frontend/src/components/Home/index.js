@@ -20,7 +20,11 @@ const Home = ()=>{
     return (
         <div className="video-list">
             {videos.map(video=>{
-                <div>{video}Video</div>
+                <div>
+                    <label>
+                    {video}
+                    </label>
+                </div>
             })}
 
         </div>

@@ -23,6 +23,9 @@ function App() {
           <Route path="/login" >
             <LoginForm />
           </Route>
+
+          {/* <Route path="/videos" >
+          </Route> */}
         </Switch>
 
     </>
