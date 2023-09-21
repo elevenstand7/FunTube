@@ -18,6 +18,7 @@ const Home = ()=>{
     const dispatch = useDispatch();
     // const videos = useSelector(getVideos);
     const videos = useSelector(state=>Object.values(state.videos));
+
     // console.log(videos)
     // const video = videos[0];
     // const routeChange1 = ()=>{history.push(`/signup`)}

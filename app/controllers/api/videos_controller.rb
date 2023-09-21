@@ -20,7 +20,7 @@ class Api::VideosController < ApplicationController
   end
 
   def show
-    @video = Video.find_by(params[:id])
+    @video = Video.find(params[:id])
     if @video
       render :show
     else
@@ -29,7 +29,7 @@ class Api::VideosController < ApplicationController
   end
 
   def destroy
-    @video = Video.find_by(params[:id])
+    @video = Video.find(params[:id])
 
     if @video && @video.user_id == current_user.id
       @video.destroy

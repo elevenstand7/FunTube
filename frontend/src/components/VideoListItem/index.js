@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Player } from 'video-react';
-import p1 from './p1.png'
 import "./VideoListItem.css"
 
 const VideoListItem = ({video})=>{
+    // console.log(video)
     const {title, description, userId, videoUrl, photoUrl} = video
     const history = useHistory();
     const handleClick = ()=>{
         // e.preventDefault();
-        history.push(`/`);
+        history.push(`/videos/${video.id}`);
     }
     return (
         <div className="video-list" >

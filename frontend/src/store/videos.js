@@ -25,7 +25,7 @@ const removeVideo = videoId =>{
     }
 }
 
-// //video selector
+//video selector
 // export const getVideo = videoId =>{
 //     return state =>{
 //         return state.videos? state.videos[videoId] : null
@@ -56,9 +56,12 @@ export const fetchVideos = () => async dispatch =>{
 
 export const fetchVideo = (videoId) => async dispatch =>{
     const res = await csrfFetch(`/api/videos/${videoId}`)
+    // console.log(res)
     if(res.ok){
-        const video = await res.json();
-        dispatch(receiveVideo(video));
+        const {video} = await res.json();
+        if(video.id){
+            dispatch(receiveVideo(video));
+        }
         // return res;
     }
 }

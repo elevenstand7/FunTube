@@ -3,6 +3,7 @@ import { Route, Switch, NavLink } from "react-router-dom";
 import Home from "./components/Home";
 import SignupForm from "./components/SignupForm";
 import LoginForm from "./components/LoginForm";
+import VideoShowPage from "./components/VideoShowPage";
 import Header from "./components/Home/header";
 
 function App() {
@@ -12,6 +13,10 @@ function App() {
       <h1>Welcom to Funtube</h1> */}
       <Header />
         <Switch>
+        <Route exact path="/" >
+            <Home />
+          </Route>
+
           <Route path="/signup" >
             <SignupForm />
           </Route>
@@ -20,13 +25,11 @@ function App() {
             <LoginForm />
           </Route>
 
-          <Route path="/videos/:id" >
-            {/* <VideoShow /> */}
+          <Route path="/videos/:videoId" >
+            <VideoShowPage />
           </Route>
 
-          <Route exact path="/" >
-            <Home />
-          </Route>
+
         </Switch>
 
     </>
