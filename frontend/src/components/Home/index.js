@@ -25,16 +25,39 @@ const Home = ()=>{
 
     useEffect(()=>{
         // debugger
-        dispatch(fetchVideos(videos));
+        dispatch(fetchVideos());
     }, [dispatch])
     return (
         <div className="video-list-container">
-                {/* <VideoShow /> */}
-                {/* {videos.map(video=>{ */}
-                   <VideoShow key={videos[0].id} video={videos[0]}/>
-                 {/* })} */}
-
+            {videos.map(video =>(
+                <div className="video-list">
+                    <VideoShow className="video-pic" key={video.id} video={video}/>
+                </div>
+            ))}
+            {/* <div className="video-list-row">
+                <div className="video-list">
+                    <VideoShow className="video-pic"/>
+                </div>
+                <div className="video-list">
+                    <VideoShow />
+                </div>
+                <div className="video-list">
+                    <VideoShow />
+                </div>
+            </div>
+            <div className="video-list-row">
+                <div className="video-list">
+                    <VideoShow />
+                </div>
+                <div className="video-list">
+                    <VideoShow />
+                </div>
+                <div className="video-list">
+                    <VideoShow />
+                </div>
+            </div> */}
         </div>
+
     )
 
 }

@@ -13,6 +13,8 @@ class Api::VideosController < ApplicationController
 
   def index
     @videos = Video.all
+    # debugger
+    # consolo.log(@videos)
     render :index
   end
 
@@ -30,7 +32,7 @@ class Api::VideosController < ApplicationController
 
     if @video && @video.user_id == current_user.id
       @video.destroy
-      render json: { message: 'Delete video!'}, status: :unauthorized
+      render json: { message: 'Delete video!'}, status: :ok
     else
       render json: { errors: ['Failed to delete video.'] }, status: :unauthorized
     end

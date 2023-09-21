@@ -50,7 +50,7 @@ export const fetchVideos = () => async dispatch =>{
     if(res.ok){
         const videos = await res.json();
         dispatch(receiveVideos(videos));
-        return res;
+        // return res;
     }
 }
 
