@@ -8,9 +8,9 @@ Rails.application.routes.draw do
     # ...
     resources :users, only: [:create, :show]
     resource :session, only: [:create, :show, :destroy]
-    resource :videos, only: [:create, :show, :index, :destroy, :update]
-    resource :comments, only: [:create, :destroy, :update]
-    resource :likes, only:[:create, :destroy]
+    resources :videos, only: [:create, :index, :show, :destroy, :update]
+    resources :comments, only: [:create, :destroy, :update]
+    resources :likes, only:[:create, :destroy]
   end
 
   get '*path', to: "static_pages#fronted_index"

@@ -1,5 +1,6 @@
 class Api::VideosController < ApplicationController
   wrap_parameters include: Video.attribute_names + [:new_video]
+  wrap_parameters include: Video.attribute_names + [:photo]
 
   def create
     @video = Video.new(video_params)
@@ -7,14 +8,14 @@ class Api::VideosController < ApplicationController
     if @video.save
       render :show
     else
-      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: @video.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   def index
     @videos = Video.all
-    # debugger
-    # consolo.log(@videos)
+    # puts @videos.inspect
+
     render :index
   end
 
@@ -42,7 +43,7 @@ class Api::VideosController < ApplicationController
 
   private
   def video_params
-      params.require(:video).permit(:title, :description, :new_video)
+      params.require(:video).permit(:title, :description, :new_video, :photo)
   end
 
 end

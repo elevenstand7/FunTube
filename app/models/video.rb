@@ -20,6 +20,7 @@ class Video < ApplicationRecord
   # has_many :likes, dependent: :destroy
 
   has_one_attached :new_video
+  has_one_attached :photo
 
   def ensure_video
     unless self.new_video.attached?

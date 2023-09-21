@@ -41,7 +41,7 @@ ApplicationRecord.transaction do
   end
 
   puts "Creating videos..."
-  random_description = proc { Faker::Lorem.paragraphs(number: rand(1..3)).join("\n\n") }
+  random_description = proc { Faker::Lorem.paragraphs(number: rand(1..6)).join("\n\n") }
 
   videos = Video.create!([
     {
@@ -55,20 +55,44 @@ ApplicationRecord.transaction do
       user_id: 2
     },
     {
-      title: 'study with me',
+      title: 'Study with me',
       description: random_description.call,
       user_id: 1
-    }]);
+    },
+    {
+      title: 'Party Animals is Fun!',
+      description: random_description.call,
+      user_id: 3
+    },
+    {
+      title: 'The Animals are soooo Cute.',
+      description: random_description.call,
+      user_id: 2
+    },
+    {
+      title: "Let's try this new game. ",
+      description: random_description.call,
+      user_id: 3
+    }
+    ]);
 
 
 end
 
 
 puts "Attaching videos..."
-Video.first(3).each_with_index do |video, index|
+Video.first(6).each_with_index do |video, index|
   video.new_video.attach(
       io: URI.open("https://funtube-seeds.s3.us-east-2.amazonaws.com/v#{index + 1}.mp4"),
       filename: "v#{index + 1}.mp4"
+    )
+end
+
+puts "Attaching phtots..."
+Video.first(6).each_with_index do |video, index|
+  video.photo.attach(
+      io: URI.open("https://funtube-seeds.s3.us-east-2.amazonaws.com/pics/p#{index + 1}.png"),
+      filename: "p#{index + 1}.png"
     )
 end
 

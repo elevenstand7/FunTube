@@ -7,7 +7,7 @@ import SearchBar from "../SearchBar";
 import NaviBar from "../NaviBar";
 import UserProfile from "../UserProfile";
 import Header from "./header";
-import VideoShow from "../VideoShow";
+import VideoListItem from "../VideoListItem";
 import { fetchVideo, fetchVideos, getVideos } from "../../store/videos";
 
 
@@ -18,7 +18,7 @@ const Home = ()=>{
     const dispatch = useDispatch();
     // const videos = useSelector(getVideos);
     const videos = useSelector(state=>Object.values(state.videos));
-    console.log(videos)
+    // console.log(videos)
     // const video = videos[0];
     // const routeChange1 = ()=>{history.push(`/signup`)}
     // const routeChange = ()=>{history.push(`/login`)}
@@ -30,32 +30,11 @@ const Home = ()=>{
     return (
         <div className="video-list-container">
             {videos.map(video =>(
-                <div className="video-list">
-                    <VideoShow className="video-pic" key={video.id} video={video}/>
+                <div className="video-card" key={video.id}>
+                    <VideoListItem className="video-pic"  video={video}/>
                 </div>
             ))}
-            {/* <div className="video-list-row">
-                <div className="video-list">
-                    <VideoShow className="video-pic"/>
-                </div>
-                <div className="video-list">
-                    <VideoShow />
-                </div>
-                <div className="video-list">
-                    <VideoShow />
-                </div>
-            </div>
-            <div className="video-list-row">
-                <div className="video-list">
-                    <VideoShow />
-                </div>
-                <div className="video-list">
-                    <VideoShow />
-                </div>
-                <div className="video-list">
-                    <VideoShow />
-                </div>
-            </div> */}
+
         </div>
 
     )

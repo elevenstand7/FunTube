@@ -5,3 +5,8 @@ if video.new_video.attached?
 else
   json.video_url "www.google.com"
 end
+
+
+if video.photo.attached?
+  json.photo_url url_for (video.photo)
+end

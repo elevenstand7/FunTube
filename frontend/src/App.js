@@ -12,10 +12,6 @@ function App() {
       <h1>Welcom to Funtube</h1> */}
       <Header />
         <Switch>
-          <Route exact path="/" >
-            <Home />
-          </Route>
-
           <Route path="/signup" >
             <SignupForm />
           </Route>
@@ -24,8 +20,13 @@ function App() {
             <LoginForm />
           </Route>
 
-          {/* <Route path="/videos" >
-          </Route> */}
+          <Route path="/videos/:id" >
+            {/* <VideoShow /> */}
+          </Route>
+
+          <Route exact path="/" >
+            <Home />
+          </Route>
         </Switch>
 
     </>

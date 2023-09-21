@@ -1,0 +1,22 @@
+h3{
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.video-list-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.video-list{
+    width: 400px;
+    height: 200px;
+    align-items: center;
+    margin: 20px;
+}
+
+.video-pic{
+    max-width: 100%;
+}
