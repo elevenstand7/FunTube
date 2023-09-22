@@ -2,7 +2,7 @@ import csrfFetch from "./csrf.js";
 
 export const RECEIVE_USER = 'users/RECEIVE_USER';
 export const RECEIVE_USERS = 'users/RECEIVE_USERS';
-
+const ADD_USER = 'users/addUser';
 
 const receiveUser = user =>{
     return {
@@ -17,6 +17,11 @@ const receiveUsers = users =>{
         users
     }
 }
+
+export const addUser = (user) => ({
+    type: ADD_USER,
+    payload: user
+  });
 
 
 export const fetchUser = (userId) => async dispatch =>{

@@ -3,3 +3,16 @@ json.video do
   json.uploader @video.user.username
 end
 
+@video.likes.includes(:user).each do |like|
+  json.likes do
+    json.set! like.id do
+      json.partial! 'api/likes/like', like: like
+    end
+  end
+
+json.users do
+    json.set! like.user_id do
+      json.partial! 'api/users/user', user: like.user
+    end
+  end
+end

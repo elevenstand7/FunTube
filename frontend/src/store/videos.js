@@ -5,6 +5,8 @@ import { addUser, fetchUser } from "./users.js";
 export const RECEIVE_VIDEOS = 'videos/RECEIVE_VIDEOS';
 export const RECEIVE_VIDEO = 'videos/RECEIVE_VIDEO';
 export const REMOVE_VIDEO = 'videos/REMOVE_VIDEO ';
+export const LIKE_VIDEO = 'videos/LIKE_VIDEO'
+export const UNLIKE_VIDEO = 'videos/UNLIKE_VIDEO'
 
 
 const receiveVideos = videos =>{
@@ -29,20 +31,20 @@ const removeVideo = videoId =>{
 }
 
 //video selector
-export const getVideo = videoId =>{
-    return state =>{
-        return state.videos? state.videos[videoId] : null
-    }
-}
+// export const getVideo = videoId =>{
+//     return state =>{
+//         return state.videos? state.videos[videoId] : null
+//     }
+// }
 
-export const getVideos = state =>{
-    // console.log(state)
-    if(state.videos){
-        return Object.values(state.videos.videos)
-    }else{
-        return []
-    }
-}
+// export const getVideos = state =>{
+//     // console.log(state)
+//     if(state.videos){
+//         return Object.values(state.videos.videos)
+//     }else{
+//         return []
+//     }
+// }
 
 
 
@@ -71,6 +73,34 @@ export const fetchVideo = (videoId) => async dispatch =>{
     }
 }
 
+export const likeVideo = (videoId) => async dispatch => {
+    const res = await csrfFetch(`/api/videos/${videoId}/like`,{
+        method:'POST'
+    });
+    if(res.ok){
+        const data = await res.json();
+        dispatch({
+            type: LIKE_VIDEO,
+            videoId
+        })
+        return data;
+    }
+}
+
+export const unlikeVideo = (videoId) => async dispatch => {
+    const res = await csrfFetch(`/api/videos/${videoId}/like`,{
+        method:'DELETE'
+    });
+    if(res.ok){
+        const data = await res.json();
+        dispatch({
+            type: UNLIKE_VIDEO,
+            videoId
+        })
+        return data;
+    }
+}
+
 function videosReducer(state={}, action){
     const nextState = {...state};
     switch(action.type){
@@ -82,6 +112,10 @@ function videosReducer(state={}, action){
         case REMOVE_VIDEO:
             delete nextState[action.videoId]
             return nextState;
+        case LIKE_VIDEO:
+            return {...nextState, likedVideos: [...state.likedVideos, action.videoId]}
+        case UNLIKE_VIDEO:
+            return {...nextState, likedVideos: nextState.filter(id => id !== action.videoId)}
         default:
             return nextState;
     }

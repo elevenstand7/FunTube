@@ -9,8 +9,8 @@ import UserProfile from "../UserProfile";
 
 const Header = ()=>{
     const history = useHistory();
-    const currentUser = useSelector(state=>state.session.user)
-    // const userHasSignUp =
+    // const currentUser = useSelector(state=>state.session.user)
+
     // const routeChange1 = ()=>{history.push(`/signup`)}
     // const routeChange = ()=>{history.push(`/login`)}
     return (
