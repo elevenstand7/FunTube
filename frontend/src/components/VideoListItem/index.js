@@ -8,9 +8,10 @@ const VideoListItem = ({video})=>{
     // console.log(video)
     const {title, description, userId, videoUrl, photoUrl} = video
     const history = useHistory();
-    const handleClick = ()=>{
-        // e.preventDefault();
-        history.push(`/videos/${video.id}`);
+    const handleClick = (e)=>{
+        e.preventDefault();
+        console.log(video.id);
+        history.push(`/videos/${(video.id)}`);
     }
     return (
         <div className="video-list" >

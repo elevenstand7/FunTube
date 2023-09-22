@@ -9,10 +9,11 @@ import "./VideoShowPage.css"
 const VideoShowPage = ()=>{
     const dispatch = useDispatch();
     const { videoId } = useParams();
+    console.log("videoId", videoId)
 
-
-    const video = useSelector(getVideo(videoId));
-
+    // const video = useSelector(getVideo(videoId));
+    const video = useSelector(state => state.videos[videoId]);
+    console.log("video2", video)
     useEffect(()=>{
         if(!video){
             dispatch(fetchVideo(videoId))
@@ -33,7 +34,7 @@ const VideoShowPage = ()=>{
                 poster={photoUrl}
                 src={videoUrl}
                 type="video/mp4"
-                autoPlay
+                // autoPlay
             />
             <div className="video-content">
                 <h4>{title}</h4>

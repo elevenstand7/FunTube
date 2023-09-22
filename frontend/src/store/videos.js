@@ -38,7 +38,7 @@ export const getVideo = videoId =>{
 export const getVideos = state =>{
     // console.log(state)
     if(state.videos){
-        return Object.values(state.videos)
+        return Object.values(state.videos.videos)
     }else{
         return []
     }
@@ -52,7 +52,7 @@ export const fetchVideos = () => async dispatch =>{
     const res = await csrfFetch(`/api/videos`);
     // console.log(res);
     if(res.ok){
-        const videos = await res.json();
+        const {videos} = await res.json();
         dispatch(receiveVideos(videos));
         // return res;
     }
@@ -63,7 +63,7 @@ export const fetchVideo = (videoId) => async dispatch =>{
     // console.log(res)
     if(res.ok){
         const {video} = await res.json();
-
+        console.log("video:", video)
         if(video.id){
             dispatch(receiveVideo(video));
         }
