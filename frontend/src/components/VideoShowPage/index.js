@@ -2,6 +2,8 @@ import React, { useEffect, useState }  from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Player } from 'video-react';
+import button from 'bootstrap';
+import momo from './momo.png'
 import { getVideo, fetchVideo } from "../../store/videos";
 
 import "./VideoShowPage.css"
@@ -9,11 +11,11 @@ import "./VideoShowPage.css"
 const VideoShowPage = ()=>{
     const dispatch = useDispatch();
     const { videoId } = useParams();
-    console.log("videoId", videoId)
+    // console.log("videoId", videoId)
 
     // const video = useSelector(getVideo(videoId));
     const video = useSelector(state => state.videos[videoId]);
-    console.log("video2", video)
+    // console.log("video2", video)
     useEffect(()=>{
         if(!video){
             dispatch(fetchVideo(videoId))
@@ -37,8 +39,18 @@ const VideoShowPage = ()=>{
                 // autoPlay
             />
             <div className="video-content">
-                <h4>{title}</h4>
-                <h2>{uploader}</h2>
+                <div className="top-row">
+                    <h4>{title}</h4>
+                </div>
+                <div className="middle-row">
+                    <div className="user-info">
+                        <img className="avatar" src={momo}></img>
+                        <h5>{uploader}</h5>
+                    </div>
+                    <button className="favi-btn btn btn-light ">
+                        <i className="fa-solid fa-heart"></i>
+                    </button>
+                </div>
                 <div className="bottom-row">
                     <p>{description}</p>
                 </div>

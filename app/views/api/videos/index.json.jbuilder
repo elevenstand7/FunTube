@@ -8,9 +8,4 @@ json.videos do
     end
   end
 end
-# @videos.each do |video|
-#   json.extract! video, :id, :title, :description, :user_id
-#   json.video_url video.new_video.url
-# end
 
-# json.array! @videos, partial: 'api/videos/video', as: :video

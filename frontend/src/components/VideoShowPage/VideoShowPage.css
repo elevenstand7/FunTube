@@ -21,6 +21,43 @@ h4{
     font-size: 0.9rem;
 }
 
+.top-row{
+    font-size: 2rem;
+}
+
+.middle-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    margin: 10px 0px;
+    padding: 0px 3px;
+}
+.user-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    margin-right: 5px;
+}
+.favi-btn{
+    width: 80px;
+    height: 36px;
+    border: 1px solid #EBE4D1;
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #f2f2f2;
+}
+
 .bottom-row{
     /* box-shadow: 0 0 10px rgb(200, 200, 200); */
     background-color: #f2f2f2;

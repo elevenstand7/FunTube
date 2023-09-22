@@ -63,7 +63,7 @@ export const fetchVideo = (videoId) => async dispatch =>{
     // console.log(res)
     if(res.ok){
         const {video} = await res.json();
-        console.log("video:", video)
+        // console.log("video:", video)
         if(video.id){
             dispatch(receiveVideo(video));
         }
