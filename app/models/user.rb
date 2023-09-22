@@ -26,7 +26,7 @@ class User < ApplicationRecord
 
   before_validation :ensure_session_token
 
-  has_many :videos, dependent: :destroy, inverse_of: :user
+  has_many :videos, dependent: :destroy
 
   def self.find_by_credentials(credential, password)
     field = credential =~ URI::MailTo::EMAIL_REGEXP ? :email : :username

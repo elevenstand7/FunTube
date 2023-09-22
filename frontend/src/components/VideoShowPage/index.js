@@ -3,27 +3,27 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Player } from 'video-react';
 import { getVideo, fetchVideo } from "../../store/videos";
+
 import "./VideoShowPage.css"
 
 const VideoShowPage = ()=>{
     const dispatch = useDispatch();
     const { videoId } = useParams();
-    // console.log(videoId)
-    // const video = useSelector(getVideo(videoId));
 
-    const video = useSelector(state => state.videos[videoId]);
-    // console.log(video)
+
+    const video = useSelector(getVideo(videoId));
 
     useEffect(()=>{
         if(!video){
             dispatch(fetchVideo(videoId))
         }
-    },[dispatch, videoId,video])
+    },[dispatch, videoId])
 
     if(!video){
         return <div>Loading...</div>
     }
-    const {title, description, userId, videoUrl, photoUrl} = video
+    const {title, description, userId, videoUrl, uploader, photoUrl} = video
+
 
     return (
         <div className="video-container">
@@ -37,6 +37,7 @@ const VideoShowPage = ()=>{
             />
             <div className="video-content">
                 <h4>{title}</h4>
+                <h2>{uploader}</h2>
                 <div className="bottom-row">
                     <p>{description}</p>
                 </div>

@@ -1,8 +1,11 @@
 import csrfFetch from "./csrf.js";
+import { addUser, fetchUser } from "./users.js";
+
 //video actions
 export const RECEIVE_VIDEOS = 'videos/RECEIVE_VIDEOS';
 export const RECEIVE_VIDEO = 'videos/RECEIVE_VIDEO';
 export const REMOVE_VIDEO = 'videos/REMOVE_VIDEO ';
+
 
 const receiveVideos = videos =>{
     return {
@@ -26,11 +29,11 @@ const removeVideo = videoId =>{
 }
 
 //video selector
-// export const getVideo = videoId =>{
-//     return state =>{
-//         return state.videos? state.videos[videoId] : null
-//     }
-// }
+export const getVideo = videoId =>{
+    return state =>{
+        return state.videos? state.videos[videoId] : null
+    }
+}
 
 export const getVideos = state =>{
     // console.log(state)
@@ -40,6 +43,7 @@ export const getVideos = state =>{
         return []
     }
 }
+
 
 
 //video thunk action
@@ -59,6 +63,7 @@ export const fetchVideo = (videoId) => async dispatch =>{
     // console.log(res)
     if(res.ok){
         const {video} = await res.json();
+
         if(video.id){
             dispatch(receiveVideo(video));
         }

@@ -16,7 +16,7 @@ const Home = ()=>{
     const history = useHistory();
     const currentUser = useSelector(state=>state.session.user)
     const dispatch = useDispatch();
-    // const videos = useSelector(getVideos);
+
     const videos = useSelector(state=>Object.values(state.videos));
 
     // console.log(videos)
