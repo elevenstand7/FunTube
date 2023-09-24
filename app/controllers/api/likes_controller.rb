@@ -1,6 +1,6 @@
 class Api::LikesController < ApplicationController
 
-  before_action :require_logged_in
+  # before_action :require_logged_in
 
   def create
     @like = current_user.likes.new(like_params)
@@ -28,6 +28,16 @@ class Api::LikesController < ApplicationController
   def show
     @like = Like.find(params[:id])
     render :show
+  end
+
+  # def index
+  #   @likes = Like.all
+  #   render :index
+  # end
+  def index
+    @likes = Like.where(user_id: params[:user_id])
+    # render json: @likes
+    render :index
   end
 
 

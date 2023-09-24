@@ -5,7 +5,7 @@ import { Player } from 'video-react';
 import button from 'bootstrap';
 import momo from './momo.png'
 import { getVideo, fetchVideo} from "../../store/videos";
-import {createLike,deleteLike} from "../../store/likes";
+import {createLike,deleteLike, hasLikedVideo, fetchLikes, fetchUserLikes} from "../../store/likes";
 
 import "./VideoShowPage.css"
 
@@ -14,15 +14,21 @@ const VideoShowPage = ()=>{
     const { videoId } = useParams();
     // console.log("videoId", videoId)
     // debugger
-    const currentUser = useSelector(state=>state.session.user)
+    const currentUser = useSelector(state=>state.session.user);
+    const currentUserId = currentUser.id;
     const video = useSelector(state => state.videos[videoId]);
+    const likes = useSelector(state => Object.values(state.likes));
+    // const userlikes = useSelector(state => Object.values(state.likes.userLikes));
+    // const hasLiked = useSelector(state => hasLikedVideo(state, videoId, currentUser.id))
     // const likedVideos = useSelector(state => state.videos.likedVideos) || [];
-    // console.log("likedVideos", likedVideos)
+    console.log(likes);
     useEffect(()=>{
         if(!video){
             dispatch(fetchVideo(videoId))
+            dispatch(fetchLikes())
+            dispatch(fetchUserLikes(currentUserId))
         }
-    },[dispatch, videoId])
+    },[dispatch, videoId, currentUserId])
 
     if(!video){
         return <div>Loading...</div>
