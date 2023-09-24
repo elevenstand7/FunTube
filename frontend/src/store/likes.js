@@ -15,9 +15,9 @@ const getLikes = likes =>({
     likes
 })
 
-const removeLike = like =>({
+const removeLike = likeId =>({
     type: REMOVE_LIKE,
-    like
+    likeId
 })
 
 const getUserLikes = likes =>({
@@ -86,7 +86,7 @@ const likesReducer = (state = {}, action) => {
             nextState[action.like.id] = action.like;
             return nextState;
         case REMOVE_LIKE:
-            delete nextState[action.like.id]
+            delete nextState[action.likeId]
             return nextState;
         case GET_USER_LIKES:
             return {...nextState, userLikes: action.likes};

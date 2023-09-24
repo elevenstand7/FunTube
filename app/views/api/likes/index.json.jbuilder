@@ -14,6 +14,8 @@ json.array! @likes do |like|
   #   json.video_id like.video_id
   #   json.user_id like.user_id
   # end
-  json.video_id like.video_id
+  json.id like.id
+  json.likedVideo_id like.video_id
+  json.user_id like.user_id
 end
 

@@ -5,7 +5,7 @@ json.video do
   json.uploader @video.user.username
 end
 
-@video.likes.includes(:user).each do |like|
+@video.likes.each do |like|
   json.likes do
     json.set! like.id do
       json.partial! 'api/likes/like', like: like

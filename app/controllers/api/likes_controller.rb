@@ -10,16 +10,17 @@ class Api::LikesController < ApplicationController
       render :show
     else
       # render json: { errors: @like.errors.full_messages }, status: :unprocessable_entity
-      render json: { message: 'You already liked this video!' }, status: :unauthorized
+      render json: { message: 'You already liked this video!' }, status: :unprocessable_entity
     end
   end
 
 
   def destroy
-    @like = current_user.likes.find_by(id: params[:id], video_id: params[:video_id])
+    @like = current_user.likes.find(params[:id])
     if @like
       @like.destroy
-      render :show
+      # render :show
+      render json: { message: 'Unlike video!' }
     else
       render json: { message: 'Unauthorized to unlike' }, status: :unauthorized
     end
