@@ -1,7 +1,7 @@
 import csrfFetch from "./csrf.js";
 
-export const ADD_LIKE = 'likes/addLike';
-export const REMOVE_LIKE = 'likes/removeLike';
+export const ADD_LIKE = 'likes/ADD_LIKE';
+export const REMOVE_LIKE = 'likes/REMOVE_LIKE';
 
 const addLike = like =>({
     type: ADD_LIKE,
@@ -13,15 +13,19 @@ const removeLike = like =>({
     like
 })
 
-export const createLike = like => async dispatch =>{
+export const createLike = videoId => async (dispatch, getState) =>{
+    const { session } = getState();
+    debugger
     const res = await csrfFetch("/api/likes", {
         method: "POST",
         body: JSON.stringify({
-
-
+            user_like: true,
+            user_id:session.user.id,
+            video_id: videoId
         })
     });
     const data = await res.json();
+    console.log(data)
     dispatch(addLike(data.like));
 };
 

@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Player } from 'video-react';
 import button from 'bootstrap';
 import momo from './momo.png'
-import { getVideo, fetchVideo, likeVideo, unlikeVideo } from "../../store/videos";
+import { getVideo, fetchVideo} from "../../store/videos";
+import {createLike,deleteLike} from "../../store/likes";
 
 import "./VideoShowPage.css"
 
@@ -12,11 +13,11 @@ const VideoShowPage = ()=>{
     const dispatch = useDispatch();
     const { videoId } = useParams();
     // console.log("videoId", videoId)
-
+    // debugger
     const currentUser = useSelector(state=>state.session.user)
     const video = useSelector(state => state.videos[videoId]);
-    const likedVideos = useSelector(state => state.videos.likedVideos);
-    console.log("likedVideos", likedVideos)
+    // const likedVideos = useSelector(state => state.videos.likedVideos) || [];
+    // console.log("likedVideos", likedVideos)
     useEffect(()=>{
         if(!video){
             dispatch(fetchVideo(videoId))
@@ -30,12 +31,21 @@ const VideoShowPage = ()=>{
 
     const handleLike = e =>{
         e.preventDefault();
-        if (currentUser && currentUser.id !== userId){
-            if(likedVideos.includes(videoId)){
-                dispatch(unlikeVideo(videoId))
-            }else{
-                dispatch(likeVideo(videoId))
-            }
+        console.log("click!")
+        console.log(currentUser)
+        console.log(userId)
+    if (currentUser ){
+
+        dispatch(createLike(videoId));
+        // if (currentUser && currentUser.id !== userId){
+        //     if(likedVideos.includes(videoId)){
+        //         dispatch(unlikeVideo(videoId))
+        //     }else{
+        //         debugger
+        //         dispatch(likeVideo(videoId))
+        //     }
+        // }else{
+        //     console.log("You cannot like your video!")
         }
     }
 

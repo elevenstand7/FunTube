@@ -1,6 +1,7 @@
 import csrfFetch from "./csrf.js";
 import { addUser, fetchUser } from "./users.js";
 
+
 //video actions
 export const RECEIVE_VIDEOS = 'videos/RECEIVE_VIDEOS';
 export const RECEIVE_VIDEO = 'videos/RECEIVE_VIDEO';
@@ -55,10 +56,23 @@ export const fetchVideos = () => async dispatch =>{
     // console.log(res);
     if(res.ok){
         const {videos} = await res.json();
+        // console.log(videos);
         dispatch(receiveVideos(videos));
         // return res;
     }
 }
+
+
+// export const fetchVideosWithoutUrl= () => async dispatch =>{
+//     const res = await csrfFetch(`/api/videos?excludeUrl=true`);
+//     // console.log(res);
+//     if(res.ok){
+//         const {videos} = await res.json();
+//         console.log(videos);
+//         dispatch(receiveVideos(videos));
+//         // return res;
+//     }
+// }
 
 export const fetchVideo = (videoId) => async dispatch =>{
     const res = await csrfFetch(`/api/videos/${videoId}`)
@@ -73,33 +87,39 @@ export const fetchVideo = (videoId) => async dispatch =>{
     }
 }
 
-export const likeVideo = (videoId) => async dispatch => {
-    const res = await csrfFetch(`/api/videos/${videoId}/like`,{
-        method:'POST'
-    });
-    if(res.ok){
-        const data = await res.json();
-        dispatch({
-            type: LIKE_VIDEO,
-            videoId
-        })
-        return data;
-    }
-}
+// export const likeVideo = (videoId) => async (dispatch, getState) => {
+//     const { session } = getState();
+//     const res = await csrfFetch(`/api/videos/${videoId}/like`,{
+//         method:'POST',
+//         body: JSON.stringify({
+//             user_like: true,
+//             user_id:session.user.id,
+//             video_id: videoId
+//         })
+//     });
+//     if(res.ok){
+//         const data = await res.json();
+//         dispatch({
+//             type: LIKE_VIDEO,
+//             videoId
+//         })
+//         return data;
+//     }
+// }
 
-export const unlikeVideo = (videoId) => async dispatch => {
-    const res = await csrfFetch(`/api/videos/${videoId}/like`,{
-        method:'DELETE'
-    });
-    if(res.ok){
-        const data = await res.json();
-        dispatch({
-            type: UNLIKE_VIDEO,
-            videoId
-        })
-        return data;
-    }
-}
+// export const unlikeVideo = (videoId) => async dispatch => {
+//     const res = await csrfFetch(`/api/videos/${videoId}/like`,{
+//         method:'DELETE'
+//     });
+//     if(res.ok){
+//         const data = await res.json();
+//         dispatch({
+//             type: UNLIKE_VIDEO,
+//             videoId
+//         })
+//         return data;
+//     }
+// }
 
 function videosReducer(state={}, action){
     const nextState = {...state};
@@ -112,10 +132,10 @@ function videosReducer(state={}, action){
         case REMOVE_VIDEO:
             delete nextState[action.videoId]
             return nextState;
-        case LIKE_VIDEO:
-            return {...nextState, likedVideos: [...state.likedVideos, action.videoId]}
-        case UNLIKE_VIDEO:
-            return {...nextState, likedVideos: nextState.filter(id => id !== action.videoId)}
+        // case LIKE_VIDEO:
+        //     return {...nextState, likedVideos: [...state.likedVideos, action.videoId]}
+        // case UNLIKE_VIDEO:
+        //     return {...nextState, likedVideos: nextState.likedVideos.filter(id => id !== action.videoId)}
         default:
             return nextState;
     }

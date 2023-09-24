@@ -31,9 +31,9 @@ const Home = ()=>{
     return (
         <div className="video-list-container">
 
-            {videos.map(video =>(
-                <div className="video-card" key={video.id}>
-                    <VideoListItem className="video-pic"  video={video}/>
+            {videos.map((video, index) =>(
+                <div className="video-card" key={`${video.id}-${index}`}>
+                    <VideoListItem className="video-pic" video={video}/>
                 </div>
             ))}
 

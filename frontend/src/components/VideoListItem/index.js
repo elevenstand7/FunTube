@@ -20,11 +20,6 @@ const VideoListItem = ({video})=>{
                     <h3>{video.title}</h3>
                     {/* <p>{video.userId.username}</p> */}
                 </a>
-                {/* <Player
-                    poster="./p1.png"
-                    src={video.videoUrl}
-                /> */}
-
         </div>
     )
 };

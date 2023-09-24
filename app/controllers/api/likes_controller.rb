@@ -9,7 +9,8 @@ class Api::LikesController < ApplicationController
     if @like.save
       render :show
     else
-      render json: { errors: @like.errors.full_messages }, status: :unprocessable_entity
+      # render json: { errors: @like.errors.full_messages }, status: :unprocessable_entity
+      render json: { message: 'You already liked this video!' }, status: :unauthorized
     end
   end
 
@@ -24,7 +25,10 @@ class Api::LikesController < ApplicationController
     end
   end
 
-
+  def show
+    @like = Like.find(params[:id])
+    render :show
+  end
 
 
   private

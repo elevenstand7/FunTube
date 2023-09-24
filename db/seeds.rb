@@ -76,6 +76,25 @@ ApplicationRecord.transaction do
     # }
     ]);
 
+    puts "Creating likes..."
+    likes = Like.create!([
+      {
+        user_like:true,
+        user_id:3,
+        video_id:1
+      },
+      {
+        user_like:true,
+        user_id:2,
+        video_id:3
+      },
+      {
+        user_like:true,
+        user_id:1,
+        video_id:2
+      }
+      ]);
+
 
 end
 

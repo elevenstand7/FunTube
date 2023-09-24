@@ -60,13 +60,11 @@ function UserProfile({ user }) {
         <Dropdown.Menu>
           <Dropdown.Item >{user.username}</Dropdown.Item>
           <Dropdown.Item >{user.email}</Dropdown.Item>
-          <Dropdown.Item >
-            <a className="logout-btn" onClick={logout}>
-              <i class="fa-solid fa-arrow-right-from-bracket logout-img"></i>
+            <Dropdown.Item as="div"  className="logout-btn" onClick={logout}>
+              <i className="fa-solid fa-arrow-right-from-bracket logout-img"></i>
               <span>Log Out</span>
-            </a>
+            </Dropdown.Item>
             {/* <button onClick={logout} className="logout-btn">Log Out</button> */}
-          </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </div>
