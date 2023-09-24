@@ -29,7 +29,9 @@ function App() {
             <VideoShowPage />
           </Route>
 
-
+          <Route path="/favorites" >
+            <FavoritesPage />
+          </Route>
         </Switch>
 
     </>

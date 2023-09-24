@@ -1,4 +1,4 @@
-
+import { useHistory } from 'react-router-dom';
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { signUpUser, loginUser, logoutUser  } from '../../store/session';
@@ -9,6 +9,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 function UserProfile({ user }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
 
   const openMenu = () => {
@@ -32,6 +33,10 @@ function UserProfile({ user }) {
     e.preventDefault();
     dispatch(logoutUser());
   };
+
+  const faviPage = e =>{
+    history.push(`/favorites`);
+  }
 
   return (
     // <div className="user-profile-bar">
@@ -60,6 +65,12 @@ function UserProfile({ user }) {
         <Dropdown.Menu>
           <Dropdown.Item >{user.username}</Dropdown.Item>
           <Dropdown.Item >{user.email}</Dropdown.Item>
+
+            <Dropdown.Item as="div"  className="menu-favi-btn" onClick={faviPage}>
+              <i className="fa-regular fa-heart favi-img"></i>
+              <span>Favorites</span>
+            </Dropdown.Item>
+
             <Dropdown.Item as="div"  className="logout-btn" onClick={logout}>
               <i className="fa-solid fa-arrow-right-from-bracket logout-img"></i>
               <span>Log Out</span>

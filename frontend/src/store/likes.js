@@ -27,7 +27,7 @@ const getUserLikes = likes =>({
 
 export const hasLikedVideo = (state,videoId, userId ) =>{
     const likes = Object.values(state.likes);
-    console.log(likes)
+
     return likes.some(like => like.video_id === videoId && like.user_id === userId);
 }
 
@@ -47,13 +47,14 @@ export const fetchUserLikes = (userId) => async dispatch => {
         const userlikes = await res.json();
         console.log(userlikes);
         dispatch(getUserLikes(userlikes));
+        return res;
     }
 }
 
 
 export const createLike = videoId => async (dispatch, getState) =>{
     const { session } = getState();
-    debugger
+    // debugger
     const res = await csrfFetch("/api/likes", {
         method: "POST",
         body: JSON.stringify({
@@ -65,6 +66,7 @@ export const createLike = videoId => async (dispatch, getState) =>{
     const data = await res.json();
     console.log(data)
     dispatch(addLike(data.like));
+    return data;
 };
 
 export const deleteLike = likeId => async dispatch =>{
@@ -73,6 +75,7 @@ export const deleteLike = likeId => async dispatch =>{
     });
     const data = await res.json();
     dispatch(removeLike(data.like));
+    return data;
 };
 
 

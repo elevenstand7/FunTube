@@ -12,26 +12,39 @@ import "./VideoShowPage.css"
 const VideoShowPage = ()=>{
     const dispatch = useDispatch();
     const { videoId } = useParams();
-    // console.log("videoId", videoId)
-    // debugger
+
+
     const currentUser = useSelector(state=>state.session.user);
-    const currentUserId = currentUser.id;
+    // const currentUserId = currentUser.id || null;
     const video = useSelector(state => state.videos[videoId]);
-    const likes = useSelector(state => Object.values(state.likes));
+    // const likes = useSelector(state => Object.values(state.likes));
     const userlikes = useSelector(state => state.likes.userLikes) || [];
     const likedVideoIds = userlikes.map(like => like.likedVideoId);
+    // let isLiked = likedVideoIds.includes(parseInt(videoId));
+    // const [likeState, setLikeState] = useState(isLiked)
+    const [isLiked, setIsLiked] = useState(likedVideoIds.includes(parseInt(videoId)));
+
     // const hasLiked = useSelector(state => hasLikedVideo(state, videoId, currentUser.id))
     // const likedVideos = useSelector(state => state.videos.likedVideos) || [];
-    console.log("likes", likes);
+    console.log("isLiked", isLiked);
     console.log("userlikes", userlikes);
     console.log("likedVideoIds", likedVideoIds);
     useEffect(()=>{
         // debugger
-        dispatch(fetchUserLikes(currentUserId))
+        if(currentUser){
+            dispatch(fetchUserLikes(currentUser.id))
+        }
+
         if(!video){
             dispatch(fetchVideo(videoId))
         }
-    },[dispatch, videoId, currentUserId])
+    },[dispatch, videoId, currentUser])
+
+    useEffect(() => {
+        // debugger
+        setIsLiked(likedVideoIds.includes(parseInt(videoId)));
+    }, [likedVideoIds, videoId]);
+
 
     if(!video){
         return <div>Loading...</div>
@@ -44,17 +57,22 @@ const VideoShowPage = ()=>{
 
 
     if (currentUser){
-        if(!likedVideoIds.includes(parseInt(videoId))){
+        if(!isLiked){
+            // setLikeState(true);
+
             dispatch(createLike(videoId));
+
         }else{
-            debugger
-            const matchedLike = userlikes.find(like => like.likedVideoId === parseInt(videoId) && like.userId === currentUserId);
+            // debugger
+            const matchedLike = userlikes.find(like => like.likedVideoId === parseInt(videoId) && like.userId === currentUser.id);
             if (matchedLike) {
+                // setLikeState(false)
                 dispatch(deleteLike(matchedLike.id));
             }
         }
-
-    }}
+    }
+    alert("login to like videos!")
+}
 
     return (
         <div className="video-container">
@@ -76,7 +94,7 @@ const VideoShowPage = ()=>{
                         <h5>{uploader}</h5>
                     </div>
                     <button className="favi-btn btn btn-light" onClick={handleLike}>
-                        <i className={ likedVideoIds.includes(parseInt(videoId))? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
+                        <i className={ isLiked? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
                         {/* <i className="fa-regular fa-heart"></i> */}
                     </button>
                 </div>
