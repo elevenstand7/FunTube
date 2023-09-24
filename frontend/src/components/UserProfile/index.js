@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { signUpUser, loginUser, logoutUser  } from '../../store/session';
 import "./UserProfile.css"
+import momo from './momo.png'
 import Dropdown from 'react-bootstrap/Dropdown';
 
 
@@ -38,6 +39,10 @@ function UserProfile({ user }) {
     history.push(`/favorites`);
   }
 
+  const channelPage = e =>{
+    history.push(`/channel`);
+  }
+
   return (
     // <div className="user-profile-bar">
     //   <div className="avatar-btn">
@@ -59,12 +64,17 @@ function UserProfile({ user }) {
     <div className="user-profile-bar">
       <Dropdown>
         <Dropdown.Toggle id="avatar-btn" variant="success">
-          <i className="fa-solid fa-user-circle" />
+          <img className="profile-avatar" src={momo}></img>
         </Dropdown.Toggle>
         {/* {showMenu && ( */}
         <Dropdown.Menu>
           <Dropdown.Item >{user.username}</Dropdown.Item>
           <Dropdown.Item >{user.email}</Dropdown.Item>
+
+          <Dropdown.Item as="div"  className="channel-btn" onClick={channelPage}>
+              <i className="fa-solid fa-user channel-img"></i>
+              <span>Your channel</span>
+            </Dropdown.Item>
 
             <Dropdown.Item as="div"  className="menu-favi-btn" onClick={faviPage}>
               <i className="fa-regular fa-heart favi-img"></i>

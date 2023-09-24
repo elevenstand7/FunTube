@@ -4,6 +4,8 @@ import Home from "./components/Home";
 import SignupForm from "./components/SignupForm";
 import LoginForm from "./components/LoginForm";
 import VideoShowPage from "./components/VideoShowPage";
+import FavoritesPage from "./components/FavoritesPage";
+import ChannelPage from "./components/ChannelPage";
 import Header from "./components/Home/header";
 
 function App() {
@@ -31,6 +33,10 @@ function App() {
 
           <Route path="/favorites" >
             <FavoritesPage />
+          </Route>
+
+          <Route path="/channel" >
+            <ChannelPage />
           </Route>
         </Switch>
 
