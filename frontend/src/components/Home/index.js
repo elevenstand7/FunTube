@@ -9,12 +9,13 @@ import UserProfile from "../UserProfile";
 import Header from "./header";
 import VideoListItem from "../VideoListItem";
 import { fetchVideo, fetchVideos, getVideos } from "../../store/videos";
+// import VideosList from "../VideosList";
 
 
 
 const Home = ()=>{
-    const history = useHistory();
-    const currentUser = useSelector(state=>state.session.user)
+    // const history = useHistory();
+    // const currentUser = useSelector(state=>state.session.user)
     const dispatch = useDispatch();
 
     const videos = useSelector(state=>Object.values(state.videos));
@@ -36,10 +37,8 @@ const Home = ()=>{
                     <VideoListItem className="video-pic" video={video}/>
                 </div>
             ))}
-
-
         </div>
-
+        // <VideosList />
     )
 
 }

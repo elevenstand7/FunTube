@@ -6,6 +6,7 @@ import button from 'bootstrap';
 import momo from '../momo.png'
 import { getVideo, fetchVideo} from "../../store/videos";
 import {createLike,deleteLike, hasLikedVideo, fetchLikes, fetchUserLikes} from "../../store/likes";
+import VideosRecomList from "../VideosRecomList";
 
 import "./VideoShowPage.css"
 
@@ -16,7 +17,7 @@ const VideoShowPage = ()=>{
 
 
     const currentUser = useSelector(state=>state.session.user);
-    // const currentUserId = currentUser.id || null;
+
     const video = useSelector(state => state.videos[videoId]);
     // const likes = useSelector(state => Object.values(state.likes));
     const userlikes = useSelector(state => state.likes.userLikes) || [];
@@ -38,7 +39,6 @@ const VideoShowPage = ()=>{
         if(currentUser){
             dispatch(fetchUserLikes(currentUser.id))
         }
-
 
     },[dispatch, videoId, currentUser])
 
@@ -74,6 +74,7 @@ const VideoShowPage = ()=>{
     }
 
     return (
+        <div>
         <div className="video-container">
             <video
                 className="video-player"
@@ -101,7 +102,7 @@ const VideoShowPage = ()=>{
                     <p>{description}</p>
                 </div>
             </div>
-
+        </div>
 
         </div>
     )
