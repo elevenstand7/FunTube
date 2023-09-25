@@ -53,29 +53,25 @@ const VideoShowPage = ()=>{
     }
     const {title, description, userId, videoUrl, uploader, photoUrl} = video
 
-    const handleLike = e =>{
+    const handleLike = async e => {
         e.preventDefault();
         console.log("click!")
 
+        if (currentUser) {
+            if (!isLiked) {
 
-    if (currentUser){
-        if(!isLiked){
-            // setLikeState(true);
-
-            dispatch(createLike(videoId));
-
-        }else{
-            // debugger
-            const matchedLike = userlikes.find(like => like.likedVideoId === parseInt(videoId) && like.userId === currentUser.id);
-            if (matchedLike) {
-                // setLikeState(false)
-                dispatch(deleteLike(matchedLike.id));
+                await dispatch(createLike(videoId));
+            } else {
+                const matchedLike = userlikes.find(like => like.likedVideoId === parseInt(videoId) && like.userId === currentUser.id);
+                if (matchedLike) {
+                    await dispatch(deleteLike(matchedLike.id));
+                }
             }
+            dispatch(fetchUserLikes(currentUser.id));
+        } else {
+            history.push('/login');
         }
-    }else{
-        history.push('/login');
     }
-}
 
     return (
         <div className="video-container">

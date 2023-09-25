@@ -1,0 +1,11 @@
+.user-prof-navbar{
+    margin: 20px 0px;
+}
+
+
+.avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    margin-right: 5px;
+}
