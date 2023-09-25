@@ -11,6 +11,7 @@ import "./VideoShowPage.css"
 
 const VideoShowPage = ()=>{
     const dispatch = useDispatch();
+    const history = useHistory();
     const { videoId } = useParams();
 
 
@@ -31,13 +32,14 @@ const VideoShowPage = ()=>{
     console.log("likedVideoIds", likedVideoIds);
     useEffect(()=>{
         // debugger
+        if(!video){
+            dispatch(fetchVideo(videoId))
+        }
         if(currentUser){
             dispatch(fetchUserLikes(currentUser.id))
         }
 
-        if(!video){
-            dispatch(fetchVideo(videoId))
-        }
+
     },[dispatch, videoId, currentUser])
 
     useEffect(() => {
@@ -70,8 +72,9 @@ const VideoShowPage = ()=>{
                 dispatch(deleteLike(matchedLike.id));
             }
         }
+    }else{
+        history.push('/login');
     }
-    alert("login to like videos!")
 }
 
     return (

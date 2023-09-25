@@ -8,6 +8,8 @@ import { fetchVideo, fetchVideos, getVideos } from "../../store/videos";
 
 const FavoritesPage = ()=>{
     const dispatch = useDispatch();
+    const history = useHistory();
+
     const currentUser = useSelector(state=>state.session.user);
     const videos = useSelector(state=>Object.values(state.videos));
     const userlikes = useSelector(state => state.likes.userLikes) || [];
@@ -18,14 +20,16 @@ const FavoritesPage = ()=>{
         // debugger
         if(currentUser){
             dispatch(fetchUserLikes(currentUser.id))
+        }else{
+            history.push('/login');
         }
 
-    },[dispatch, currentUser])
+    },[dispatch, currentUser, history])
 
     return (
         <>
         <div>
-            <h2>{currentUser.username}</h2>
+            <h2>{currentUser?.username}</h2>
 
 
         </div>
