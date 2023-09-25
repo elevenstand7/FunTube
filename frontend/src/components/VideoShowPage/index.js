@@ -3,7 +3,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Player } from 'video-react';
 import button from 'bootstrap';
-import momo from './momo.png'
+import momo from '../momo.png'
 import { getVideo, fetchVideo} from "../../store/videos";
 import {createLike,deleteLike, hasLikedVideo, fetchLikes, fetchUserLikes} from "../../store/likes";
 
@@ -81,7 +81,7 @@ const VideoShowPage = ()=>{
                 poster={photoUrl}
                 src={videoUrl}
                 type="video/mp4"
-                // autoPlay
+                autoPlay
             />
             <div className="video-content">
                 <div className="top-row">

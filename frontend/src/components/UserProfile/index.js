@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { signUpUser, loginUser, logoutUser  } from '../../store/session';
 import "./UserProfile.css"
-import momo from './momo.png'
+import momo from '../momo.png'
 import Dropdown from 'react-bootstrap/Dropdown';
 
 

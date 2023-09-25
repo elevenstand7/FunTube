@@ -1,9 +1,12 @@
 import React, { useEffect, useState }  from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
+import VideoListItem from "../VideoListItem";
 import {createLike,deleteLike, hasLikedVideo, fetchLikes, fetchUserLikes} from "../../store/likes";
 import { fetchVideo, fetchVideos, getVideos } from "../../store/videos";
+import UserProHeader from "../ChannelPage/UserProHeader";
+import './FavoritesPage.css';
+
 
 
 const FavoritesPage = ()=>{
@@ -11,28 +14,52 @@ const FavoritesPage = ()=>{
     const history = useHistory();
 
     const currentUser = useSelector(state=>state.session.user);
-    const videos = useSelector(state=>Object.values(state.videos));
+    const videos = useSelector(state=>state.videos);
     const userlikes = useSelector(state => state.likes.userLikes) || [];
     const likedVideoIds = userlikes.map(like => like.likedVideoId);
-    console.log("userlikes", userlikes);
+    console.log("videos", videos);
+    console.log("likedVideoIds", likedVideoIds);
+
+
+    const currentUserLikedVideos = likedVideoIds.map(id => videos[id]).filter(Boolean);
+
+    console.log("currentUserLikedVideos", currentUserLikedVideos);
 
     useEffect(()=>{
         // debugger
+
         if(currentUser){
             dispatch(fetchUserLikes(currentUser.id))
         }else{
             history.push('/login');
-        }
+        };
+        dispatch(fetchVideos());
 
     },[dispatch, currentUser, history])
 
     return (
         <>
-        <div>
-            <h2>{currentUser?.username}</h2>
+            <UserProHeader />
+            <div>
+                <ul className="nav nav-underline user-prof-navbar">
+                    <li className="nav-item">
+                        <a className="nav-link" href="/channel">CHANNELS</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link active" aria-current="true"  href="/favorites">FAVORITES</a>
+                    </li>
+                </ul>
+            </div>
+            <div className="user-fav-videos-container">
+                {currentUserLikedVideos.map(video =>(
+                    // <h3>{video.title}</h3>
+                    <div className="video-card" key={video.id}>
+                        <VideoListItem className="video-pic" video={video}/>
+                </div>
+                ))}
 
+            </div>
 
-        </div>
 
         </>
     )
