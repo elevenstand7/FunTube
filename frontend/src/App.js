@@ -6,6 +6,7 @@ import LoginForm from "./components/LoginForm";
 import VideoShowPage from "./components/VideoShowPage";
 import FavoritesPage from "./components/FavoritesPage";
 import ChannelPage from "./components/ChannelPage";
+import SearchResults from "./components/SearchResults";
 import Header from "./components/Home/header";
 
 function App() {
@@ -37,6 +38,10 @@ function App() {
 
           <Route path="/channel" >
             <ChannelPage />
+          </Route>
+
+          <Route path="/search-results" >
+            <SearchResults />
           </Route>
         </Switch>
 

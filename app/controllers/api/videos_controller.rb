@@ -13,7 +13,11 @@ class Api::VideosController < ApplicationController
   end
 
   def index
-    @videos = Video.all
+    if params[:query]
+      @videos = Video.where('title LIKE ?', "%#{params[:query]}%")
+    else
+      @videos = Video.all
+    end
     # puts @videos.inspect
     # if params[:excludeUrl] == 'true'
     #   videos = videos.map do |video|

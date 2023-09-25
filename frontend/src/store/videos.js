@@ -6,8 +6,9 @@ import { addUser, fetchUser } from "./users.js";
 export const RECEIVE_VIDEOS = 'videos/RECEIVE_VIDEOS';
 export const RECEIVE_VIDEO = 'videos/RECEIVE_VIDEO';
 export const REMOVE_VIDEO = 'videos/REMOVE_VIDEO ';
-export const LIKE_VIDEO = 'videos/LIKE_VIDEO'
-export const UNLIKE_VIDEO = 'videos/UNLIKE_VIDEO'
+export const LIKE_VIDEO = 'videos/LIKE_VIDEO';
+export const UNLIKE_VIDEO = 'videos/UNLIKE_VIDEO';
+export const SEARCH_VIDEOS = 'videos/SEARCH_VIDEOS';
 
 
 const receiveVideos = videos =>{
@@ -28,6 +29,13 @@ const removeVideo = videoId =>{
     return {
         type:REMOVE_VIDEO,
         videoId
+    }
+}
+
+const searchVideos = videos =>{
+    return {
+        type:SEARCH_VIDEOS,
+        videos
     }
 }
 
@@ -73,6 +81,14 @@ export const fetchVideos = () => async dispatch =>{
 //         // return res;
 //     }
 // }
+
+export const fetchVideosByTitle = title => async dispatch =>{
+    const res = await csrfFetch(`/api/videos?query=${title}`);
+    if(res.ok){
+        const {videos} = await res.json();
+        dispatch(searchVideos(videos));
+    }
+}
 
 export const fetchVideo = (videoId) => async dispatch =>{
     const res = await csrfFetch(`/api/videos/${videoId}`)
@@ -136,6 +152,8 @@ function videosReducer(state={}, action){
         //     return {...nextState, likedVideos: [...state.likedVideos, action.videoId]}
         // case UNLIKE_VIDEO:
         //     return {...nextState, likedVideos: nextState.likedVideos.filter(id => id !== action.videoId)}
+        case SEARCH_VIDEOS:
+            return {...nextState, ...action.videos}
         default:
             return nextState;
     }
