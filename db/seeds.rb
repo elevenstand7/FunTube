@@ -96,6 +96,25 @@ ApplicationRecord.transaction do
       ]);
 
 
+      puts "Creating comments..."
+      comments = Comment.create!([
+        {
+          body:"I like your video!",
+          author_id:3,
+          video_id:1
+        },
+        {
+          body:"I really enjoy studying with your video!",
+          author_id:2,
+          video_id:3
+        },
+        {
+          body:"I like the bgm!",
+          author_id:1,
+          video_id:2
+        }
+        ]);
+
 end
 
 

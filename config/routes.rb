@@ -10,10 +10,14 @@ Rails.application.routes.draw do
       resources :likes, only:[:index]
     end
     resource :session, only: [:create, :show, :destroy]
-    resources :comments, only: [:create, :destroy, :update]
+
     resources :likes, only:[:create, :destroy, :show]
 
-    resources :videos, only: [:create, :index, :show, :destroy, :update]
+    resources :videos, only: [:create, :index, :show, :destroy, :update] do
+      resources :comments, only: [:create, :destroy, :update, :index, :show]
+    end
+
+    
   end
 
   get '*path', to: "static_pages#fronted_index"

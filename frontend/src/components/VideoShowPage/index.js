@@ -25,8 +25,6 @@ const VideoShowPage = ()=>{
     // let isLiked = likedVideoIds.includes(parseInt(videoId));
     const [isLiked, setIsLiked] = useState(likedVideoIds.includes(parseInt(videoId)));
 
-    // const hasLiked = useSelector(state => hasLikedVideo(state, videoId, currentUser.id))
-    // const likedVideos = useSelector(state => state.videos.likedVideos) || [];
     console.log("isLiked", isLiked);
     console.log("userlikes", userlikes);
     console.log("likedVideoIds", likedVideoIds);
@@ -100,6 +98,10 @@ const VideoShowPage = ()=>{
                 <div className="bottom-row">
                     <p>{description}</p>
                 </div>
+            </div>
+            <div className="comments">
+                
+
             </div>
         </div>
 

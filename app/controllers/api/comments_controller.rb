@@ -1,9 +1,10 @@
 class Api::CommentsController < ApplicationController
-  before_action :require_logged_in
+  # before_action :require_logged_in
   wrap_parameters include: Comment.attribute_names + [:videoId]
+  wrap_parameters include: Comment.attribute_names + [:authorId]
 
   def create
-    @comment = Comment.new(comment_params)
+    @comment = current_user.comments.new(comment_params)
     if @comment.save
       render :show
     else
@@ -12,9 +13,9 @@ class Api::CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
+    @comment = current_user.comments.find(params[:id])
 
-    if @comment && @comment.author_id == current_user.id
+    if @comment
       @comment.destroy
       render json: { message: 'Delete Comment!'}, status: :ok
     else
@@ -23,15 +24,20 @@ class Api::CommentsController < ApplicationController
   end
 
   def index
-    case
-    when params[:author_id]
-      comments = Comment.where(author_id: params[:author_id])
-    when params[:video_id]
-      comments = Comment.where(video_id: params[:video_id])
-    else
-      comment = Comment.all
-    end
+    # case
+    #   when params[:author_id]
+    #     @comments = Comment.where(author_id: params[:author_id])
+    #   when params[:video_id]
+    #     @comments = Comment.where(video_id: params[:video_id])
+    #   else
+      @comments = Comment.where(video_id: params[:video_id])
+    # end
     render :index
+  end
+
+  def show
+    @comment = Comment.find(params[:id])
+    return :show
   end
 
   def update
