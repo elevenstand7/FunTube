@@ -5,7 +5,7 @@ import './SearchResults.css'
 
 const SearchResults = ()=>{
 
-    const videos = useSelector(state =>Object.values(state.videos.videos));
+    const videos = useSelector(state =>Object.values(state.videos.videos)) || null;
     return (
         <div className="video-list-container">
 

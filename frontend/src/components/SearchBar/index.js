@@ -13,8 +13,9 @@ function SearchBar() {
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
 
-    const handleSearch = ()=>{
-        dispatch(fetchVideosByTitle(title));
+    const handleSearch = async (e)=>{
+        await dispatch(fetchVideosByTitle(title));
+        // debugger
         history.push('/search-results');
     }
 
