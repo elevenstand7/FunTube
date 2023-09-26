@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:create, :destroy, :update, :index, :show]
     end
 
-    
+
   end
 
   get '*path', to: "static_pages#fronted_index"

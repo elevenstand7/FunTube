@@ -7,6 +7,7 @@ import momo from '../momo.png'
 import { getVideo, fetchVideo} from "../../store/videos";
 import {createLike,deleteLike, hasLikedVideo, fetchLikes, fetchUserLikes} from "../../store/likes";
 import VideosRecomList from "../VideosRecomList";
+import { getVideoComments, fetchComments } from "../../store/comments";
 
 import "./VideoShowPage.css"
 
@@ -20,36 +21,45 @@ const VideoShowPage = ()=>{
 
     const video = useSelector(state => state.videos[videoId]);
     // const likes = useSelector(state => Object.values(state.likes));
+    // debugger
+    const comments = useSelector(state => Object.values(state.comments));
     const userlikes = useSelector(state => state.likes.userLikes) || [];
     const likedVideoIds = userlikes.map(like => like.likedVideoId);
     // let isLiked = likedVideoIds.includes(parseInt(videoId));
-    const [isLiked, setIsLiked] = useState(likedVideoIds.includes(parseInt(videoId)));
+    const isLiked = likedVideoIds.includes(parseInt(videoId));
+    // const [isLiked, setIsLiked] = useState(initialLikeState);
+    // debugger
 
+    console.log("comments", comments)
     console.log("isLiked", isLiked);
-    console.log("userlikes", userlikes);
-    console.log("likedVideoIds", likedVideoIds);
+    // console.log("userlikes", userlikes);
+    // console.log("likedVideoIds", likedVideoIds);
     useEffect(()=>{
         // debugger
         if(!video){
-            dispatch(fetchVideo(videoId))
+            dispatch(fetchVideo(videoId))  
         }
+        dispatch(getVideoComments(videoId))
+    },[dispatch, videoId])
+
+    // useEffect(() => {
+    //     // debugger
+    //     setIsLiked(initialLikeState);
+    // }, [likedVideoIds]);
+
+    useEffect(()=>{
         if(currentUser){
             dispatch(fetchUserLikes(currentUser.id))
-        }
-
-    },[dispatch, videoId, currentUser])
-
-    useEffect(() => {
-        // debugger
-        setIsLiked(likedVideoIds.includes(parseInt(videoId)));
-    }, [likedVideoIds, videoId]);
+        } 
+    }, [dispatch, currentUser])
 
 
     if(!video){
         return <div>Loading...</div>
     }
     const {title, description, userId, videoUrl, uploader, photoUrl} = video
-
+    
+    
     const handleLike = async e => {
         e.preventDefault();
         console.log("click!")
@@ -96,11 +106,31 @@ const VideoShowPage = ()=>{
                     </button>
                 </div>
                 <div className="bottom-row">
-                    <p>{description}</p>
+                    <div className="video-description-container">
+                        {description}
+                    </div>
                 </div>
             </div>
-            <div className="comments">
-                
+            <div className="comments-container">
+            <h3>comments</h3>
+                {comments.reverse().map(comment=>(
+                    <div className="comment-content" key={comment.id}>
+                        <div className="left-block">
+                            <img className="comment-avatar" src={momo}></img>
+                        </div>
+                        <div className="right-block">
+                            <div className="comment-top-row">
+                                <div className="comment-author">@{comment.author}</div>
+                                <div className="comment-createTime">{comment.createdAt}</div>
+       
+                            </div>
+ 
+                            <div className="comment-body">{comment.body}</div>
+                        </div>
+                        
+
+                    </div>
+                ))}
 
             </div>
         </div>

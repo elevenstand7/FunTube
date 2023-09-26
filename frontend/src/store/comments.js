@@ -1,7 +1,7 @@
 import csrfFetch from "./csrf";
 
 export const ADD_COMMENT = 'comments/addComment';
-export const RECEIVE_COMMENTS = 'comments/receiveComments';
+export const RECEIVE_VIDEO_COMMENTS = 'comments/receiveVideoComments';
 export const RECEIVE_COMMENT = 'comments/receiveComment';
 export const UPDATE_COMMENT = 'comments/updateComment';
 export const DELETE_COMMENT = 'comments/deleteComment';
@@ -11,8 +11,8 @@ const addComment = comment => ({
     comment
 });
 
-const receiveComments = comments => ({
-    type: RECEIVE_COMMENTS,
+const receiveVideoComments = comments => ({
+    type: RECEIVE_VIDEO_COMMENTS,
     comments
 });
 
@@ -51,3 +51,47 @@ export const destroyComment = commentId => async dispatch =>{
         return res;
     }
 }
+
+// export const getVideoComments = videoId => state =>(
+//     Object.values(state.comments)
+//         .filter(comment => comment.videoId === videoId)
+//         .map(comment => ({
+//             ...comment, 
+//             author: state.users[comment.authorId]?.username
+//         }))
+// );
+
+export const getVideoComments = (videoId) => async dispatch =>{
+    const res = await csrfFetch(`/api/videos/${videoId}/comments`);
+    // const res = await csrfFetch(`/api/comments`);
+    console.log("res",res);
+    if(res.ok){
+        const {comments} = await res.json();
+        // console.log(comments);
+        dispatch(receiveVideoComments(comments));
+        return res;
+    }
+}
+
+
+
+
+
+const commentsReducer = (state={}, action)=>{
+    const nextState = {...state};
+    switch(action.type){
+        case ADD_COMMENT:
+            nextState[action.comment.id] = action.comment;
+            return nextState;
+        case DELETE_COMMENT:
+            delete nextState[action.commentId]
+            return nextState;
+        case RECEIVE_VIDEO_COMMENTS:
+            return { ...action.comments};
+        default:
+            return nextState;    
+    }
+
+}
+
+export default commentsReducer;
