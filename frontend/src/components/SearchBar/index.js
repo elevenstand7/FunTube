@@ -15,7 +15,7 @@ function SearchBar() {
 
     const handleSearch = ()=>{
         dispatch(fetchVideosByTitle(title));
-
+        history.push('/search-results');
     }
 
     return (

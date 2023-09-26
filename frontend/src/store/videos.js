@@ -86,7 +86,9 @@ export const fetchVideosByTitle = title => async dispatch =>{
     const res = await csrfFetch(`/api/videos?query=${title}`);
     if(res.ok){
         const {videos} = await res.json();
+        console.log("Fetched Videos:", videos);
         dispatch(searchVideos(videos));
+        return res;
     }
 }
 
@@ -153,7 +155,7 @@ function videosReducer(state={}, action){
         // case UNLIKE_VIDEO:
         //     return {...nextState, likedVideos: nextState.likedVideos.filter(id => id !== action.videoId)}
         case SEARCH_VIDEOS:
-            return {...nextState, ...action.videos}
+            return {...nextState, videos: action.videos}
         default:
             return nextState;
     }

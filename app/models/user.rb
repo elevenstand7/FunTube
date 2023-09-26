@@ -28,7 +28,10 @@ class User < ApplicationRecord
 
   has_many :videos, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :comments, dependent: :destroy
+  has_many :comments, 
+    foreign_key: :author_id,
+    dependent: :destroy, 
+    inverse_of: :author
 
   def self.find_by_credentials(credential, password)
     field = credential =~ URI::MailTo::EMAIL_REGEXP ? :email : :username
