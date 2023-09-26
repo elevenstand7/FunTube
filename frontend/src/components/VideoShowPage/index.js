@@ -23,7 +23,6 @@ const VideoShowPage = ()=>{
     const userlikes = useSelector(state => state.likes.userLikes) || [];
     const likedVideoIds = userlikes.map(like => like.likedVideoId);
     // let isLiked = likedVideoIds.includes(parseInt(videoId));
-    // const [likeState, setLikeState] = useState(isLiked)
     const [isLiked, setIsLiked] = useState(likedVideoIds.includes(parseInt(videoId)));
 
     // const hasLiked = useSelector(state => hasLikedVideo(state, videoId, currentUser.id))
