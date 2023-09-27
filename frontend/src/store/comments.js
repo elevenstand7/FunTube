@@ -31,13 +31,25 @@ const deleteComment = commentId => ({
     commentId
 });
 
-export const createComment = comment => async dispatch =>{
-    const res = await csrfFetch('/api/comments', {
+export const createComment = ({body}, videoId) => async (dispatch, getState) =>{
+    const { session } = getState();
+    const res = await csrfFetch(`/api/videos/${videoId}/comments`, {
         method:'POST',
-        body: JSON.stringify(comment)
+        body: JSON.stringify(
+            {
+                body: body,
+                author_id:session.user.id,
+                video_id: videoId
+            }
+        ),
+        headers:{
+            'Content-Type': 'application/json'
+        }
     });
+    debugger
     const data = await res.json();
-    dispatch(addComment(comment));
+    console.log("data", data);
+    dispatch(addComment(data));
     return res;
 }
 

@@ -114,8 +114,8 @@ const VideoShowPage = ()=>{
                 </div>
             </div>
 
-            {currentUser?
-                <CreateCommentForm /> : 
+            {(currentUser && videoId) ?
+                <CreateCommentForm videoId={videoId}/> : 
                 <div>
                     <button onClick={()=> history.push('/login')}>Login to add a comment</button>
                 </div>
