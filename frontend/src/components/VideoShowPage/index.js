@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Player } from 'video-react';
 import button from 'bootstrap';
 import momo from '../momo.png'
+import { formatDateTime } from "../../util/dateUtil";
 import { getVideo, fetchVideo} from "../../store/videos";
 import {createLike,deleteLike, hasLikedVideo, fetchLikes, fetchUserLikes} from "../../store/likes";
 import VideosRecomList from "../VideosRecomList";
 import { getVideoComments, fetchComments } from "../../store/comments";
+import CreateCommentForm from "../CreateCommentForm";
 
 import "./VideoShowPage.css"
 
@@ -111,7 +113,20 @@ const VideoShowPage = ()=>{
                     </div>
                 </div>
             </div>
+
+            {currentUser?
+                <CreateCommentForm /> : 
+                <div>
+                    <button onClick={()=> history.push('/login')}>Login to add a comment</button>
+                </div>
+            }
             <div className="comments-container">
+                {/* <div>
+
+                    <input type="text">Add a comment</input>
+                    <button>Comment</button>
+                </div> */}
+
             <h3>comments</h3>
                 {comments.reverse().map(comment=>(
                     <div className="comment-content" key={comment.id}>
@@ -121,7 +136,7 @@ const VideoShowPage = ()=>{
                         <div className="right-block">
                             <div className="comment-top-row">
                                 <div className="comment-author">@{comment.author}</div>
-                                <div className="comment-createTime">{comment.createdAt}</div>
+                                <div className="comment-createTime">{formatDateTime(comment.createdAt)}</div>
        
                             </div>
  
