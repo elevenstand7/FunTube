@@ -116,3 +116,15 @@ h4{
     margin-left: 10px;
     text-align: start;
 }
+
+.comment-block{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.comment-edit-list{
+    border: 1px solid #c72d2d;
+    width: 100px;
+    height: 100px;
+}

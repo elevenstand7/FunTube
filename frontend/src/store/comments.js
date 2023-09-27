@@ -46,11 +46,15 @@ export const createComment = ({body}, videoId) => async (dispatch, getState) =>{
             'Content-Type': 'application/json'
         }
     });
-    debugger
-    const data = await res.json();
-    console.log("data", data);
-    dispatch(addComment(data));
-    return res;
+    // debugger
+    if(res.ok){
+        const data = await res.json();
+        dispatch(addComment(data));
+        return true;
+    }else{
+        return false;
+    }
+
 }
 
 export const destroyComment = commentId => async dispatch =>{

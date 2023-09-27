@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Player } from 'video-react';
 import button from 'bootstrap';
 import momo from '../momo.png'
+import Dropdown from 'react-bootstrap/Dropdown';
 import { formatDateTime } from "../../util/dateUtil";
 import { getVideo, fetchVideo} from "../../store/videos";
 import {createLike,deleteLike, hasLikedVideo, fetchLikes, fetchUserLikes} from "../../store/likes";
@@ -29,7 +30,7 @@ const VideoShowPage = ()=>{
     const likedVideoIds = userlikes.map(like => like.likedVideoId);
     // let isLiked = likedVideoIds.includes(parseInt(videoId));
     const isLiked = likedVideoIds.includes(parseInt(videoId));
-    // const [isLiked, setIsLiked] = useState(initialLikeState);
+    const [commentsUpdated, setCommentsUpdated] = useState(false);
     // debugger
 
     console.log("comments", comments)
@@ -82,6 +83,10 @@ const VideoShowPage = ()=>{
         }
     }
 
+    const onCommentChange = ()=>{
+        setCommentsUpdated(!commentsUpdated);
+    }
+
     return (
         <div>
         <div className="video-container">
@@ -115,7 +120,9 @@ const VideoShowPage = ()=>{
             </div>
 
             {(currentUser && videoId) ?
-                <CreateCommentForm videoId={videoId}/> : 
+                <CreateCommentForm videoId={videoId} onCommentChange={onCommentChange}/>
+                
+                : 
                 <div>
                     <button onClick={()=> history.push('/login')}>Login to add a comment</button>
                 </div>
@@ -130,19 +137,40 @@ const VideoShowPage = ()=>{
             <h3>comments</h3>
                 {comments.reverse().map(comment=>(
                     <div className="comment-content" key={comment.id}>
-                        <div className="left-block">
-                            <img className="comment-avatar" src={momo}></img>
+                        <div className="comment-block">
+                            <div className="left-block">
+                                <img className="comment-avatar" src={momo}></img>
+                            </div>
+                            <div className="middle-block">
+
+                                <div className="comment-top-row">
+                                    <div className="comment-author">@{comment.author}</div>
+                                    <div className="comment-createTime">{formatDateTime(comment.createdAt)}</div>
+                                    <div></div>
+                                </div>
+                                <div className="comment-body">{comment.body}</div>
+                            </div>
                         </div>
                         <div className="right-block">
-                            <div className="comment-top-row">
-                                <div className="comment-author">@{comment.author}</div>
-                                <div className="comment-createTime">{formatDateTime(comment.createdAt)}</div>
-       
-                            </div>
- 
-                            <div className="comment-body">{comment.body}</div>
+                        <Dropdown>
+                            <Dropdown.Toggle className="modify-btn" variant="Secondary">
+                                <i className="fa-solid fa-ellipsis-vertical"></i>
+                            </Dropdown.Toggle>
+
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item as="div"  className="edit-btn" >
+                                    <i className="fa-solid fa-pen"></i>
+                                    <span>Edit</span>
+                                </Dropdown.Item>
+                                <Dropdown.Item as="div"  className="delete-btn" >
+                                    <i className="fa-solid fa-trash"></i>
+                                    <span>Delete</span>
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+
                         </div>
-                        
 
                     </div>
                 ))}
