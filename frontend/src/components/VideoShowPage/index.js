@@ -5,11 +5,13 @@ import { Player } from 'video-react';
 import button from 'bootstrap';
 import momo from '../momo.png'
 import Dropdown from 'react-bootstrap/Dropdown';
+import Modal from 'react-bootstrap/Modal';
+import DeleteCommentModal from "./DeleteCommentModal";
 import { formatDateTime } from "../../util/dateUtil";
 import { getVideo, fetchVideo} from "../../store/videos";
 import {createLike,deleteLike, hasLikedVideo, fetchLikes, fetchUserLikes} from "../../store/likes";
 import VideosRecomList from "../VideosRecomList";
-import { getVideoComments, fetchComments } from "../../store/comments";
+import { getVideoComments, fetchComments, destroyComment,createComment } from "../../store/comments";
 import CreateCommentForm from "../CreateCommentForm";
 
 import "./VideoShowPage.css"
@@ -31,6 +33,8 @@ const VideoShowPage = ()=>{
     // let isLiked = likedVideoIds.includes(parseInt(videoId));
     const isLiked = likedVideoIds.includes(parseInt(videoId));
     const [commentsUpdated, setCommentsUpdated] = useState(false);
+    const [deleteCommentModal, setDeleteCommentModal] = useState(false);
+    const [commentToDelete, setCommentToDelete] = useState(null);
     // debugger
 
     console.log("comments", comments)
@@ -87,97 +91,123 @@ const VideoShowPage = ()=>{
         setCommentsUpdated(!commentsUpdated);
     }
 
+    const handleShow = (commentId)=> {
+        setCommentToDelete(commentId);
+        setDeleteCommentModal(true);
+    }
+
+    const handleDeleteComment = async()=>{
+
+
+            if(commentToDelete){
+                await dispatch(destroyComment(commentToDelete));
+                setCommentToDelete(null);
+                setDeleteCommentModal(false);
+            }
+        // <DeleteCommentModal deleteCommentModal={deleteCommentModal} onHide={()=>setDeleteCommentModal(false)}/>
+        
+    }
+
     return (
         <div>
-        <div className="video-container">
-            <video
-                className="video-player"
-                controls
-                poster={photoUrl}
-                src={videoUrl}
-                type="video/mp4"
-                autoPlay
-            />
-            <div className="video-content">
-                <div className="top-row">
-                    <h4>{title}</h4>
-                </div>
-                <div className="middle-row">
-                    <div className="user-info">
-                        <img className="avatar" src={momo}></img>
-                        <h5>{uploader}</h5>
+            <div className="video-container">
+                <video
+                    className="video-player"
+                    controls
+                    poster={photoUrl}
+                    src={videoUrl}
+                    type="video/mp4"
+                    autoPlay
+                />
+                <div className="video-content">
+                    <div className="top-row">
+                        <h4>{title}</h4>
                     </div>
-                    <button className="favi-btn btn btn-light" onClick={handleLike}>
-                        <i className={ isLiked? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
-                        {/* <i className="fa-regular fa-heart"></i> */}
-                    </button>
-                </div>
-                <div className="bottom-row">
-                    <div className="video-description-container">
-                        {description}
+                    <div className="middle-row">
+                        <div className="user-info">
+                            <img className="avatar" src={momo}></img>
+                            <h5>{uploader}</h5>
+                        </div>
+                        <button className="favi-btn btn btn-light" onClick={handleLike}>
+                            <i className={ isLiked? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
+                            {/* <i className="fa-regular fa-heart"></i> */}
+                        </button>
+                    </div>
+                    <div className="bottom-row">
+                        <div className="video-description-container">
+                            {description}
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            {(currentUser && videoId) ?
-                <CreateCommentForm videoId={videoId} onCommentChange={onCommentChange}/>
-                
-                : 
-                <div>
-                    <button onClick={()=> history.push('/login')}>Login to add a comment</button>
-                </div>
-            }
-            <div className="comments-container">
-                {/* <div>
+                {(currentUser && videoId) ?
+                    <CreateCommentForm videoId={videoId} onCommentChange={onCommentChange}/>
+                    : 
+                    <div>
+                        <button onClick={()=> history.push('/login')}>Login to add a comment</button>
+                    </div>
+                }
+                <div className="comments-container">
 
-                    <input type="text">Add a comment</input>
-                    <button>Comment</button>
-                </div> */}
-
-            <h3>comments</h3>
-                {comments.reverse().map(comment=>(
-                    <div className="comment-content" key={comment.id}>
-                        <div className="comment-block">
-                            <div className="left-block">
-                                <img className="comment-avatar" src={momo}></img>
-                            </div>
-                            <div className="middle-block">
-
-                                <div className="comment-top-row">
-                                    <div className="comment-author">@{comment.author}</div>
-                                    <div className="comment-createTime">{formatDateTime(comment.createdAt)}</div>
-                                    <div></div>
+                    <h3>comments</h3>
+                    {comments.reverse().map(comment=>(
+                        <div className="comment-content" key={comment.id}>
+                            <div className="comment-block">
+                                <div className="left-block">
+                                    <img className="comment-avatar" src={momo}></img>
                                 </div>
-                                <div className="comment-body">{comment.body}</div>
+                                <div className="middle-block">
+
+                                    <div className="comment-top-row">
+                                        <div className="comment-author">@{comment.author}</div>
+                                        <div className="comment-createTime">{formatDateTime(comment.createdAt)}</div>
+                                        <div></div>
+                                    </div>
+                                    <div className="comment-body">{comment.body}</div>
+                                </div>
                             </div>
+                            <div className="right-block">
+
+                                {
+                                currentUser && currentUser.id == comment.authorId  &&(
+                                    <Dropdown>
+                                        <Dropdown.Toggle className="modify-btn" variant="Secondary">
+                                            <i className="fa-solid fa-ellipsis-vertical"></i>
+                                        </Dropdown.Toggle>
+
+                                        
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item as="div"  className="edit-btn" >
+                                                <i className="fa-solid fa-pen"></i>
+                                                <span>Edit</span>
+                                            </Dropdown.Item>
+                                            <Dropdown.Item as="div"  className="delete-btn" onClick={()=>handleShow(comment.id)}>
+                                                <i className="fa-solid fa-trash"></i>
+                                                <span>Delete</span>
+                                            </Dropdown.Item>
+                                        </Dropdown.Menu> 
+                                    </Dropdown>
+                                )}
+
+
+                            </div>
+
                         </div>
-                        <div className="right-block">
-                        <Dropdown>
-                            <Dropdown.Toggle className="modify-btn" variant="Secondary">
-                                <i className="fa-solid fa-ellipsis-vertical"></i>
-                            </Dropdown.Toggle>
+                    ))}
 
-
-                            <Dropdown.Menu>
-                                <Dropdown.Item as="div"  className="edit-btn" >
-                                    <i className="fa-solid fa-pen"></i>
-                                    <span>Edit</span>
-                                </Dropdown.Item>
-                                <Dropdown.Item as="div"  className="delete-btn" >
-                                    <i className="fa-solid fa-trash"></i>
-                                    <span>Delete</span>
-                                </Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-
-                        </div>
-
-                    </div>
-                ))}
-
+                </div>
             </div>
-        </div>
-
+            
+            <Modal show={deleteCommentModal} onHide={() => setDeleteCommentModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Delete comment</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Delete your comment permanently?</Modal.Body>
+                <Modal.Footer>
+                    <button onClick={() => setDeleteCommentModal(false)}>Cancel</button>
+                    <button onClick={handleDeleteComment}>Delete</button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 
