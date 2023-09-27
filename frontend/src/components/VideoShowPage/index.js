@@ -37,8 +37,8 @@ const VideoShowPage = ()=>{
     const [commentToDelete, setCommentToDelete] = useState(null);
     // debugger
 
-    console.log("comments", comments)
-    console.log("isLiked", isLiked);
+    // console.log("comments", comments)
+    // console.log("isLiked", isLiked);
     // console.log("userlikes", userlikes);
     // console.log("likedVideoIds", likedVideoIds);
     useEffect(()=>{
@@ -198,14 +198,14 @@ const VideoShowPage = ()=>{
                 </div>
             </div>
             
-            <Modal show={deleteCommentModal} onHide={() => setDeleteCommentModal(false)}>
+            <Modal show={deleteCommentModal} onHide={() => setDeleteCommentModal(false)} className="delete-comment-modal">
                 <Modal.Header closeButton>
                     <Modal.Title>Delete comment</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>Delete your comment permanently?</Modal.Body>
-                <Modal.Footer>
-                    <button onClick={() => setDeleteCommentModal(false)}>Cancel</button>
-                    <button onClick={handleDeleteComment}>Delete</button>
+                <Modal.Footer >
+                    <button onClick={() => setDeleteCommentModal(false)} className="delete-modal-btn">Cancel</button>
+                    <button onClick={handleDeleteComment} className="delete-modal-btn">Delete</button>
                 </Modal.Footer>
             </Modal>
         </div>
