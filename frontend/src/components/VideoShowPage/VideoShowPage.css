@@ -90,7 +90,7 @@ h4{
 .comment-top-row{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -146,4 +146,29 @@ h4{
 
 .delete-btn-img{
     margin-right: 10px;   
+}
+
+.edit-save-btn{
+    border-radius: 10px;
+}
+
+.edit-text-box{
+    /* width: 600px; */
+    height: 30px;
+    /* border: 1px solid #777ee4; */
+    border-bottom: 1px solid #909090;
+}
+
+.edit-comment-contain{
+
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-save-btn{
+    width: 80px;
+    height: 35px;
+    margin-top: 10px;
+    align-content: center;
+    margin-left: 450px;
 }

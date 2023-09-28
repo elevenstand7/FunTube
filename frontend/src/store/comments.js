@@ -33,7 +33,7 @@ const deleteComment = commentId => ({
 
 export const createComment = ({body}, videoId) => async (dispatch, getState) =>{
     const { session } = getState();
-    debugger
+    // debugger
     const res = await csrfFetch(`/api/videos/${videoId}/comments`, {
         method:'POST',
         body: JSON.stringify(
@@ -71,7 +71,7 @@ export const destroyComment = commentId => async dispatch =>{
 }
 
 export const updateVideoComment = (comment) => async dispatch =>{
-    debugger
+    // debugger
     const res = await csrfFetch(`/api/comments/${comment.id}`,{
         method: 'PATCH',
         body: JSON.stringify(comment),
@@ -79,7 +79,7 @@ export const updateVideoComment = (comment) => async dispatch =>{
             'Content-Type': 'application/json' 
         }
     });
-    debugger
+    // debugger
     if(res.ok){
         const {comment} = await res.json();
         dispatch(addComment(comment))
@@ -106,7 +106,7 @@ const commentsReducer = (state={}, action)=>{
     const nextState = {...state};
     switch(action.type){
         case ADD_COMMENT:
-            debugger
+            // debugger
             nextState[action.comment.id] = action.comment;
             return nextState;
         case DELETE_COMMENT:

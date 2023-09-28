@@ -109,20 +109,20 @@ const VideoShowPage = ()=>{
     }
 
     const handleEdit = (commentId)=>{
-        debugger
+        // debugger
         const currentComment = comments.find(comment => comment.id === commentId);
         setNewCommentContent(currentComment.body);
         setEditingComment(commentId);
     }
 
     const handleCommentChange = (newContent) =>{
-        debugger
+        // debugger
 
         setNewCommentContent(newContent);
     }
 
     const handleSaveEditComment = (commentId, body) =>{
-        debugger
+        // debugger
         dispatch(updateVideoComment({id:commentId, body}))
         setEditingComment(null);
     }
@@ -163,7 +163,7 @@ const VideoShowPage = ()=>{
                     <CreateCommentForm videoId={videoId} onCommentChange={onCommentChange}/>
                     : 
                     <div>
-                        <button onClick={()=> history.push('/login')}>Login to add a comment</button>
+                        <button onClick={()=> history.push('/login')} className="btn btn-outline-secondary add-comment-btn">Login to add a comment</button>
                     </div>
                 }
                 <div className="comments-container">
@@ -178,16 +178,17 @@ const VideoShowPage = ()=>{
                                 <div className="middle-block">
 
                                     <div className="comment-top-row">
-                                        <div className="comment-author">@{currentUser.username}</div>
+                                        <div className="comment-author">@{comment.author}</div>
                                         <div className="comment-createTime">{formatDateTime(comment.createdAt)}</div>
                                     </div>
                                     {editingComment === comment.id? (
-                                        <div>
+                                        <div className="edit-comment-contain">
                                             <textarea 
                                                 value={newCommentContent}
                                                 onChange={e => handleCommentChange(e.target.value)}
+                                                className="edit-text-box"
                                             />
-                                            <button onClick={()=>handleSaveEditComment(comment.id, newCommentContent)}>Save</button>
+                                            <button onClick={()=>handleSaveEditComment(comment.id, newCommentContent)} className="btn btn-outline-secondary edit-save-btn">Save</button>
                                         </div>
 
                                     ) : (
