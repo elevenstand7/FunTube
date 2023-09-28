@@ -15,8 +15,8 @@ const UserProHeader = () =>{
                     <img className="userPro-avatar" src={momo}></img>
                 </div>
                <div className="userPro-info-card">
-                    <h5>{currentUser.username}</h5>
-                    <h5>{currentUser.email}</h5>
+                    <h5>{currentUser?.username}</h5>
+                    <h5>{currentUser?.email}</h5>
                </div>
             </div>
 

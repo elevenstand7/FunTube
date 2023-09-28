@@ -58,22 +58,22 @@ ApplicationRecord.transaction do
       title: 'Study with me',
       description: random_description.call,
       user_id: 1
+    },
+    {
+      title: 'Party Animals is Fun!',
+      description: random_description.call,
+      user_id: 3
+    },
+    {
+      title: 'The Animals are soooo Cute.',
+      description: random_description.call,
+      user_id: 2
+    },
+    {
+      title: "Let's try this new game. ",
+      description: random_description.call,
+      user_id: 3
     }
-    # {
-    #   title: 'Party Animals is Fun!',
-    #   description: random_description.call,
-    #   user_id: 3
-    # },
-    # {
-    #   title: 'The Animals are soooo Cute.',
-    #   description: random_description.call,
-    #   user_id: 2
-    # },
-    # {
-    #   title: "Let's try this new game. ",
-    #   description: random_description.call,
-    #   user_id: 3
-    # }
     ]);
 
     puts "Creating likes..."
@@ -119,7 +119,7 @@ end
 
 
 puts "Attaching videos..."
-Video.first(3).each_with_index do |video, index|
+Video.first(6).each_with_index do |video, index|
   video.new_video.attach(
       io: URI.open("https://funtube-seeds.s3.us-east-2.amazonaws.com/v#{index + 1}.mp4"),
       filename: "v#{index + 1}.mp4"
@@ -127,7 +127,7 @@ Video.first(3).each_with_index do |video, index|
 end
 
 puts "Attaching phtots..."
-Video.first(3).each_with_index do |video, index|
+Video.first(6).each_with_index do |video, index|
   video.photo.attach(
       io: URI.open("https://funtube-seeds.s3.us-east-2.amazonaws.com/pics/p#{index + 1}.png"),
       filename: "p#{index + 1}.png"

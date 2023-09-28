@@ -30,8 +30,8 @@ const VideoShowPage = ()=>{
     const comments = useSelector(state => Object.values(state.comments));
     const userlikes = useSelector(state => state.likes.userLikes) || [];
     const likedVideoIds = userlikes.map(like => like.likedVideoId);
-    // let isLiked = likedVideoIds.includes(parseInt(videoId));
-    const isLiked = likedVideoIds.includes(parseInt(videoId));
+    // const  isLiked = likedVideoIds.includes(parseInt(videoId));
+    const isLiked = currentUser? likedVideoIds.includes(parseInt(videoId)) : false;
     const [commentsUpdated, setCommentsUpdated] = useState(false);
     const [deleteCommentModal, setDeleteCommentModal] = useState(false);
     const [commentToDelete, setCommentToDelete] = useState(null);
