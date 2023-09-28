@@ -11,7 +11,7 @@ import { formatDateTime } from "../../util/dateUtil";
 import { getVideo, fetchVideo} from "../../store/videos";
 import {createLike,deleteLike, hasLikedVideo, fetchLikes, fetchUserLikes} from "../../store/likes";
 import VideosRecomList from "../VideosRecomList";
-import { getVideoComments, fetchComments, destroyComment,createComment } from "../../store/comments";
+import { getVideoComments, fetchComments, destroyComment,createComment, updateVideoComment } from "../../store/comments";
 import CreateCommentForm from "../CreateCommentForm";
 
 import "./VideoShowPage.css"
@@ -35,6 +35,8 @@ const VideoShowPage = ()=>{
     const [commentsUpdated, setCommentsUpdated] = useState(false);
     const [deleteCommentModal, setDeleteCommentModal] = useState(false);
     const [commentToDelete, setCommentToDelete] = useState(null);
+    const [editingComment, setEditingComment] = useState(null);
+    const [newCommentContent, setNewCommentContent] = useState("");   
     // debugger
 
     // console.log("comments", comments)
@@ -103,9 +105,26 @@ const VideoShowPage = ()=>{
                 await dispatch(destroyComment(commentToDelete));
                 setCommentToDelete(null);
                 setDeleteCommentModal(false);
-            }
-        // <DeleteCommentModal deleteCommentModal={deleteCommentModal} onHide={()=>setDeleteCommentModal(false)}/>
-        
+            }     
+    }
+
+    const handleEdit = (commentId)=>{
+        debugger
+        const currentComment = comments.find(comment => comment.id === commentId);
+        setNewCommentContent(currentComment.body);
+        setEditingComment(commentId);
+    }
+
+    const handleCommentChange = (newContent) =>{
+        debugger
+
+        setNewCommentContent(newContent);
+    }
+
+    const handleSaveEditComment = (commentId, body) =>{
+        debugger
+        dispatch(updateVideoComment({id:commentId, body}))
+        setEditingComment(null);
     }
 
     return (
@@ -159,11 +178,21 @@ const VideoShowPage = ()=>{
                                 <div className="middle-block">
 
                                     <div className="comment-top-row">
-                                        <div className="comment-author">@{comment.author}</div>
+                                        <div className="comment-author">@{currentUser.username}</div>
                                         <div className="comment-createTime">{formatDateTime(comment.createdAt)}</div>
-                                        <div></div>
                                     </div>
-                                    <div className="comment-body">{comment.body}</div>
+                                    {editingComment === comment.id? (
+                                        <div>
+                                            <textarea 
+                                                value={newCommentContent}
+                                                onChange={e => handleCommentChange(e.target.value)}
+                                            />
+                                            <button onClick={()=>handleSaveEditComment(comment.id, newCommentContent)}>Save</button>
+                                        </div>
+
+                                    ) : (
+                                        <div className="comment-body">{comment.body}</div>
+                                    )}
                                 </div>
                             </div>
                             <div className="right-block">
@@ -177,12 +206,12 @@ const VideoShowPage = ()=>{
 
                                         
                                         <Dropdown.Menu>
-                                            <Dropdown.Item as="div"  className="edit-btn" >
-                                                <i className="fa-solid fa-pen"></i>
+                                            <Dropdown.Item as="div"  className="edit-btn" onClick={()=>handleEdit(comment.id)}>
+                                                <i className="fa-solid fa-pen edit-btn-img"></i>
                                                 <span>Edit</span>
                                             </Dropdown.Item>
                                             <Dropdown.Item as="div"  className="delete-btn" onClick={()=>handleShow(comment.id)}>
-                                                <i className="fa-solid fa-trash"></i>
+                                                <i className="fa-solid fa-trash delete-btn-img"></i>
                                                 <span>Delete</span>
                                             </Dropdown.Item>
                                         </Dropdown.Menu> 
@@ -198,16 +227,23 @@ const VideoShowPage = ()=>{
                 </div>
             </div>
             
-            <Modal show={deleteCommentModal} onHide={() => setDeleteCommentModal(false)} className="delete-comment-modal">
+            <Modal 
+                show={deleteCommentModal} 
+                onHide={() => setDeleteCommentModal(false)} 
+                className="delete-comment-modal"
+                centered
+            >
                 <Modal.Header closeButton>
                     <Modal.Title>Delete comment</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>Delete your comment permanently?</Modal.Body>
                 <Modal.Footer >
-                    <button onClick={() => setDeleteCommentModal(false)} className="delete-modal-btn">Cancel</button>
-                    <button onClick={handleDeleteComment} className="delete-modal-btn">Delete</button>
+                    <button onClick={() => setDeleteCommentModal(false)} className="btn delete-modal-btn">Cancel</button>
+                    <button onClick={handleDeleteComment} className="btn delete-modal-btn">Delete</button>
                 </Modal.Footer>
             </Modal>
+
+
         </div>
     )
 

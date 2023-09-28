@@ -33,6 +33,7 @@ const deleteComment = commentId => ({
 
 export const createComment = ({body}, videoId) => async (dispatch, getState) =>{
     const { session } = getState();
+    debugger
     const res = await csrfFetch(`/api/videos/${videoId}/comments`, {
         method:'POST',
         body: JSON.stringify(
@@ -48,8 +49,9 @@ export const createComment = ({body}, videoId) => async (dispatch, getState) =>{
     });
     // debugger
     if(res.ok){
-        const data = await res.json();
-        dispatch(addComment(data));
+        const {comment} = await res.json();
+        // debugger
+        dispatch(addComment(comment));
         return true;
     }else{
         return false;
@@ -68,14 +70,21 @@ export const destroyComment = commentId => async dispatch =>{
     }
 }
 
-// export const getVideoComments = videoId => state =>(
-//     Object.values(state.comments)
-//         .filter(comment => comment.videoId === videoId)
-//         .map(comment => ({
-//             ...comment, 
-//             author: state.users[comment.authorId]?.username
-//         }))
-// );
+export const updateVideoComment = (comment) => async dispatch =>{
+    debugger
+    const res = await csrfFetch(`/api/comments/${comment.id}`,{
+        method: 'PATCH',
+        body: JSON.stringify(comment),
+        headers:{
+            'Content-Type': 'application/json' 
+        }
+    });
+    debugger
+    if(res.ok){
+        const {comment} = await res.json();
+        dispatch(addComment(comment))
+    }
+}
 
 export const getVideoComments = (videoId) => async dispatch =>{
     const res = await csrfFetch(`/api/videos/${videoId}/comments`);
@@ -97,6 +106,7 @@ const commentsReducer = (state={}, action)=>{
     const nextState = {...state};
     switch(action.type){
         case ADD_COMMENT:
+            debugger
             nextState[action.comment.id] = action.comment;
             return nextState;
         case DELETE_COMMENT:

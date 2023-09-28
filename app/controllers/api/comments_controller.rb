@@ -5,6 +5,7 @@ class Api::CommentsController < ApplicationController
 
   def create
     @comment = current_user.comments.new(comment_params)
+    # debugger
     if @comment.save
       render :show
     else
@@ -37,6 +38,7 @@ class Api::CommentsController < ApplicationController
 
   def show
     @comment = Comment.find(params[:id])
+    # debugger
     return :show
   end
 

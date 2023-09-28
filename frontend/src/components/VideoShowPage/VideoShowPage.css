@@ -139,3 +139,11 @@ h4{
 .delete-modal-btn{
     border-radius: 10px;
 }
+
+.edit-btn-img{
+    margin-right: 10px;
+}
+
+.delete-btn-img{
+    margin-right: 10px;   
+}
