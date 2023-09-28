@@ -24,9 +24,15 @@ This project is a Full Stack Project that is implemented with the following tech
 *   User Auth: User can sign up, sign in, and log out. Users can use a demo login to try the site. Users can't make comments or like videos without logging in.
 *   Videos: User can see a list of videos on the homepage and search videos by video title. User can add comments and likes on videos.
 *   Favorites: Login user can like/dislike videos. User can have a favorite page to see all the videos they like.
+  -   The like create, delete and favorite page:
+
+<p align="center">
+  <img src="./assets/like.gif" />
+</p>
+
 *   Comments: Login user can add comments to videos. Users can edit and delete their own comments.
   
--   The comment create, edit, and delete:
+    -   The comment create, edit, and delete:
 
 <p align="center">
   <img src="./assets/comment.gif" />
