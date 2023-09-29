@@ -65,6 +65,7 @@ export const fetchVideos = () => async dispatch =>{
     if(res.ok){
         const {videos} = await res.json();
         // console.log(videos);
+        // debugger
         dispatch(receiveVideos(videos));
         // return res;
     }
@@ -143,6 +144,7 @@ function videosReducer(state={}, action){
     const nextState = {...state};
     switch(action.type){
         case RECEIVE_VIDEOS:
+            // debugger
             return {...nextState, ...action.videos};
         case RECEIVE_VIDEO:
             nextState[action.video.id] = action.video;

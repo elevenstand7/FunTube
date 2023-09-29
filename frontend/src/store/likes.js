@@ -63,18 +63,20 @@ export const createLike = videoId => async (dispatch, getState) =>{
             video_id: videoId
         })
     });
-    const data = await res.json();
-    console.log(data)
-    dispatch(addLike(data.like));
-    return data;
+    const {like} = await res.json();
+    debugger
+    
+    dispatch(addLike(like));
+
 };
 
 export const deleteLike = likeId => async dispatch =>{
     const res = await csrfFetch(`/api/likes/${likeId}`, {
         method: "DELETE"
     });
+    // debugger
     const data = await res.json();
-    dispatch(removeLike(data.like));
+    dispatch(removeLike(likeId));
     return data;
 };
 
@@ -86,9 +88,11 @@ const likesReducer = (state = {}, action) => {
         case GET_LIKES:
             return {...nextState, ...action.likes};
         case ADD_LIKE:
+            debugger
             nextState[action.like.id] = action.like;
             return nextState;
         case REMOVE_LIKE:
+            // debugger
             delete nextState[action.likeId]
             return nextState;
         case GET_USER_LIKES:

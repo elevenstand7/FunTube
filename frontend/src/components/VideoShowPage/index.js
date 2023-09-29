@@ -75,11 +75,12 @@ const VideoShowPage = ()=>{
 
         if (currentUser) {
             if (!isLiked) {
-
+                debugger
                 await dispatch(createLike(videoId));
             } else {
                 const matchedLike = userlikes.find(like => like.likedVideoId === parseInt(videoId) && like.userId === currentUser.id);
                 if (matchedLike) {
+                    // debugger
                     await dispatch(deleteLike(matchedLike.id));
                 }
             }
