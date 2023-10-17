@@ -11,13 +11,13 @@ h3{
 }
 
 .video-list{
-    width: 400px;
-    height: 200px;
+    width: 50%;
+    height: 50%;
     align-items: center;
     margin: 20px;
 }
 
 .video-pic{
-    max-width: 100%;
+    max-width: 80%;
     border-radius: 12px;
 }

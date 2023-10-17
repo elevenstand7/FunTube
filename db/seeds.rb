@@ -73,6 +73,36 @@ ApplicationRecord.transaction do
       title: "Let's try this new game. ",
       description: random_description.call,
       user_id: 3
+    },
+    {
+      title: 'This is so cute and comfy to watch!',
+      description: random_description.call,
+      user_id: 2
+    },
+    {
+      title: 'I love this ambiance so much!',
+      description: random_description.call,
+      user_id: 3
+    },
+    {
+      title: 'This is so freaking adorable',
+      description: random_description.call,
+      user_id: 1
+    },
+    {
+      title: 'Boomerang Master!',
+      description: random_description.call,
+      user_id: 1
+    },
+    {
+      title: 'Relaxing game!',
+      description: random_description.call,
+      user_id: 2
+    },
+    {
+      title: 'Pomodoro | Game ',
+      description: random_description.call,
+      user_id: 3
     }
     ]);
 
@@ -119,7 +149,7 @@ end
 
 
 puts "Attaching videos..."
-Video.first(6).each_with_index do |video, index|
+Video.first(12).each_with_index do |video, index|
   video.new_video.attach(
       io: URI.open("https://funtube-seeds.s3.us-east-2.amazonaws.com/v#{index + 1}.mp4"),
       filename: "v#{index + 1}.mp4"
@@ -127,7 +157,7 @@ Video.first(6).each_with_index do |video, index|
 end
 
 puts "Attaching phtots..."
-Video.first(6).each_with_index do |video, index|
+Video.first(12).each_with_index do |video, index|
   video.photo.attach(
       io: URI.open("https://funtube-seeds.s3.us-east-2.amazonaws.com/pics/p#{index + 1}.png"),
       filename: "p#{index + 1}.png"
