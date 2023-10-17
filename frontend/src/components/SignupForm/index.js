@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { signUpUser, loginUser, logoutUser  } from "../../store/session";
 import './SignupForm.css';
 
@@ -14,6 +14,7 @@ const SignupForm = ()=>{
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const [isSignUp, setisSignUp] = useState(false);
+    const history = useHistory();
 
     if(sessionUser) return <Redirect to="/" />;
 
@@ -34,6 +35,10 @@ const SignupForm = ()=>{
           else if (data) setErrors([data]);
           else setErrors([res.statusText]);
         });
+      }
+
+      const handleBackLogIn = () =>{
+        history.push(`/login`)
       }
         // try{
         //     dispatch(signUpUser({ email, username, password }))
@@ -70,7 +75,10 @@ const SignupForm = ()=>{
                 <label className="content">Password
                     <input type="password" onChange={e=>setPassword(e.target.value)} value={password} required></input>
                 </label>
-                <button type="submit" className="content signup-btn">Sign Up</button>
+                <div>
+                  <button type="submit" className="content signup-btn">Sign Up</button>
+                  <button onClick={handleBackLogIn} className="content signup-btn">Log In</button>
+                </div>
             </form>
         </div>
     )

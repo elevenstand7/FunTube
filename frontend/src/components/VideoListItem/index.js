@@ -17,8 +17,8 @@ const VideoListItem = ({video})=>{
         <div className="video-list" >
                 <a onClick={handleClick}>
                     <img className="video-pic" src={video.photoUrl}/>
-                    <h3>{video.title}</h3>
-                    {/* <p>{video.userId.username}</p> */}
+                    <p>{video.title}</p>
+                    <p>{video.uploader}</p>
                 </a>
         </div>
     )
