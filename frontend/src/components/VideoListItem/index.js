@@ -15,11 +15,9 @@ const VideoListItem = ({video})=>{
     }
     return (
         <div className="video-list" >
-                <a onClick={handleClick}>
-                    <img className="video-pic" src={video.photoUrl}/>
-                    <p>{video.title}</p>
-                    <p>{video.uploader}</p>
-                </a>
+            <div className="video-pic-container"><img className="video-pic" src={video.photoUrl} onClick={handleClick}/></div>
+            <div>{video.title}</div>
+            <div>{video.uploader}</div>
         </div>
     )
 };
