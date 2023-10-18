@@ -64,8 +64,8 @@ export const createLike = videoId => async (dispatch, getState) =>{
         })
     });
     const {like} = await res.json();
-    debugger
-    
+    // debugger
+
     dispatch(addLike(like));
 
 };
@@ -88,7 +88,7 @@ const likesReducer = (state = {}, action) => {
         case GET_LIKES:
             return {...nextState, ...action.likes};
         case ADD_LIKE:
-            debugger
+            // debugger
             nextState[action.like.id] = action.like;
             return nextState;
         case REMOVE_LIKE:

@@ -15,17 +15,15 @@
     margin-top: 40px;
     /* margin: 15px; */
 }
-.video-card{
-    /* width: 400px;
-    height: 200px; */
-    width: 30%;
-    height: 38%;
+.user-favi-video-card{
+    width: 400px;
+    height: 200px;
     display: flex;
     align-items: center;
     margin: 10px;
 }
 
-.video-pic{
+.user-favi-video-pic{
     max-width: 100%;
     border-radius: 12px;
 }

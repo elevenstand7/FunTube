@@ -53,8 +53,8 @@ const FavoritesPage = ()=>{
             <div className="user-fav-videos-container">
                 {currentUserLikedVideos.map(video =>(
                     // <h3>{video.title}</h3>
-                    <div className="video-card" key={video.id}>
-                        <VideoListItem className="video-pic" video={video}/>
+                    <div className="user-favi-video-card" key={video.id}>
+                        <VideoListItem className="user-favi-video-pic" video={video}/>
                 </div>
                 ))}
 
