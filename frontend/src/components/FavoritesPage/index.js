@@ -51,12 +51,12 @@ const FavoritesPage = ()=>{
                 </ul>
             </div>
             <div className="user-fav-videos-container">
-                {currentUserLikedVideos.map(video =>(
+                {currentUserLikedVideos.length !==0? currentUserLikedVideos.map(video =>(
                     // <h3>{video.title}</h3>
                     <div className="user-favi-video-card" key={video.id}>
                         <VideoListItem className="user-favi-video-pic" video={video}/>
                 </div>
-                ))}
+                )) : <p>Your favorite page is empty!</p>}
 
             </div>
 

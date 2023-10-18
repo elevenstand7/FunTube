@@ -40,12 +40,12 @@ const ChannelPage = ()=>{
                 </ul>
             </div>
             <div className="user-fav-videos-container">
-                {currentUserVideos.map(video =>(
+                {currentUserVideos.length !==0? currentUserVideos.map(video =>(
                     // <h3>{video.title}</h3>
                     <div className="user-favi-video-card" key={video.id}>
                         <VideoListItem className="user-favi-video-pic" video={video}/>
                 </div>
-                ))}
+                )) : <p>Your channel is empty!</p>}
 
             </div>
         </>
