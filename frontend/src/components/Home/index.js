@@ -9,7 +9,7 @@ import UserProfile from "../UserProfile";
 import Header from "./header";
 import VideoListItem from "../VideoListItem";
 import { fetchVideo, fetchVideos, getVideos } from "../../store/videos";
-// import VideosList from "../VideosList";
+import Footer from "./footer";
 
 
 
@@ -30,15 +30,18 @@ const Home = ()=>{
         dispatch(fetchVideos());
     }, [dispatch])
     return (
-        <div className="video-list-container">
+        <div>
+            <div className="video-list-container">
 
-            {videos.map((video, index) =>(
-                <div className="video-card" key={`${video.id}-${index}`}>
-                    <VideoListItem className="video-pic" video={video}/>
-                </div>
-            ))}
+                {videos.map((video, index) =>(
+                    <div className="video-card" key={`${video.id}-${index}`}>
+                        <VideoListItem className="video-pic" video={video}/>
+                    </div>
+                ))}
+            </div>
+            <Footer />
         </div>
-        // <VideosList />
+
     )
 
 }

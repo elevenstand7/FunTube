@@ -8,6 +8,7 @@ import FavoritesPage from "./components/FavoritesPage";
 import ChannelPage from "./components/ChannelPage";
 import SearchResults from "./components/SearchResults";
 import Header from "./components/Home/header";
+import Footer from "./components/Home/footer";
 
 function App() {
   return (
@@ -44,7 +45,7 @@ function App() {
             <SearchResults />
           </Route>
         </Switch>
-
+      {/* <Footer /> */}
     </>
   );
 }

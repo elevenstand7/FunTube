@@ -71,11 +71,11 @@ const VideoShowPage = ()=>{
 
     const handleLike = async e => {
         e.preventDefault();
-        console.log("click!")
+        // console.log("click!")
 
         if (currentUser) {
             if (!isLiked) {
-                debugger
+                // debugger
                 await dispatch(createLike(videoId));
             } else {
                 const matchedLike = userlikes.find(like => like.likedVideoId === parseInt(videoId) && like.userId === currentUser.id);

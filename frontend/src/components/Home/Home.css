@@ -8,15 +8,15 @@
 }
 
 .video-list-container{
-    width: 85%;
-    height: 100%;
+    width: 95%;
+    height: 95%;
     /* border: 5px solid black; */
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     flex-wrap: wrap;
     align-items: center;
-    margin: 15px;
+    margin: 35px 25px;
 }
 
 .video-list-row{
@@ -33,7 +33,7 @@
     max-height: 250px;
     display: flex;
     align-items: center;
-    margin: 10px;
+    margin: 20px 10px;
     /* border: 1px solid black; */
 }
 
