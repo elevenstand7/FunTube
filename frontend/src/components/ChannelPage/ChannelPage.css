@@ -14,7 +14,7 @@
 .userPro-info{
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     font-family: "Comic Sans MS", cursive, sans-serif;
     height: 20%;
@@ -40,3 +40,10 @@
     margin-left: 30px;
 }
 
+.channel-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+}

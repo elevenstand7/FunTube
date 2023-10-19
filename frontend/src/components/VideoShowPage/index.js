@@ -36,7 +36,7 @@ const VideoShowPage = ()=>{
     const [deleteCommentModal, setDeleteCommentModal] = useState(false);
     const [commentToDelete, setCommentToDelete] = useState(null);
     const [editingComment, setEditingComment] = useState(null);
-    const [newCommentContent, setNewCommentContent] = useState("");   
+    const [newCommentContent, setNewCommentContent] = useState("");
     // debugger
 
     // console.log("comments", comments)
@@ -45,9 +45,9 @@ const VideoShowPage = ()=>{
     // console.log("likedVideoIds", likedVideoIds);
     useEffect(()=>{
         // debugger
-        if(!video){
-            dispatch(fetchVideo(videoId))  
-        }
+
+        dispatch(fetchVideo(videoId))
+
         dispatch(getVideoComments(videoId))
     },[dispatch, videoId])
 
@@ -59,7 +59,7 @@ const VideoShowPage = ()=>{
     useEffect(()=>{
         if(currentUser){
             dispatch(fetchUserLikes(currentUser.id))
-        } 
+        }
     }, [dispatch, currentUser])
 
 
@@ -67,8 +67,8 @@ const VideoShowPage = ()=>{
         return <div>Loading...</div>
     }
     const {title, description, userId, videoUrl, uploader, photoUrl} = video
-    
-    
+
+
     const handleLike = async e => {
         e.preventDefault();
         console.log("click!")
@@ -106,7 +106,7 @@ const VideoShowPage = ()=>{
                 await dispatch(destroyComment(commentToDelete));
                 setCommentToDelete(null);
                 setDeleteCommentModal(false);
-            }     
+            }
     }
 
     const handleEdit = (commentId)=>{
@@ -162,7 +162,7 @@ const VideoShowPage = ()=>{
 
                 {(currentUser && videoId) ?
                     <CreateCommentForm videoId={videoId} onCommentChange={onCommentChange}/>
-                    : 
+                    :
                     <div>
                         <button onClick={()=> history.push('/login')} className="btn btn-outline-secondary add-comment-btn">Login to add a comment</button>
                     </div>
@@ -184,7 +184,7 @@ const VideoShowPage = ()=>{
                                     </div>
                                     {editingComment === comment.id? (
                                         <div className="edit-comment-contain">
-                                            <textarea 
+                                            <textarea
                                                 value={newCommentContent}
                                                 onChange={e => handleCommentChange(e.target.value)}
                                                 className="edit-text-box"
@@ -206,7 +206,7 @@ const VideoShowPage = ()=>{
                                             <i className="fa-solid fa-ellipsis-vertical"></i>
                                         </Dropdown.Toggle>
 
-                                        
+
                                         <Dropdown.Menu>
                                             <Dropdown.Item as="div"  className="edit-btn" onClick={()=>handleEdit(comment.id)}>
                                                 <i className="fa-solid fa-pen edit-btn-img"></i>
@@ -216,7 +216,7 @@ const VideoShowPage = ()=>{
                                                 <i className="fa-solid fa-trash delete-btn-img"></i>
                                                 <span>Delete</span>
                                             </Dropdown.Item>
-                                        </Dropdown.Menu> 
+                                        </Dropdown.Menu>
                                     </Dropdown>
                                 )}
 
@@ -228,10 +228,10 @@ const VideoShowPage = ()=>{
 
                 </div>
             </div>
-            
-            <Modal 
-                show={deleteCommentModal} 
-                onHide={() => setDeleteCommentModal(false)} 
+
+            <Modal
+                show={deleteCommentModal}
+                onHide={() => setDeleteCommentModal(false)}
                 className="delete-comment-modal"
                 centered
             >

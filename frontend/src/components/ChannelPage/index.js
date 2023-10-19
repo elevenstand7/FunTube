@@ -15,19 +15,33 @@ const ChannelPage = ()=>{
 
     const currentUser = useSelector(state=>state.session.user);
     const videos = useSelector(state=>Object.values(state.videos));
-    const currentUserVideos = videos.filter(video => video.userId === currentUser.id)
-    console.log(currentUserVideos)
-    console.log(currentUser)
+    let currentUserVideos = null;
+    if (currentUser){
+        currentUserVideos = videos.filter(video => video.userId === currentUser.id)
+
+    }else{
+        history.push('/login')
+    }
+
+    // console.log(currentUserVideos)
+    // console.log(currentUser)
     // console.log(videos)
 
     useEffect(()=>{
-        dispatch(fetchVideos());
-    },[dispatch])
+        if(currentUser){
+            dispatch(fetchVideos());
+    }else{
+        history.push('/login')
+    }
+
+    },[dispatch, currentUser])
 
 
 
     return (
         <>
+        {currentUser?
+        <div className='channel-container'>
             <UserProHeader />
             <div>
                 <ul className="nav nav-underline user-prof-navbar">
@@ -48,6 +62,8 @@ const ChannelPage = ()=>{
                 )) : <p>Your channel is empty!</p>}
 
             </div>
+        </div>
+            : history.push('/login')}
         </>
     )
 

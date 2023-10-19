@@ -39,28 +39,30 @@ const FavoritesPage = ()=>{
 
     return (
         <>
-            <UserProHeader />
-            <div>
-                <ul className="nav nav-underline user-prof-navbar">
-                    <li className="nav-item">
-                        <a className="nav-link" href="/channel">CHANNELS</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link active" aria-current="true"  href="/favorites">FAVORITES</a>
-                    </li>
-                </ul>
-            </div>
-            <div className="user-fav-videos-container">
-                {currentUserLikedVideos.length !==0? currentUserLikedVideos.map(video =>(
-                    // <h3>{video.title}</h3>
-                    <div className="user-favi-video-card" key={video.id}>
-                        <VideoListItem className="user-favi-video-pic" video={video}/>
+        {currentUser?
+        <div className="favi-container">
+                <UserProHeader />
+                <div>
+                    <ul className="nav nav-underline user-prof-navbar">
+                        <li className="nav-item">
+                            <a className="nav-link" href="/channel">CHANNELS</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link active" aria-current="true"  href="/favorites">FAVORITES</a>
+                        </li>
+                    </ul>
                 </div>
-                )) : <p>Your favorite page is empty!</p>}
+                <div className="user-fav-videos-container">
+                    {currentUserLikedVideos.length !==0? currentUserLikedVideos.map(video =>(
+                        // <h3>{video.title}</h3>
+                        <div className="user-favi-video-card" key={video.id}>
+                            <VideoListItem className="user-favi-video-pic" video={video}/>
+                    </div>
+                    )) : <p>Your favorite page is empty!</p>}
 
+                </div>
             </div>
-
-
+                : history.push('/login') }
         </>
     )
 }
