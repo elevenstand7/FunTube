@@ -47,5 +47,27 @@
 }
 
 .side-bar-home-img{
-    margin-right: 20px;
+    margin-right: 15px;
+}
+.side-bar-about{
+    text-decoration: none;
+}
+
+.side-bar-about-btn{
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    border: 5px solid white;
+    border-radius: 20px;
+    width: 240px;
+    height: 50px;
+}
+
+.side-bar-about-img{
+    margin-right: 15px;
+}
+
+.about-text{
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }
