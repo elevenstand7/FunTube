@@ -23,6 +23,9 @@ const ChannelPage = ()=>{
         history.push('/login')
     }
 
+    // console.log(currentUserVideos)
+    // console.log(currentUser)
+    // console.log(videos)
 
     useEffect(()=>{
         if(currentUser){
@@ -33,13 +36,13 @@ const ChannelPage = ()=>{
 
     },[dispatch, currentUser])
 
-    const faviPage = e =>{
-        history.push(`/favorites`);
-      }
+//   const faviPage = e =>{
+//     history.push(`/favorites`);
+//   }
 
-    const channelPage = e =>{
-    history.push(`/channel`);
-    }
+//   const channelPage = e =>{
+//     history.push(`/channel`);
+//   }
 
     return (
         <>
@@ -49,10 +52,10 @@ const ChannelPage = ()=>{
             <div>
                 <ul className="nav nav-underline user-prof-navbar">
                     <li className="nav-item">
-                        <a className="nav-link active" aria-current="true" onClick={channelPage}>CHANNELS</a>
+                        <Link className="nav-link active" aria-current="true" to="/channel">CHANNELS</Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link"  onClick={faviPage}>FAVORITES</a>
+                        <Link className="nav-link"  to="/favorites">FAVORITES</Link>
                     </li>
                 </ul>
             </div>

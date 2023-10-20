@@ -37,13 +37,13 @@ const FavoritesPage = ()=>{
 
     },[dispatch, currentUser, history])
 
-    const faviPage = e =>{
-        history.push(`/favorites`);
-      }
+    // const faviPage = e =>{
+    //     history.push(`/favorites`);
+    //   }
 
-    const channelPage = e =>{
-    history.push(`/channel`);
-    }
+    // const channelPage = e =>{
+    // history.push(`/channel`);
+    // }
 
     return (
         <>
@@ -53,10 +53,10 @@ const FavoritesPage = ()=>{
                 <div>
                     <ul className="nav nav-underline user-prof-navbar">
                         <li className="nav-item">
-                            <a className="nav-link" onClick={channelPage}>CHANNELS</a>
+                            <Link className="nav-link" to="/channel">CHANNELS</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="true"  onClick={faviPage}>FAVORITES</a>
+                            <Link className="nav-link active" aria-current="true"  to="/favorites">FAVORITES</Link>
                         </li>
                     </ul>
                 </div>
