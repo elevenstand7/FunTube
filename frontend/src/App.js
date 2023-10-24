@@ -17,9 +17,6 @@ function App() {
       <h1>Welcom to Funtube</h1> */}
       <Header />
         <Switch>
-        <Route exact path="/" >
-            <Home />
-          </Route>
 
           <Route path="/signup" >
             <SignupForm />
@@ -43,6 +40,10 @@ function App() {
 
           <Route path="/search-results" >
             <SearchResults />
+          </Route>
+
+          <Route exact path="/" >
+            <Home />
           </Route>
         </Switch>
       {/* <Footer /> */}
