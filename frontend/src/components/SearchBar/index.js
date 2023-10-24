@@ -16,11 +16,15 @@ function SearchBar() {
     const handleSearch = e =>{
         e.preventDefault();
         const query = e.target.value;
+        console.log("q", query)
         setSearchText(query);
+
+        console.log("searchText",searchText)
 
         if (query.trim() !== "") {
             dispatch(fetchVideosByTitle(query));
-            history.push('/search-results');
+            // history.push('/search-results');
+            history.push(`/search?query=${query}`);
         }else{
             dispatch(clearSearchResults());
             history.push('/');
@@ -32,7 +36,8 @@ function SearchBar() {
         e.preventDefault();
         if (searchText.trim() !== '') {
           setSearchText('');
-          history.push('/search-results');
+          history.push(`/search?query=${searchText}`);
+
         }else{
             dispatch(clearSearchResults());
             history.push('/');

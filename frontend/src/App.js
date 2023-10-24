@@ -38,7 +38,7 @@ function App() {
             <ChannelPage />
           </Route>
 
-          <Route path="/search-results" >
+          <Route path="/search" >
             <SearchResults />
           </Route>
 

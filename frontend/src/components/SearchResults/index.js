@@ -12,13 +12,16 @@ const SearchResults = ()=>{
     const searchResults = useSelector((state) => Object.values(state.search));
     const searchParams = new URLSearchParams(location.search);
     const query = searchParams.get("query");
-    const noResults = searchResults.length === 0;
-
-    console.log("searchResults", searchResults);
+    const noResults = searchResults.length === 1;
+    const isLoading = useSelector((state) => state.search.isLoading);
     console.log("query", query);
+    console.log("searchParams", searchParams);
+    console.log("searchResults", searchResults);
+    console.log("isLoading", isLoading);
+    console.log("noResults", noResults);
 
     useEffect(() => {
-        debugger
+        // debugger
         if (query) {
 
             dispatch(fetchVideosByTitle(query));
@@ -28,15 +31,17 @@ const SearchResults = ()=>{
     // const videos = useSelector(state =>Object.values(state.videos.videos)) || null;
     return (
         <div className="video-list-container">
-            {noResults &&
-                <div id='results-for'>No results containing "{query}"</div>
-            }
+            {isLoading && <div>Loading...</div>}
 
-            {searchResults.map((video, index) =>(
+            {!isLoading && noResults && <div>No results containing "{query}"</div>}
+
+
+            {!isLoading && !noResults &&
+            (searchResults.map((video, index) =>(
                 <div className="video-card" key={`${video.id}-${index}`}>
                     <VideoListItem className="video-pic" video={video}/>
                 </div>
-            ))}
+            )))}
         </div>
     )
 }
