@@ -36,7 +36,7 @@ export const fetchLikes = () => async dispatch => {
 
     if(res.ok) {
         const likes = await res.json();
-        console.log(res);
+        // console.log(res);
         dispatch(getLikes(likes));
     }
 };
@@ -45,7 +45,7 @@ export const fetchUserLikes = (userId) => async dispatch => {
     const res = await csrfFetch(`/api/users/${userId}/likes`);
     if(res.ok) {
         const userlikes = await res.json();
-        console.log(userlikes);
+        // console.log(userlikes);
         dispatch(getUserLikes(userlikes));
         return res;
     }

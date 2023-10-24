@@ -76,7 +76,7 @@ export const updateVideoComment = (comment) => async dispatch =>{
         method: 'PATCH',
         body: JSON.stringify(comment),
         headers:{
-            'Content-Type': 'application/json' 
+            'Content-Type': 'application/json'
         }
     });
     // debugger
@@ -89,7 +89,7 @@ export const updateVideoComment = (comment) => async dispatch =>{
 export const getVideoComments = (videoId) => async dispatch =>{
     const res = await csrfFetch(`/api/videos/${videoId}/comments`);
     // const res = await csrfFetch(`/api/comments`);
-    console.log("res",res);
+    // console.log("res",res);
     if(res.ok){
         const {comments} = await res.json();
         // console.log(comments);
@@ -115,7 +115,7 @@ const commentsReducer = (state={}, action)=>{
         case RECEIVE_VIDEO_COMMENTS:
             return { ...action.comments};
         default:
-            return nextState;    
+            return nextState;
     }
 
 }

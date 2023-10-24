@@ -5,13 +5,15 @@ import videos from './videos';
 import users from './users';
 import likes from './likes';
 import comments from './comments';
+import search from './search';
 
 const rootReducer = combineReducers({
   session,
   videos,
   users,
   likes,
-  comments
+  comments,
+  search
 });
 
 let enhancer;

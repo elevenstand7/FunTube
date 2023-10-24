@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     # ...
+    get 'videos/search', to: "videos#search"
     resources :users, only: [:create, :show, :index] do
       resources :likes, only:[:index]
     end

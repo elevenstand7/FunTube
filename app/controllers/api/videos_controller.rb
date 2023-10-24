@@ -49,6 +49,11 @@ class Api::VideosController < ApplicationController
 
   end
 
+  def search
+    query = params[:query]
+    @videos = Video.where('LOWER(title) LIKE LOWER(?)', "%#{params[:query]}%")
+    render :index
+  end
 
   private
   def video_params

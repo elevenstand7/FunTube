@@ -17,23 +17,24 @@ const FavoritesPage = ()=>{
     const videos = useSelector(state=>state.videos);
     const userlikes = useSelector(state => state.likes.userLikes) || [];
     const likedVideoIds = userlikes.map(like => like.likedVideoId);
-    console.log("videos", videos);
-    console.log("likedVideoIds", likedVideoIds);
+    // console.log("videos", videos);
+    // console.log("likedVideoIds", likedVideoIds);
 
 
     const currentUserLikedVideos = likedVideoIds.map(id => videos[id]).filter(Boolean);
 
-    console.log("currentUserLikedVideos", currentUserLikedVideos);
+    // console.log("currentUserLikedVideos", currentUserLikedVideos);
 
     useEffect(()=>{
         // debugger
 
-        if(currentUser){
-            dispatch(fetchUserLikes(currentUser.id))
-        }else{
+        if(!currentUser){
             history.push('/login');
+        }else{
+            dispatch(fetchUserLikes(currentUser.id));
+            dispatch(fetchVideos());
         };
-        dispatch(fetchVideos());
+
 
     },[dispatch, currentUser, history])
 

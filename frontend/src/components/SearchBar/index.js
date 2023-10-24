@@ -3,21 +3,41 @@ import { NavLink, useHistory } from 'react-router-dom';
 import button from 'bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import './SearchBar.css'
-import { fetchVideosByTitle } from '../../store/videos';
+import { fetchVideosByTitle, clearSearchResults } from '../../store/search';
 
 
 
 function SearchBar() {
-    const [title, setTitle] = useState('');
+    const [searchText, setSearchText] = useState("");
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
 
-    const handleSearch = async (e)=>{
-        await dispatch(fetchVideosByTitle(title));
-        // debugger
-        history.push('/search-results');
+    const handleSearch = e =>{
+        e.preventDefault();
+        const query = e.target.value;
+        setSearchText(query);
+
+        if (query.trim() !== "") {
+            dispatch(fetchVideosByTitle(query));
+            history.push('/search-results');
+        }else{
+            dispatch(clearSearchResults());
+            history.push('/');
+        }
+
     }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        if (searchText.trim() !== '') {
+          setSearchText('');
+          history.push('/search-results');
+        }else{
+            dispatch(clearSearchResults());
+            history.push('/');
+        }
+  }
 
     return (
         <>
@@ -25,11 +45,11 @@ function SearchBar() {
             <input
                 type='text'
                 className='search-box'
-                value={title}
+                value={searchText}
                 placeholder='Search by title'
-                onChange={e => setTitle(e.target.value)}
+                onChange={handleSearch}
             />
-            <button className='search-btn' onClick={handleSearch}>
+            <button className='search-btn' onClick={handleSubmit}>
                 <i className="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>

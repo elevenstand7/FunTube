@@ -10,7 +10,7 @@ const VideoListItem = ({video})=>{
     const history = useHistory();
     const handleClick = (e)=>{
         e.preventDefault();
-        console.log(video.id);
+        // console.log(video.id);
         history.push(`/videos/${(video.id)}`);
     }
     return (

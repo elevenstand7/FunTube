@@ -9,6 +9,7 @@ export const REMOVE_VIDEO = 'videos/REMOVE_VIDEO ';
 export const LIKE_VIDEO = 'videos/LIKE_VIDEO';
 export const UNLIKE_VIDEO = 'videos/UNLIKE_VIDEO';
 export const SEARCH_VIDEOS = 'videos/SEARCH_VIDEOS';
+export const CLEAR_SEARCH_RESULTS = 'videos/CLEAR_SEARCH_RESULTS';
 
 
 const receiveVideos = videos =>{
@@ -38,6 +39,10 @@ const searchVideos = videos =>{
         videos
     }
 }
+
+export const clearSearchResults = () => ({
+    type: CLEAR_SEARCH_RESULTS
+});
 
 //video selector
 // export const getVideo = videoId =>{
@@ -87,7 +92,7 @@ export const fetchVideosByTitle = title => async dispatch =>{
     const res = await csrfFetch(`/api/videos?query=${title}`);
     if(res.ok){
         const {videos} = await res.json();
-        console.log("Fetched Videos:", videos);
+        // console.log("Fetched Videos:", videos);
         dispatch(searchVideos(videos));
         return res;
     }
@@ -158,6 +163,8 @@ function videosReducer(state={}, action){
         //     return {...nextState, likedVideos: nextState.likedVideos.filter(id => id !== action.videoId)}
         case SEARCH_VIDEOS:
             return {...nextState, videos: action.videos}
+        case CLEAR_SEARCH_RESULTS:
+            return {};
         default:
             return nextState;
     }
