@@ -21,7 +21,6 @@ Rails.application.routes.draw do
 
   end
 
-  get '*path', to: "static_pages#fronted_index"
-  # get '/api/users/:user_id/likes', to: 'likes#index'
-  # post 'api/test', to: 'application#test'
+  get '*path', to: "static_pages#frontend_index"
+
 end
