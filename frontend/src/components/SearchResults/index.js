@@ -14,11 +14,11 @@ const SearchResults = ()=>{
     const query = searchParams.get("query");
     const noResults = searchResults.length === 1;
     const isLoading = useSelector((state) => state.search.isLoading);
-    console.log("query", query);
-    console.log("searchParams", searchParams);
-    console.log("searchResults", searchResults);
-    console.log("isLoading", isLoading);
-    console.log("noResults", noResults);
+    // console.log("query", query);
+    // console.log("searchParams", searchParams);
+    // console.log("searchResults", searchResults);
+    // console.log("isLoading", isLoading);
+    // console.log("noResults", noResults);
 
     useEffect(() => {
         // debugger
@@ -38,7 +38,7 @@ const SearchResults = ()=>{
 
             {!isLoading && !noResults &&
             (searchResults.map((video, index) =>(
-                <div className="video-card" key={`${video.id}-${index}`}>
+                <div className="video-card clickable" key={`${video.id}-${index}`}>
                     <VideoListItem className="video-pic" video={video}/>
                 </div>
             )))}

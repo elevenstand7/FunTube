@@ -47,3 +47,7 @@
     align-content: center;
     align-items: center;
 }
+
+.clickable{
+    cursor: pointer;
+}

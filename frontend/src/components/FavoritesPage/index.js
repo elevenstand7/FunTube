@@ -54,10 +54,10 @@ const FavoritesPage = ()=>{
                 <div>
                     <ul className="nav nav-underline user-prof-navbar">
                         <li className="nav-item">
-                            <Link className="nav-link" to="/channel">CHANNELS</Link>
+                            <Link className="nav-link clickable" to="/channel">CHANNELS</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link active" aria-current="true"  to="/favorites">FAVORITES</Link>
+                            <Link className="nav-link active clickable" aria-current="true"  to="/favorites">FAVORITES</Link>
                         </li>
                     </ul>
                 </div>

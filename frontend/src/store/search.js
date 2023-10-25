@@ -23,7 +23,7 @@ export const fetchVideosByTitle = query => async dispatch =>{
     const res = await csrfFetch(`/api/videos/search?query=${query}`);
     if(res.ok){
         const {videos} = await res.json();
-        debugger
+        // debugger
         // console.log("Fetched Videos:", videos);
         dispatch(receiveSearchResults(videos));
         dispatch(setSearchLoading(false));
@@ -36,7 +36,7 @@ const searchReducer = (state = { isLoading: false }, action) => {
     const newState = {...state}
     switch (action.type) {
         case GET_SEARCH_RESULTS:
-            debugger
+            // debugger
             return {...action.searchResults, isLoading: false };
         case CLEAR_SEARCH_RESULTS:
             return { isLoading: false };

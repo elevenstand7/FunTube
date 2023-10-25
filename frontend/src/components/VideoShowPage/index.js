@@ -148,7 +148,7 @@ const VideoShowPage = ()=>{
                             <img className="avatar" src={momo}></img>
                             <h5>{uploader}</h5>
                         </div>
-                        <button className="favi-btn btn btn-light" onClick={handleLike}>
+                        <button className="favi-btn btn btn-light clickable" onClick={handleLike}>
                             <i className={ isLiked? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
                             {/* <i className="fa-regular fa-heart"></i> */}
                         </button>
@@ -164,7 +164,7 @@ const VideoShowPage = ()=>{
                     <CreateCommentForm videoId={videoId} onCommentChange={onCommentChange}/>
                     :
                     <div>
-                        <button onClick={()=> history.push('/login')} className="btn btn-outline-secondary add-comment-btn">Login to add a comment</button>
+                        <button onClick={()=> history.push('/login')} className="btn btn-outline-secondary add-comment-btn clickable">Login to add a comment</button>
                     </div>
                 }
                 <div className="comments-container">
@@ -189,7 +189,7 @@ const VideoShowPage = ()=>{
                                                 onChange={e => handleCommentChange(e.target.value)}
                                                 className="edit-text-box"
                                             />
-                                            <button onClick={()=>handleSaveEditComment(comment.id, newCommentContent)} className="btn btn-outline-secondary edit-save-btn">Save</button>
+                                            <button onClick={()=>handleSaveEditComment(comment.id, newCommentContent)} className="btn btn-outline-secondary edit-save-btn clickable">Save</button>
                                         </div>
 
                                     ) : (
@@ -208,11 +208,11 @@ const VideoShowPage = ()=>{
 
 
                                         <Dropdown.Menu>
-                                            <Dropdown.Item as="div"  className="edit-btn" onClick={()=>handleEdit(comment.id)}>
+                                            <Dropdown.Item as="div"  className="edit-btn clickable" onClick={()=>handleEdit(comment.id)}>
                                                 <i className="fa-solid fa-pen edit-btn-img"></i>
                                                 <span>Edit</span>
                                             </Dropdown.Item>
-                                            <Dropdown.Item as="div"  className="delete-btn" onClick={()=>handleShow(comment.id)}>
+                                            <Dropdown.Item as="div"  className="delete-btn clickable" onClick={()=>handleShow(comment.id)}>
                                                 <i className="fa-solid fa-trash delete-btn-img"></i>
                                                 <span>Delete</span>
                                             </Dropdown.Item>

@@ -11,7 +11,7 @@ const CreateCommentForm = ({videoId, onCommentChange})=>{
     // const {commentId} = useParams();
     const sessionUser = useSelector(state => state.session.user);
     const [body, setBody] = useState("");
-    
+
 
 
 
@@ -31,7 +31,7 @@ const CreateCommentForm = ({videoId, onCommentChange})=>{
         <div className='comment-form'>
             <form className="user-input-container" onSubmit={handleSubmit}>
                 <textarea id='user-input' placeholder='Add a comment...' onChange={e=>setBody(e.target.value)} value={body}></textarea>
-                <button className='btn comment-btn' >Comment</button>
+                <button className='btn comment-btn clickable' >Comment</button>
             </form>
 
         </div>

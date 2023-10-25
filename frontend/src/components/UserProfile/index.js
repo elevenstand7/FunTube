@@ -36,7 +36,10 @@ function UserProfile({ user }) {
   };
 
   const faviPage = e =>{
-    history.push(`/favorites`);
+    e.preventDefault();
+    const favoritesUrl = `/favorites`;
+
+    window.open(favoritesUrl, '_blank');
   }
 
   const channelPage = e =>{
@@ -68,20 +71,20 @@ function UserProfile({ user }) {
         </Dropdown.Toggle>
         {/* {showMenu && ( */}
         <Dropdown.Menu>
-          <Dropdown.Item >{user.username}</Dropdown.Item>
-          <Dropdown.Item >{user.email}</Dropdown.Item>
+          <Dropdown.Item as="div">{user.username}</Dropdown.Item>
+          <Dropdown.Item as="div">{user.email}</Dropdown.Item>
 
-          <Dropdown.Item as="div"  className="channel-btn" onClick={channelPage}>
+          <Dropdown.Item as="div"  className="channel-btn clickable" onClick={channelPage}>
               <i className="fa-solid fa-user channel-img"></i>
               <span>Your channel</span>
             </Dropdown.Item>
 
-            <Dropdown.Item as="div"  className="menu-favi-btn" onClick={faviPage}>
+            <Dropdown.Item as="div"  className="menu-favi-btn clickable" onClick={faviPage}>
               <i className="fa-regular fa-heart favi-img"></i>
               <span>Favorites</span>
             </Dropdown.Item>
 
-            <Dropdown.Item as="div"  className="logout-btn" onClick={logout}>
+            <Dropdown.Item as="div"  className="logout-btn clickable" onClick={logout}>
               <i className="fa-solid fa-arrow-right-from-bracket logout-img"></i>
               <span>Log Out</span>
             </Dropdown.Item>

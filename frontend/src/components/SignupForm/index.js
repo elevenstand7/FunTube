@@ -76,8 +76,8 @@ const SignupForm = ()=>{
                     <input type="password" onChange={e=>setPassword(e.target.value)} value={password} required></input>
                 </label>
                 <div>
-                  <button type="submit" className="content signup-btn">Sign Up</button>
-                  <button onClick={handleBackLogIn} className="content signup-btn">Log In</button>
+                  <button type="submit" className="content signup-btn clickable">Sign Up</button>
+                  <button onClick={handleBackLogIn} className="content signup-btn clickable">Log In</button>
                 </div>
             </form>
         </div>

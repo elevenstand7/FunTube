@@ -52,17 +52,17 @@ const ChannelPage = ()=>{
             <div>
                 <ul className="nav nav-underline user-prof-navbar">
                     <li className="nav-item">
-                        <Link className="nav-link active" aria-current="true" to="/channel">CHANNELS</Link>
+                        <Link className="nav-link active clickable" aria-current="true" to="/channel">CHANNELS</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link"  to="/favorites">FAVORITES</Link>
+                        <Link className="nav-link clickable"  to="/favorites">FAVORITES</Link>
                     </li>
                 </ul>
             </div>
             <div className="user-fav-videos-container">
                 {currentUserVideos.length !==0? currentUserVideos.map(video =>(
                     // <h3>{video.title}</h3>
-                    <div className="user-favi-video-card" key={video.id}>
+                    <div className="user-favi-video-card clickable" key={video.id}>
                         <VideoListItem className="user-favi-video-pic" video={video}/>
                 </div>
                 )) : <p>Your channel is empty!</p>}

@@ -16,10 +16,10 @@ function SearchBar() {
     const handleSearch = e =>{
         e.preventDefault();
         const query = e.target.value;
-        console.log("q", query)
+        // console.log("q", query)
         setSearchText(query);
 
-        console.log("searchText",searchText)
+        // console.log("searchText",searchText)
 
         if (query.trim() !== "") {
             dispatch(fetchVideosByTitle(query));
@@ -54,7 +54,7 @@ function SearchBar() {
                 placeholder='Search by title'
                 onChange={handleSearch}
             />
-            <button className='search-btn' onClick={handleSubmit}>
+            <button className='search-btn clickable' onClick={handleSubmit}>
                 <i className="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>

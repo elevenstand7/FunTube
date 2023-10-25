@@ -19,7 +19,7 @@ function NaviBar() {
   } else {
     sessionLinks = (
       <>
-        <button onClick={changeRoute} type="button" className="user-btn btn btn-outline-primary ">
+        <button onClick={changeRoute} type="button" className="user-btn btn btn-outline-primary clickable">
           <i className="fa-solid fa-user"></i>
           <div className='btn-content'>LogIn</div>
         </button>

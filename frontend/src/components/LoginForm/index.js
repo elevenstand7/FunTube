@@ -59,12 +59,12 @@ function LoginForm() {
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         </label>
         <div className="login-btn-container">
-          <button type="submit" className="content login-btn">Log In</button>
-          <button className="demo-user-link login-btn" onClick={loginDemo}>Demo User</button>
+          <button type="submit" className="content login-btn clickable">Log In</button>
+          <button className="demo-user-link login-btn clickable" onClick={loginDemo}>Demo User</button>
         </div>
       </form>
       {/* <Link className="demo-user-link" onClick={loginDemo}>Demo User</Link> */}
-      <Link to={`/signup`} className="sign-up-link">Create an Account!</Link>
+      <Link to={`/signup`} className="sign-up-link clickable">Create an Account!</Link>
     </div>
   );
 }

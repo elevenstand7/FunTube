@@ -24,7 +24,7 @@ function MenuBar() {
     return (
         <div className='menu-bar'>
             <div>
-                <button type="button" className='btn menu-btn'data-bs-toggle="offcanvas" data-bs-target="#side-bar">
+                <button type="button" className='btn menu-btn clickable'data-bs-toggle="offcanvas" data-bs-target="#side-bar">
                     <i className="fa-solid fa-bars"></i>
                 </button>
                 <div className="offcanvas offcanvas-start " tabIndex="-1" id="side-bar" >
@@ -32,14 +32,14 @@ function MenuBar() {
                         <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
                     </div>
                     <div className="offcanvas-body" >
-                        <a className="side-bar-home" href="/">
-                            <button className="side-bar-home-btn" >
+                        <a className="side-bar-home clickable" href="/">
+                            <button className="side-bar-home-btn clickable" >
                                 <i className="fa-solid fa-house side-bar-home-img"></i>
                                 <span>Home</span>
                             </button>
                         </a>
-                        <a className="side-bar-about" >
-                            <button className="side-bar-about-btn" onClick={handleOpenModal}>
+                        <a className="side-bar-about clickable" >
+                            <button className="side-bar-about-btn clickable" onClick={handleOpenModal}>
                                 <i className="fa-solid fa-circle-question side-bar-about-img"></i>
                                 <span>About</span>
                             </button>
@@ -66,7 +66,7 @@ function MenuBar() {
                                     </div>
                                 </Modal.Body>
                                 <Modal.Footer>
-                                    <Button variant="secondary" onClick={handleCloseModal}>
+                                    <Button variant="secondary clickable" onClick={handleCloseModal}>
                                         OK
                                     </Button>
                                 </Modal.Footer>
