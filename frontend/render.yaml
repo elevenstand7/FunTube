@@ -1,0 +1,5 @@
+routes:
+  - destination: index.html
+    status: 200
+    headers:
+      content-type: text/html
