@@ -25,9 +25,10 @@ export const addUser = (user) => ({
 
 
 export const fetchUser = (userId) => async dispatch =>{
+    // debugger
     const res = await csrfFetch(`/api/users/${userId}`)
     if(res.ok){
-        const user = await res.json();
+        const {user} = await res.json();
         if(user.id){
             dispatch(receiveUser(user));
         }
@@ -48,6 +49,7 @@ const usersReducer = (state={}, action)=>{
     const nextState = {...state};
     switch(action.type){
         case RECEIVE_USER:
+            // debugger
             nextState[action.user.id] = action.user
             return nextState;
         case RECEIVE_USERS:

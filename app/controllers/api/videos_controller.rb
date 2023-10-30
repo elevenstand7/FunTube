@@ -18,12 +18,7 @@ class Api::VideosController < ApplicationController
     else
       @videos = Video.all
     end
-    # puts @videos.inspect
-    # if params[:excludeUrl] == 'true'
-    #   videos = videos.map do |video|
-    #     video.attributes.except("videoUrl")
-    #   end
-    # end
+    # @videos = Video.where(user_id: params[:user_id])
 
     render :index
   end

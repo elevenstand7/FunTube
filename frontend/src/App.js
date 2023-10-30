@@ -34,7 +34,7 @@ function App() {
             <FavoritesPage />
           </Route>
 
-          <Route path="/channel" >
+          <Route path="/:userId/channel" >
             <ChannelPage />
           </Route>
 

@@ -7,11 +7,11 @@ const Footer = ()=>{
         <div className="footer" >
             <div className="footer-content">
                 <i className="fa-brands fa-linkedin fa-xl footer-img"></i>
-                <Link href="https://www.linkedin.com/in/yinyin-huang" className="footer-link clickable">Linkedin</Link>
+                <Link to="https://www.linkedin.com/in/yinyin-huang" className="footer-link clickable">Linkedin</Link>
             </div>
             <div className="footer-content">
                 <i className="fa-brands fa-square-github fa-xl footer-img"></i>
-                <Link href="https://github.com/elevenstand7" className="footer-link clickable">GitHub</Link>
+                <Link to="https://github.com/elevenstand7" className="footer-link clickable">GitHub</Link>
             </div>
         </div>
 

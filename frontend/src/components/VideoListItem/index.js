@@ -13,11 +13,16 @@ const VideoListItem = ({video})=>{
         // console.log(video.id);
         history.push(`/videos/${(video.id)}`);
     }
+
+    const handleClickUploader = e =>{
+        e.preventDefault();
+        history.push(`/${userId}/channel`);
+    }
     return (
         <div className="video-list" >
             <div className="video-pic-container clickable"><img className="video-pic" src={video.photoUrl} onClick={handleClick}/></div>
             <div className="video-list-title clickable" onClick={handleClick}>{video.title}</div>
-            <div>{video.uploader}</div>
+            <div className="video-list-uploader clickable" onClick={handleClickUploader}>{video.uploader}</div>
         </div>
     )
 };

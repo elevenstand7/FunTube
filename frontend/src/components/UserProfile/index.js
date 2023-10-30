@@ -43,7 +43,7 @@ function UserProfile({ user }) {
   }
 
   const channelPage = e =>{
-    history.push(`/channel`);
+    history.push(`/${user.id}/channel`);
   }
 
   return (

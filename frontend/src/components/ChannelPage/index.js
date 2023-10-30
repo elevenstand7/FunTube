@@ -12,55 +12,43 @@ const ChannelPage = ()=>{
 
     const dispatch = useDispatch();
     const history = useHistory();
-
+    const { userId } = useParams();
+    console.log("userId", userId)
     const currentUser = useSelector(state=>state.session.user);
     const videos = useSelector(state=>Object.values(state.videos));
-    let currentUserVideos = null;
-    if (currentUser){
-        currentUserVideos = videos.filter(video => video.userId === currentUser.id)
-
-    }else{
-        history.push('/login')
-    }
-
-    // console.log(currentUserVideos)
+    // let currentUserVideos = null;
+    // if (currentUser){
+    //     currentUserVideos = videos.filter(video => video.userId === currentUser.id)
+    // }
+    const currentChannelVideos = videos.filter(video => video.userId == parseInt(userId))
+    console.log("currentChannelVideos",currentChannelVideos)
     // console.log(currentUser)
     // console.log(videos)
 
     useEffect(()=>{
-        if(currentUser){
-            dispatch(fetchVideos());
-    }else{
-        history.push('/login')
-    }
+        dispatch(fetchVideos());
+    },[dispatch])
 
-    },[dispatch, currentUser])
 
-//   const faviPage = e =>{
-//     history.push(`/favorites`);
-//   }
-
-//   const channelPage = e =>{
-//     history.push(`/channel`);
-//   }
 
     return (
         <>
         {currentUser?
         <div className='channel-container'>
-            <UserProHeader />
+            <UserProHeader userId={userId}/>
             <div>
                 <ul className="nav nav-underline user-prof-navbar">
                     <li className="nav-item">
                         <Link className="nav-link active clickable" aria-current="true" to="/channel">CHANNELS</Link>
                     </li>
+                    {currentUser.id ===  parseInt(userId)?
                     <li className="nav-item">
                         <Link className="nav-link clickable"  to="/favorites">FAVORITES</Link>
-                    </li>
+                    </li> : null}
                 </ul>
             </div>
             <div className="user-fav-videos-container">
-                {currentUserVideos.length !==0? currentUserVideos.map(video =>(
+                {currentChannelVideos.length !==0? currentChannelVideos.map(video =>(
                     // <h3>{video.title}</h3>
                     <div className="user-favi-video-card clickable" key={video.id}>
                         <VideoListItem className="user-favi-video-pic" video={video}/>

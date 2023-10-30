@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get 'videos/search', to: "videos#search"
     resources :users, only: [:create, :show, :index] do
       resources :likes, only:[:index]
+      resources :videos, only:[:index]
     end
     resource :session, only: [:create, :show, :destroy]
 
