@@ -21,7 +21,7 @@ const ChannelPage = ()=>{
     //     currentUserVideos = videos.filter(video => video.userId === currentUser.id)
     // }
     const currentChannelVideos = videos.filter(video => video.userId == parseInt(userId))
-    console.log("currentChannelVideos",currentChannelVideos)
+    // console.log("currentChannelVideos",currentChannelVideos)
     // console.log(currentUser)
     // console.log(videos)
 
@@ -39,7 +39,7 @@ const ChannelPage = ()=>{
             <div>
                 <ul className="nav nav-underline user-prof-navbar">
                     <li className="nav-item">
-                        <Link className="nav-link active clickable" aria-current="true" to="/channel">CHANNELS</Link>
+                        <Link className="nav-link active clickable" aria-current="true" to={`/${userId}/channel`}>CHANNELS</Link>
                     </li>
                     {currentUser.id ===  parseInt(userId)?
                     <li className="nav-item">

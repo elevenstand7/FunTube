@@ -50,11 +50,11 @@ const FavoritesPage = ()=>{
         <>
         {currentUser?
         <div className="favi-container">
-                <UserProHeader />
+                <UserProHeader userId={currentUser.id}/>
                 <div>
                     <ul className="nav nav-underline user-prof-navbar">
                         <li className="nav-item">
-                            <Link className="nav-link clickable" to="/channel">CHANNELS</Link>
+                            <Link className="nav-link clickable" to={`/${currentUser.id}/channel`}>CHANNELS</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link active clickable" aria-current="true"  to="/favorites">FAVORITES</Link>

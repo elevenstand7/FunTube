@@ -30,7 +30,7 @@ const UserProHeader = ({userId}) =>{
                     <h5>{user.email}</h5>
                </div>
             </div>
-            : null
+            : <h3>Loading User</h3>
 }
 
         </>

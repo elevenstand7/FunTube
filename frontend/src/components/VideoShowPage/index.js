@@ -128,6 +128,11 @@ const VideoShowPage = ()=>{
         setEditingComment(null);
     }
 
+    const handleClickUploader = e =>{
+        e.preventDefault();
+        history.push(`/${userId}/channel`);
+    }
+
     return (
         <div>
             <div className="video-container">
@@ -146,7 +151,7 @@ const VideoShowPage = ()=>{
                     <div className="middle-row">
                         <div className="user-info">
                             <img className="avatar" src={momo}></img>
-                            <h5>{uploader}</h5>
+                            <h5 className="clickable" onClick={handleClickUploader}>{uploader}</h5>
                         </div>
                         <button className="favi-btn btn btn-light clickable" onClick={handleLike}>
                             <i className={ isLiked? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
