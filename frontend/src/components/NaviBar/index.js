@@ -14,7 +14,11 @@ function NaviBar() {
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <UserProfile user={sessionUser} />
+      <div className='userContainer'>
+        <i className="fa-solid fa-upload fa-lg"></i>
+        <UserProfile user={sessionUser} />
+      </div>
+
     );
   } else {
     sessionLinks = (
