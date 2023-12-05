@@ -11,11 +11,17 @@ function NaviBar() {
   const changeRoute = ()=>{
     history.push(`/login`);
   }
+
+  const openUploadModal = ()=>{
+
+  }
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
       <div className='userContainer'>
-        <i className="fa-solid fa-upload fa-lg"></i>
+        <div className='upload-btn clickable' onClick={openUploadModal}>
+          <i className="fa-solid fa-upload fa-xl "></i>
+        </div>
         <UserProfile user={sessionUser} />
       </div>
 
