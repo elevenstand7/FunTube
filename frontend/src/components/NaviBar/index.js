@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import button from 'bootstrap';
 import { useSelector } from 'react-redux';
@@ -8,6 +8,7 @@ import './NaviBar.css';
 function NaviBar() {
   const sessionUser = useSelector(state => state.session.user);
   const history = useHistory();
+  const [uploadModal, setUploadModal] = useState(false);
   const changeRoute = ()=>{
     history.push(`/login`);
   }
