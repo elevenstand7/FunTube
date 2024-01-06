@@ -13,6 +13,7 @@ import {createLike,deleteLike, hasLikedVideo, fetchLikes, fetchUserLikes} from "
 import VideosRecomList from "../VideosRecomList";
 import { getVideoComments, fetchComments, destroyComment,createComment, updateVideoComment } from "../../store/comments";
 import CreateCommentForm from "../CreateCommentForm";
+import VideoUploadModal from "../VideoUploadModal";
 
 import "./VideoShowPage.css"
 
