@@ -9,14 +9,14 @@ const VideoUploadModal = ()=>{
     return (
         <>
             <Modal
-                show={deleteCommentModal}
+                // show={uploadVideoModal}
                 onHide={() => setDeleteCommentModal(false)}
                 className="upload-video-modal"
                 centered
             >
                 <Modal.Header closeButton>
                     <Modal.Title>Upload videos</Modal.Title>
-                    <button onClick={handleUploadVideo} className="btn upload-video-modal-btn">Upload</button>
+                    {/* <button onClick={handleUploadVideo} className="btn upload-video-modal-btn">Upload</button> */}
                 </Modal.Header>
                 <Modal.Body>
                     <div>Drag and drop video files to upload</div>
