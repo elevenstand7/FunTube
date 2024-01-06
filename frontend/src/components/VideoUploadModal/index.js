@@ -10,7 +10,7 @@ const VideoUploadModal = ()=>{
         <>
             <Modal
                 // show={uploadVideoModal}
-                onHide={() => setDeleteCommentModal(false)}
+                // onHide={() => setDeleteCommentModal(false)}
                 className="upload-video-modal"
                 centered
             >
