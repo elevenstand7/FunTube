@@ -7,6 +7,7 @@ import './NaviBar.css';
 import VideoUploadModal from '../VideoUploadModal';
 import Modal from 'react-bootstrap/Modal';
 // import 'bootstrap/dist/css/bootstrap.min.css';
+import "./VideoUploadModal.css"
 
 
 function NaviBar() {
@@ -20,7 +21,7 @@ function NaviBar() {
 
   const openUploadModal = ()=>{
     console.log("upload btn click!");
-    setUploadModal(true);
+    setUploadModal(!uploadModal);
   }
   let sessionLinks;
   if (sessionUser) {
@@ -40,7 +41,7 @@ function NaviBar() {
           <i className="fa-solid fa-user"></i>
           <div className='btn-content'>LogIn</div>
         </button>
-        <Modal
+        {/* <Modal
                 show={uploadModal}
                 onHide={() => setUploadModal(false)}
                 className="upload-video-modal"
@@ -48,13 +49,12 @@ function NaviBar() {
             >
                 <Modal.Header closeButton>
                     <Modal.Title>Upload videos</Modal.Title>
-                    {/* <button onClick={handleUploadVideo} className="btn upload-video-modal-btn">Upload</button> */}
                 </Modal.Header>
                 <Modal.Body>
                     <div>Drag and drop video files to upload</div>
                     <button className="btn">SELECT FILES</button>
                 </Modal.Body>
-            </Modal>
+            </Modal> */}
       </>
     );
   }
@@ -63,6 +63,20 @@ function NaviBar() {
     <>
       <div className='navi-btn'>
         {sessionLinks}
+        <Modal
+                show={uploadModal}
+                onHide={() => setUploadModal(false)}
+                className="upload-video-modal"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Upload videos</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div>Drag and drop video files to upload</div>
+                    <button className="btn">SELECT FILES</button>
+                </Modal.Body>
+            </Modal>
       </div>
 
     </>
