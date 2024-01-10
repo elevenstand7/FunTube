@@ -12,22 +12,37 @@ import "./VideoUploadModal.css"
 
 function NaviBar() {
   const sessionUser = useSelector(state => state.session.user);
+  const userId = sessionUser.id
   const history = useHistory();
   const [uploadModal, setUploadModal] = useState(false);
+  const [photoFile, setPhotoFile] = useState (null);
+  const [videoFile, setVideoFile] = useState (null);
 
   const changeRoute = ()=>{
     history.push(`/login`);
   }
 
-  const openUploadModal = ()=>{
-    console.log("upload btn click!");
-    setUploadModal(!uploadModal);
+  const openUploadModal = () => {
+    if (sessionUser) {
+      setUploadModal(true);
+    } else {
+      changeRoute();
+    }
   }
+
+  const toChannelPage = () => {
+    if (sessionUser) {
+      history.push(`/${sessionUser.id}/channel`);
+      setUploadModal(true);
+    }
+  }
+
+
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
       <div className='userContainer'>
-        <div className='upload-btn clickable' onClick={openUploadModal}>
+        <div className='upload-btn clickable' onClick={toChannelPage}>
           <i className="fa-solid fa-upload fa-xl "></i>
         </div>
         <UserProfile user={sessionUser} />
@@ -41,20 +56,6 @@ function NaviBar() {
           <i className="fa-solid fa-user"></i>
           <div className='btn-content'>LogIn</div>
         </button>
-        {/* <Modal
-                show={uploadModal}
-                onHide={() => setUploadModal(false)}
-                className="upload-video-modal"
-                centered
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>Upload videos</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <div>Drag and drop video files to upload</div>
-                    <button className="btn">SELECT FILES</button>
-                </Modal.Body>
-            </Modal> */}
       </>
     );
   }
@@ -74,7 +75,7 @@ function NaviBar() {
                 </Modal.Header>
                 <Modal.Body>
                     <div>Drag and drop video files to upload</div>
-                    <button className="btn">SELECT FILES</button>
+                    <input type="file" />
                 </Modal.Body>
             </Modal>
       </div>
