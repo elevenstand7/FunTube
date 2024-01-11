@@ -81,8 +81,26 @@ export const fetchVideos = () => async dispatch =>{
     }
 }
 
-export const createVideo = ()=> async (dispatch, getState) => {
+export const createVideo = ({title, description})=> async (dispatch, getState) => {
     const {session} = getState();
+    const res = await csrfFetch(`/api/videos`, {
+        method: 'POST',
+        body: JSON.stringify(
+            {
+                title: title,
+                description: description,
+                user_id: session.user.id
+            }
+        ),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+
+    });
+    if (res.ok){
+        const {video} = await res.json();
+        dispatch(addVideo(video));
+    }
 
 }
 
