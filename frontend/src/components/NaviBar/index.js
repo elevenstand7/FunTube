@@ -12,7 +12,6 @@ import "./VideoUploadModal.css"
 
 function NaviBar() {
   const sessionUser = useSelector(state => state.session.user);
-  const userId = sessionUser.id
   const history = useHistory();
   const [uploadModal, setUploadModal] = useState(false);
   const [photoFile, setPhotoFile] = useState (null);

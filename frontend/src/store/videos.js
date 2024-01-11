@@ -3,6 +3,7 @@ import { addUser, fetchUser } from "./users.js";
 
 
 //video actions
+export const ADD_VIDEO = 'videos/ADD_VIDEO';
 export const RECEIVE_VIDEOS = 'videos/RECEIVE_VIDEOS';
 export const RECEIVE_VIDEO = 'videos/RECEIVE_VIDEO';
 export const REMOVE_VIDEO = 'videos/REMOVE_VIDEO ';
@@ -11,6 +12,10 @@ export const UNLIKE_VIDEO = 'videos/UNLIKE_VIDEO';
 export const SEARCH_VIDEOS = 'videos/SEARCH_VIDEOS';
 export const CLEAR_SEARCH_RESULTS = 'videos/CLEAR_SEARCH_RESULTS';
 
+const addVideo = video => ({
+    type: ADD_VIDEO,
+    video
+});
 
 const receiveVideos = videos =>{
     return {
@@ -76,17 +81,10 @@ export const fetchVideos = () => async dispatch =>{
     }
 }
 
+export const createVideo = ()=> async (dispatch, getState) => {
+    const {session} = getState();
 
-// export const fetchVideosWithoutUrl= () => async dispatch =>{
-//     const res = await csrfFetch(`/api/videos?excludeUrl=true`);
-//     // console.log(res);
-//     if(res.ok){
-//         const {videos} = await res.json();
-//         console.log(videos);
-//         dispatch(receiveVideos(videos));
-//         // return res;
-//     }
-// }
+}
 
 export const fetchVideosByTitle = title => async dispatch =>{
     const res = await csrfFetch(`/api/videos?query=${title}`);
@@ -148,6 +146,10 @@ export const fetchVideo = (videoId) => async dispatch =>{
 function videosReducer(state={}, action){
     const nextState = {...state};
     switch(action.type){
+        case ADD_VIDEO:
+            // debugger
+            nextState[action.video.id] = action.video;
+            return nextState;
         case RECEIVE_VIDEOS:
             // debugger
             return {...nextState, ...action.videos};

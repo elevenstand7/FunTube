@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
+import { createComment } from '../../store/comments';
 
 const CreateVideoForm = ()=>{
 
@@ -9,7 +10,10 @@ const CreateVideoForm = ()=>{
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
-
+    const handleSubmit = ()=>{
+        e.preventDefault();
+        const res = await dispatch();
+    }
 
     return (
         <div className='video-form'>
