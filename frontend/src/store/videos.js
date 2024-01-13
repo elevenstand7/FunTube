@@ -49,23 +49,6 @@ export const clearSearchResults = () => ({
     type: CLEAR_SEARCH_RESULTS
 });
 
-//video selector
-// export const getVideo = videoId =>{
-//     return state =>{
-//         return state.videos? state.videos[videoId] : null
-//     }
-// }
-
-// export const getVideos = state =>{
-//     // console.log(state)
-//     if(state.videos){
-//         return Object.values(state.videos.videos)
-//     }else{
-//         return []
-//     }
-// }
-
-
 
 //video thunk action
 
@@ -127,39 +110,6 @@ export const fetchVideo = (videoId) => async dispatch =>{
     }
 }
 
-// export const likeVideo = (videoId) => async (dispatch, getState) => {
-//     const { session } = getState();
-//     const res = await csrfFetch(`/api/videos/${videoId}/like`,{
-//         method:'POST',
-//         body: JSON.stringify({
-//             user_like: true,
-//             user_id:session.user.id,
-//             video_id: videoId
-//         })
-//     });
-//     if(res.ok){
-//         const data = await res.json();
-//         dispatch({
-//             type: LIKE_VIDEO,
-//             videoId
-//         })
-//         return data;
-//     }
-// }
-
-// export const unlikeVideo = (videoId) => async dispatch => {
-//     const res = await csrfFetch(`/api/videos/${videoId}/like`,{
-//         method:'DELETE'
-//     });
-//     if(res.ok){
-//         const data = await res.json();
-//         dispatch({
-//             type: UNLIKE_VIDEO,
-//             videoId
-//         })
-//         return data;
-//     }
-// }
 
 function videosReducer(state={}, action){
     const nextState = {...state};
@@ -177,10 +127,7 @@ function videosReducer(state={}, action){
         case REMOVE_VIDEO:
             delete nextState[action.videoId]
             return nextState;
-        // case LIKE_VIDEO:
-        //     return {...nextState, likedVideos: [...state.likedVideos, action.videoId]}
-        // case UNLIKE_VIDEO:
-        //     return {...nextState, likedVideos: nextState.likedVideos.filter(id => id !== action.videoId)}
+
         case SEARCH_VIDEOS:
             return {...nextState, videos: action.videos}
         case CLEAR_SEARCH_RESULTS:
