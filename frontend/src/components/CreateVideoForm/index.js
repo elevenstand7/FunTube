@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { createComment } from '../../store/comments';
+import { createVideo } from '../../store/videos';
 
 const CreateVideoForm = ()=>{
 
@@ -12,14 +12,20 @@ const CreateVideoForm = ()=>{
 
     const handleSubmit = ()=>{
         e.preventDefault();
-        const res = await dispatch();
+        const res = await dispatch(createVideo({title, description}));
+
+        if(resp){
+            setTitle("");
+            setDescription("");
+        }
+
     }
 
     return (
         <div className='video-form'>
             <form className="video-container" onSubmit={handleSubmit}>
-                <input type='text' placeholder='Title'></input>
-                <textarea placeholder='Description' onChange={e=>setBody(e.target.value)} value={description}></textarea>
+                <input type='text' placeholder='Title' onChange={e=>setTitle(e.target.value)} value={title}></input>
+                <textarea placeholder='Description' onChange={e=>setDescription(e.target.value)} value={description}></textarea>
                 <button className='btn comment-btn clickable' >Upload</button>
             </form>
 
