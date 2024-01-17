@@ -3,6 +3,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from 'react-bootstrap/Modal';
 import "./VideoUploadModal.css"
+import CreateVideoForm from "../CreateVideoForm";
 
 const VideoUploadModal = ()=>{
 

@@ -10,9 +10,9 @@ const CreateVideoForm = ()=>{
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
-    const handleSubmit = ()=>{
+    const handleSubmit = async(e) =>{
         e.preventDefault();
-        const res = await dispatch(createVideo({title, description}));
+        const resp = await dispatch(createVideo({title, description}));
 
         if(resp){
             setTitle("");
