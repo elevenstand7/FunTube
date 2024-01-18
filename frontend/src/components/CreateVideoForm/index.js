@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { createVideo } from '../../store/videos';
+import "./CreateVideoForm.css"
 
 const CreateVideoForm = ()=>{
 
@@ -22,11 +23,11 @@ const CreateVideoForm = ()=>{
     }
 
     return (
-        <div className='video-form'>
+        <div className='upload-video-form'>
             <form className="video-container" onSubmit={handleSubmit}>
-                <input type='text' placeholder='Title' onChange={e=>setTitle(e.target.value)} value={title}></input>
-                <textarea placeholder='Description' onChange={e=>setDescription(e.target.value)} value={description}></textarea>
-                <button className='btn comment-btn clickable' >Upload</button>
+                <input className='upload-video-title' type='text' placeholder='Title' onChange={e=>setTitle(e.target.value)} value={title}></input>
+                <textarea className='upload-video-description' placeholder='Description' onChange={e=>setDescription(e.target.value)} value={description}></textarea>
+                <button className='btn upload-video-btn clickable' >Upload</button>
             </form>
 
         </div>
