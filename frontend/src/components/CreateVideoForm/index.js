@@ -10,17 +10,29 @@ const CreateVideoForm = ()=>{
     const sessionUser = useSelector(state => state.session.user);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [thumbnail, setThumbnail] = useState(null);
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
-        const resp = await dispatch(createVideo({title, description}));
+
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('thumbnail', thumbnail);
+
+        const resp = await dispatch(createVideo(formData));
 
         if(resp){
             setTitle("");
             setDescription("");
+            setThumbnail(null)
         }
-
     }
+
+    const handleVideoPicture = (e) => {
+        const file = e.target.files[0];
+        setThumbnail(file);
+      };
 
     return (
         <div className='upload-video-form'>
@@ -29,7 +41,7 @@ const CreateVideoForm = ()=>{
                 <textarea className='upload-video-description' placeholder='Description' onChange={e=>setDescription(e.target.value)} value={description}></textarea>
                 <div>Thumbnail</div>
                 <div><span>Select or upload a picture that shows what's in your video. A good thumbnail stands out and draws viewers' attention</span></div>
-                <input type="file" />
+                <input type="file" onChange={handleVideoPicture}/>
 
                 <button className='btn upload-video-btn clickable' >Upload</button>
             </form>
