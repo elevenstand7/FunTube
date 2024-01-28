@@ -79,15 +79,20 @@ function NaviBar() {
                     <Modal.Title>Upload videos</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div>Drag and drop video files to upload</div>
-                    <input type="file" />
-                    <button onClick={() => {setUploadModal(false); setCreateVideoModal(true);}}>
+                    <CreateVideoForm
+                    // setCreateVideoModal={setCreateVideoModal}
+                    // videoFile={videoFile}
+                    />
+                    {/* <div>Drag and drop video files to upload</div>
+                    <input type="file" /> */}
+
+                    {/* <button onClick={() => {setUploadModal(false); setCreateVideoModal(true);}}>
                       Next
-                    </button>
+                    </button> */}
                 </Modal.Body>
           </Modal>
 
-          <Modal
+          {/* <Modal
             show={createVideoModal}
             onHide={() => setCreateVideoModal(false)}
             className="create-video-form-modal"
@@ -99,7 +104,7 @@ function NaviBar() {
             <Modal.Body>
               <CreateVideoForm />
             </Modal.Body>
-          </Modal>
+          </Modal> */}
       </div>
 
     </>

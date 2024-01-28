@@ -11,9 +11,15 @@ const CreateVideoForm = ()=>{
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [thumbnail, setThumbnail] = useState(null);
+    const [videoUploaded, setVideoUploaded] = useState(false);
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
+
+        if (!videoUploaded){
+            alert('Please upload video');
+            return;
+        }
 
         const formData = new FormData();
         formData.append('title', title);
@@ -25,13 +31,15 @@ const CreateVideoForm = ()=>{
         if(resp){
             setTitle("");
             setDescription("");
-            setThumbnail(null)
+            setThumbnail(null);
+            setVideoUploaded(false);
         }
     }
 
     const handleVideoPicture = (e) => {
         const file = e.target.files[0];
         setThumbnail(file);
+        setVideoUploaded(true);
       };
 
     return (
@@ -42,6 +50,10 @@ const CreateVideoForm = ()=>{
                 <div>Thumbnail</div>
                 <div><span>Select or upload a picture that shows what's in your video. A good thumbnail stands out and draws viewers' attention</span></div>
                 <input type="file" onChange={handleVideoPicture}/>
+                <div>
+                    <div>Drag and drop video files to upload</div>
+                    <input type="file" />
+                </div>
 
                 <button className='btn upload-video-btn clickable' >Upload</button>
             </form>
