@@ -64,7 +64,7 @@ export const fetchVideos = () => async dispatch =>{
     }
 }
 
-export const createVideo = ({title, description, thumbnail, video})=> async (dispatch, getState) => {
+export const createVideo = ({title, description, thumbnail, videoObject})=> async (dispatch, getState) => {
     const {session} = getState();
     const res = await csrfFetch(`/api/videos`, {
         method: 'POST',
@@ -73,7 +73,7 @@ export const createVideo = ({title, description, thumbnail, video})=> async (dis
                 title: title,
                 description: description,
                 thumbnail: thumbnail,
-                video: video,
+                video: videoObject,
                 user_id: session.user.id
             }
         ),
