@@ -47,11 +47,12 @@ const CreateVideoForm = ()=>{
             <form className="video-container" onSubmit={handleSubmit}>
                 <input className='upload-video-title' type='text' placeholder='Title' onChange={e=>setTitle(e.target.value)} value={title}></input>
                 <textarea className='upload-video-description' placeholder='Description' onChange={e=>setDescription(e.target.value)} value={description}></textarea>
-                <div>Thumbnail</div>
-                <div><span>Select or upload a picture that shows what's in your video. A good thumbnail stands out and draws viewers' attention</span></div>
-                <input type="file" onChange={handleVideoPicture}/>
-                <div>
-                    <div>Drag and drop video files to upload</div>
+                <div className='thumbnail'>Thumbnail
+                    <div><span>Select or upload a picture that shows what's in your video. A good thumbnail stands out and draws viewers' attention</span></div>
+                    <input type="file" onChange={handleVideoPicture}/>
+                </div>
+                <div className='upload-video-box'>
+                    <div>Select the video files to upload</div>
                     <input type="file" />
                 </div>
 
