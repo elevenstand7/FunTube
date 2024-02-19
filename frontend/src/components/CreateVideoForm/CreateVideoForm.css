@@ -3,13 +3,15 @@
 }
 
 .upload-video-description{
-    border: 1px solid black;
-    border-radius: 5px;
+
+    /* border: 1px solid black; */
+    /* border-radius: 5px;
     overflow: auto;
     outline: none;
     box-shadow: none;
-    resize: none;
-    margin: 25px 10px;
+    resize: none; */
+    margin-top: 10px;
+
 
 }
 
@@ -29,9 +31,9 @@
 
 
 .thumbnail{
-    margin: 10px 10px;
+    margin: 5px 5px;
 }
 
 .upload-video-box{
-    margin: 10px 10px;
+    margin: 5px 5px;
 }
